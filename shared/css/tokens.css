@@ -1,0 +1,169 @@
+/* ============================================================
+   STR Design Tokens — mirrors the Columbus, OH reference palette
+   (Website Redesign/columbus.html inline TOKENS block).
+
+   Cream/light theme with dark-green header + footer brackets and
+   a deep-blue accent. Dark-text-on-cream content surface.
+   ============================================================ */
+
+:root {
+  /* --------------------------------------------------------
+     COLOR — Brand greens (FirstCall family)
+     -------------------------------------------------------- */
+  --color-primary:        #1A4120;
+  --color-primary-dark:   #0F2814;
+  --color-primary-mid:    #2D5F36;
+  --color-primary-soft:   #4A7D52;
+
+  /* Accent — deep brand blue */
+  --color-accent:         #00558C;
+  --color-accent-dark:    #003D66;
+  --color-accent-light:   #5BA3D6;
+
+  /* --------------------------------------------------------
+     COLOR — Surfaces (cream-led, dark-bracket)
+     -------------------------------------------------------- */
+  --color-bg:             #FCFBF7;  /* page background — warm cream */
+  --color-bg-soft:        #F4F2EA;  /* alt section bands */
+  --color-bg-section:     #EDE9DC;  /* tinted bands */
+  --color-bg-dark:        #0F2814;  /* deepest — footer, deep CTAs */
+  --color-bg-card:        #FFFFFF;  /* lifted cards on cream */
+
+  --color-text:           #1A2331;  /* near-black primary text */
+  --color-text-muted:     #5A6371;  /* secondary copy */
+  --color-text-light:     #8A93A1;  /* tertiary, meta */
+  --color-text-on-dark:   #F2EFE3;  /* warm cream on dark surfaces */
+  --color-text-on-primary:#FFFFFF;
+
+  --color-border:         #E5E1D2;
+  --color-border-strong:  #C9C7B7;
+  --color-border-dark:    #0F2814;
+
+  /* --------------------------------------------------------
+     INDUSTRIES-GRID TIER TOKENS
+     Used by the "Industries We Serve" hex grid + legend.
+     -------------------------------------------------------- */
+  --fc-tier-1:        #0B2E4F;   /* Specialty Focus — darkest navy */
+  --fc-tier-2:        #1E5A8A;   /* Deep Expertise — mid navy */
+  --fc-tier-3:        #A8C5DC;   /* Trusted Partner — light blue */
+  --fc-text-light:    #FFFFFF;
+  --fc-text-dark:     #0B2E4F;
+
+  /* --------------------------------------------------------
+     COLOR — Semantic
+     -------------------------------------------------------- */
+  --color-success:        #5BA3D6;
+  --color-warning:        #B8861A;
+  --color-danger:         #C0392B;
+  --color-info:           #5BA3D6;
+
+  /* --------------------------------------------------------
+     TYPOGRAPHY
+     Manrope (display/headings) + IBM Plex Sans (body)
+     -------------------------------------------------------- */
+  --font-display: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-xs:    0.75rem;
+  --text-sm:    0.875rem;
+  --text-base:  1rem;
+  --text-lg:    1.125rem;
+  --text-xl:    1.25rem;
+  --text-2xl:   1.5rem;
+  --text-3xl:   1.875rem;
+  --text-4xl:   2.25rem;
+  --text-5xl:   3rem;
+  --text-6xl:   3.75rem;
+  --text-7xl:   4.5rem;
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-extrabold:800;
+
+  --leading-tight:   1.15;
+  --leading-snug:    1.3;
+  --leading-normal:  1.55;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.02em;
+  --tracking-caps:   0.08em;
+
+  /* --------------------------------------------------------
+     SPACING — 4px base
+     -------------------------------------------------------- */
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.5rem;
+  --space-6:   2rem;
+  --space-7:   3rem;
+  --space-8:   4rem;
+  --space-9:   6rem;
+  --space-10:  8rem;
+  --space-11: 10rem;
+
+  /* --------------------------------------------------------
+     LAYOUT
+     -------------------------------------------------------- */
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1600px;
+  --container-content: 1440px;
+
+  --header-height: 80px;
+  --header-height-mobile: 64px;
+  --pad-x: clamp(1.25rem, 4vw, 3rem);
+
+  /* --------------------------------------------------------
+     RADII
+     -------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-pill: 999px;
+
+  /* --------------------------------------------------------
+     SHADOWS
+     -------------------------------------------------------- */
+  --shadow-xs: 0 1px 2px rgba(15, 42, 31, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 42, 31, 0.06), 0 1px 2px rgba(15, 42, 31, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 42, 31, 0.08), 0 2px 4px rgba(15, 42, 31, 0.04);
+  --shadow-lg: 0 12px 32px rgba(15, 42, 31, 0.10), 0 4px 8px rgba(15, 42, 31, 0.04);
+  --shadow-xl: 0 24px 48px rgba(15, 42, 31, 0.14), 0 8px 16px rgba(15, 42, 31, 0.06);
+
+  /* --------------------------------------------------------
+     MOTION
+     -------------------------------------------------------- */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:   150ms;
+  --duration-base:   200ms;
+  --duration-slow:   320ms;
+
+  /* --------------------------------------------------------
+     Z-INDEX
+     -------------------------------------------------------- */
+  --z-base:     1;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-header:   300;
+  --z-overlay:  400;
+  --z-modal:    500;
+  --z-toast:    600;
+}
+
+/* Focus ring — applied via :focus-visible across the system. */
+:root {
+  --focus-ring: 0 0 0 3px rgba(0, 85, 140, 0.35);
+}

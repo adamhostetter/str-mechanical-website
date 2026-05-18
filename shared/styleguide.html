@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FirstCall Design System</title>
+  <meta name="description" content="FirstCall design system — tokens, type, and components." />
+
+  <!-- Fonts: Manrope (display) + IBM Plex Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+  <style>
+    /* Styleguide-only chrome (not part of the design system) */
+    .sg-shell {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 100vh;
+    }
+    @media (max-width: 1023px) {
+      .sg-shell { grid-template-columns: 1fr; }
+      .sg-sidebar { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--color-border); }
+    }
+    .sg-sidebar {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      overflow-y: auto;
+      padding: var(--space-6) var(--space-5);
+      border-right: 1px solid var(--color-border);
+      background: var(--color-bg-soft);
+    }
+    .sg-sidebar h1 {
+      font-size: var(--text-lg);
+      letter-spacing: var(--tracking-tight);
+      margin-bottom: var(--space-1);
+    }
+    .sg-sidebar p {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-5);
+    }
+    .sg-sidebar nav { display: flex; flex-direction: column; gap: var(--space-1); }
+    .sg-sidebar a {
+      display: block;
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+    }
+    .sg-sidebar a:hover { background: var(--color-bg); color: var(--color-text); }
+
+    .sg-main { padding: var(--space-7) var(--space-7); max-width: 1200px; }
+    @media (max-width: 767px) { .sg-main { padding: var(--space-5); } }
+
+    .sg-section { padding-block: var(--space-8); border-bottom: 1px solid var(--color-border); }
+    .sg-section:first-child { padding-top: 0; }
+    .sg-section:last-child { border-bottom: none; }
+    .sg-section > h2 {
+      font-size: var(--text-3xl);
+      letter-spacing: var(--tracking-tight);
+      margin-bottom: var(--space-2);
+    }
+    .sg-section > .sg-section-intro {
+      color: var(--color-text-muted);
+      max-width: 60ch;
+      margin-bottom: var(--space-6);
+    }
+    .sg-section h3 {
+      font-size: var(--text-xl);
+      margin-block: var(--space-6) var(--space-4);
+      letter-spacing: var(--tracking-tight);
+    }
+    .sg-section h3:first-of-type { margin-top: var(--space-2); }
+
+    .sg-tile {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+    .sg-tile + .sg-tile { margin-top: var(--space-4); }
+
+    .sg-swatches {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: var(--space-5);
+    }
+
+    .sg-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+
+    .sg-type-row { display: flex; align-items: baseline; gap: var(--space-5); padding-block: var(--space-3); border-bottom: 1px dashed var(--color-border); }
+    .sg-type-row:last-child { border-bottom: none; }
+    .sg-type-label {
+      font-family: var(--font-mono, monospace);
+      font-size: var(--text-xs);
+      color: var(--color-text-light);
+      min-width: 80px;
+      flex-shrink: 0;
+    }
+
+    .sg-spacings { display: flex; align-items: flex-end; gap: var(--space-4); flex-wrap: wrap; }
+    .sg-spacing { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+    .sg-spacing__bar { background: var(--color-primary); border-radius: var(--radius-sm); width: 100%; }
+    .sg-spacing__label { font-family: var(--font-mono, monospace); font-size: var(--text-xs); color: var(--color-text-muted); }
+
+    .sg-shadow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--space-5); }
+    .sg-shadow {
+      background: var(--color-bg);
+      height: 100px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono, monospace); font-size: var(--text-xs); color: var(--color-text-muted);
+    }
+
+    .sg-radius-grid { display: flex; flex-wrap: wrap; gap: var(--space-5); }
+    .sg-radius {
+      width: 96px; height: 96px;
+      background: var(--color-primary-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono, monospace); font-size: var(--text-xs); color: var(--color-primary-dark);
+    }
+
+    .sg-callout {
+      background: var(--color-bg-section);
+      border: 1px dashed var(--color-border-strong);
+      padding: var(--space-5);
+      border-radius: var(--radius-md);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .sg-dark-preview {
+      background: var(--color-bg-dark);
+      color: var(--color-text-on-dark);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+    }
+  </style>
+</head>
+<body>
+  <div class="sg-shell">
+    <!-- Sidebar nav -->
+    <aside class="sg-sidebar">
+      <h1>FirstCall Design</h1>
+      <p>Milestone 1 — tokens &amp; components</p>
+      <nav>
+        <a href="#logo">Logo</a>
+        <a href="#colors">Colors</a>
+        <a href="#hex">Hex motif</a>
+        <a href="#type">Typography</a>
+        <a href="#spacing">Spacing &amp; layout</a>
+        <a href="#radii">Radii</a>
+        <a href="#shadows">Shadows</a>
+        <a href="#buttons">Buttons</a>
+        <a href="#links">Links</a>
+        <a href="#badges">Badges</a>
+        <a href="#cards">Cards</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#branch-cards">Branch cards</a>
+        <a href="#forms">Forms</a>
+        <a href="#header">Header / nav</a>
+        <a href="#footer">Footer</a>
+        <a href="#callouts">Callouts</a>
+      </nav>
+    </aside>
+
+    <main class="sg-main">
+
+      <!-- Intro -->
+      <section class="sg-section">
+        <span class="eyebrow">Design System</span>
+        <h2>FirstCall — visual foundations</h2>
+        <p class="sg-section-intro">
+          The single source of truth for every FirstCall web property. Edit
+          <code>tokens.css</code> and every site updates. Brand: corporate blue
+          drawn from the FirstCall Group logo, paired with a warm signal orange
+          for high-energy CTAs. Type: Manrope for display + IBM Plex Sans for
+          body. Hexagon motif preserved from the existing brand.
+        </p>
+      </section>
+
+      <!-- LOGO -->
+      <section class="sg-section" id="logo">
+        <h2>Logo</h2>
+        <p class="sg-section-intro">The FirstCall Group hero mark — color, white (for dark surfaces), and the favicon/icon. Source files live in <code>shared/img/logos/</code>.</p>
+
+        <h3>Color (default surface)</h3>
+        <div class="sg-tile" style="background:var(--color-bg)">
+          <img src="img/logos/firstcall-group-color.svg" alt="FirstCall Group logo, color" style="max-width:520px; width:100%; height:auto;" />
+        </div>
+
+        <h3>White (dark surface)</h3>
+        <div class="sg-tile sg-dark-preview" style="background:var(--color-bg-dark)">
+          <img src="img/logos/firstcall-group-white.svg" alt="FirstCall Group logo, white" style="max-width:520px; width:100%; height:auto;" />
+        </div>
+
+        <h3>Black (single-color, on light surface)</h3>
+        <div class="sg-tile">
+          <img src="img/logos/firstcall-group-black.svg" alt="FirstCall Group logo, black" style="max-width:520px; width:100%; height:auto;" />
+        </div>
+
+        <h3>Favicon / icon-only</h3>
+        <div class="sg-tile">
+          <div class="sg-row" style="gap:var(--space-6); align-items:center">
+            <img src="img/logos/firstcall-group-favicon.svg" alt="FirstCall icon, 64px" width="64" height="64" />
+            <img src="img/logos/firstcall-group-favicon.svg" alt="FirstCall icon, 40px" width="40" height="40" />
+            <img src="img/logos/firstcall-group-favicon.svg" alt="FirstCall icon, 24px" width="24" height="24" />
+            <span class="text-muted text-small">Used in the favicon, the site header at smaller breakpoints, and as a decorative anchor in section dividers.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLORS -->
+      <section class="sg-section" id="colors">
+        <h2>Colors</h2>
+        <p class="sg-section-intro">Corporate blue dominates. Orange accent is used sparingly for primary CTAs and emphasis. Neutrals are cool blue-tinted slate.</p>
+
+        <h3>Brand</h3>
+        <div class="sg-swatches">
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-primary)"></div>
+            <div class="swatch__meta"><strong>Primary</strong>#00558C — primary surfaces, nav, footer</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-primary-dark)"></div>
+            <div class="swatch__meta"><strong>Primary dark</strong>#003D66 — hover / pressed, dark sections</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-primary-mid)"></div>
+            <div class="swatch__meta"><strong>Primary mid</strong>#1A75B0 — hover lift, secondary fill</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-primary-soft)"></div>
+            <div class="swatch__meta"><strong>Primary soft</strong>#D6E8F2 — subtle backgrounds, badges</div>
+          </div>
+        </div>
+
+        <h3>Accent</h3>
+        <div class="sg-swatches">
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-accent)"></div>
+            <div class="swatch__meta"><strong>Accent</strong>#E07A1F — primary CTA, emphasis</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-accent-dark)"></div>
+            <div class="swatch__meta"><strong>Accent dark</strong>#B85F12 — hover</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-accent-light)"></div>
+            <div class="swatch__meta"><strong>Accent light</strong>#F4A261 — on dark surfaces</div>
+          </div>
+        </div>
+
+        <h3>Neutrals</h3>
+        <div class="sg-swatches">
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-bg)"></div>
+            <div class="swatch__meta"><strong>BG</strong>#FFFFFF — page</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-bg-soft)"></div>
+            <div class="swatch__meta"><strong>BG soft</strong>#F7F9FB — alt sections</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-bg-section)"></div>
+            <div class="swatch__meta"><strong>BG section</strong>#EDF2F7 — tinted bands</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-bg-dark)"></div>
+            <div class="swatch__meta"><strong>BG dark</strong>#003D66 — footer, dark CTAs</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-text)"></div>
+            <div class="swatch__meta"><strong>Text</strong>#1A2331 — body</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-text-muted)"></div>
+            <div class="swatch__meta"><strong>Text muted</strong>#5A6371 — secondary</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-text-light)"></div>
+            <div class="swatch__meta"><strong>Text light</strong>#8A93A1 — tertiary</div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__chip" style="background:var(--color-border)"></div>
+            <div class="swatch__meta"><strong>Border</strong>#DCE3EA — default</div>
+          </div>
+        </div>
+
+        <h3>Semantic</h3>
+        <div class="sg-swatches">
+          <div class="swatch"><div class="swatch__chip" style="background:var(--color-success)"></div><div class="swatch__meta"><strong>Success / Info</strong>#00558C</div></div>
+          <div class="swatch"><div class="swatch__chip" style="background:var(--color-warning)"></div><div class="swatch__meta"><strong>Warning</strong>#E07A1F</div></div>
+          <div class="swatch"><div class="swatch__chip" style="background:var(--color-danger)"></div><div class="swatch__meta"><strong>Danger</strong>#C0392B</div></div>
+        </div>
+      </section>
+
+      <!-- HEX MOTIF -->
+      <section class="sg-section" id="hex">
+        <h2>Hex motif</h2>
+        <p class="sg-section-intro">A recurring brand element inherited from the existing FirstCall identity. Used three ways: <strong>as a Markets-Served honeycomb</strong> on the homepage and branch sites, <strong>as a decorative anchor</strong> in section dividers and section-header eyebrows, and <strong>as a subtle background pattern</strong> on tinted bands.</p>
+
+        <h3>Single hex — section anchor</h3>
+        <div class="sg-tile">
+          <div class="sg-row" style="gap:var(--space-6); align-items:center">
+            <!-- Small filled hex anchor (used beside eyebrows) -->
+            <svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true">
+              <polygon points="10,1 19,6 19,16 10,21 1,16 1,6" fill="var(--color-accent)"/>
+            </svg>
+            <span class="eyebrow" style="margin:0">A FirstCall Company</span>
+          </div>
+          <div class="sg-row" style="gap:var(--space-6); align-items:center; margin-top:var(--space-5)">
+            <!-- Larger outline hex anchor (used as section dividers) -->
+            <svg width="40" height="44" viewBox="0 0 40 44" aria-hidden="true">
+              <polygon points="20,2 38,12 38,32 20,42 2,32 2,12" fill="none" stroke="var(--color-primary)" stroke-width="2"/>
+            </svg>
+            <svg width="40" height="44" viewBox="0 0 40 44" aria-hidden="true">
+              <polygon points="20,2 38,12 38,32 20,42 2,32 2,12" fill="var(--color-primary-soft)" stroke="var(--color-primary)" stroke-width="2"/>
+            </svg>
+            <svg width="40" height="44" viewBox="0 0 40 44" aria-hidden="true">
+              <polygon points="20,2 38,12 38,32 20,42 2,32 2,12" fill="var(--color-primary)"/>
+            </svg>
+            <svg width="40" height="44" viewBox="0 0 40 44" aria-hidden="true">
+              <polygon points="20,2 38,12 38,32 20,42 2,32 2,12" fill="var(--color-accent)"/>
+            </svg>
+          </div>
+        </div>
+
+        <h3>Industries We Serve honeycomb</h3>
+        <p class="text-muted text-small" style="margin-bottom:var(--space-4)">A 19-hex concentric bullseye, two-tone. The <strong>inner cluster</strong> (darkest navy) is one hex at center plus a 6-hex ring — mission-critical specialty verticals, with Critical Infrastructure anchoring the center. The <strong>outer ring</strong> (mid navy, with a deeper hairline border to keep hex edges legible) is 12 hexes — broader commercial categories. Canonical source: <code>shared/partials/industries-grid--main.html</code>.</p>
+        <div class="sg-tile" style="background:var(--color-bg-soft); display:flex; justify-content:center; padding-block:var(--space-7)">
+          <svg width="640" height="600" viewBox="0 0 640 600" aria-label="Industries we serve honeycomb">
+            <defs>
+              <style>
+                .sg-hex-t1     { fill: var(--fc-tier-1); }
+                .sg-hex-t1     { fill: var(--fc-tier-2); stroke: var(--fc-tier-1); stroke-width: 1.5; }
+                .sg-label      { fill: var(--fc-text-light); font-family: var(--font-display); font-weight: 700; font-size: 13px; }
+              </style>
+            </defs>
+            <!-- Row 1 (top, 3 — all T3 outer) -->
+            <polygon class="sg-hex-t2" points="200,20 260,55 260,125 200,160 140,125 140,55"/>
+            <text class="sg-label" text-anchor="middle" x="200" y="83">Government</text>
+            <text class="sg-label" text-anchor="middle" x="200" y="100">&amp; Federal</text>
+            <polygon class="sg-hex-t2" points="320,20 380,55 380,125 320,160 260,125 260,55"/>
+            <text class="sg-label" text-anchor="middle" x="320" y="83">Commercial</text>
+            <text class="sg-label" text-anchor="middle" x="320" y="100">Office Space</text>
+            <polygon class="sg-hex-t2" points="440,20 500,55 500,125 440,160 380,125 380,55"/>
+            <text class="sg-label" text-anchor="middle" x="440" y="95">K&ndash;12 Education</text>
+
+            <!-- Row 2 (4: T3, T2, T2, T3) -->
+            <polygon class="sg-hex-t2" points="140,125 200,160 200,230 140,265 80,230 80,160"/>
+            <text class="sg-label" text-anchor="middle" x="140" y="200">Public Sector</text>
+            <polygon class="sg-hex-t1" points="260,125 320,160 320,230 260,265 200,230 200,160"/>
+            <text class="sg-label" text-anchor="middle" x="260" y="200">Healthcare</text>
+            <polygon class="sg-hex-t1" points="380,125 440,160 440,230 380,265 320,230 320,160"/>
+            <text class="sg-label" text-anchor="middle" x="380" y="188">Life Sciences</text>
+            <text class="sg-label" text-anchor="middle" x="380" y="205">&amp; Pharma</text>
+            <polygon class="sg-hex-t2" points="500,125 560,160 560,230 500,265 440,230 440,160"/>
+            <text class="sg-label" text-anchor="middle" x="500" y="200">Hospitality</text>
+
+            <!-- Row 3 (widest, 5: T3, T2, T1 center, T2, T3) -->
+            <polygon class="sg-hex-t2" points="80,230 140,265 140,335 80,370 20,335 20,265"/>
+            <text class="sg-label" text-anchor="middle" x="80" y="305">Automotive</text>
+            <polygon class="sg-hex-t1" points="200,230 260,265 260,335 200,370 140,335 140,265"/>
+            <text class="sg-label" text-anchor="middle" x="200" y="293">Higher</text>
+            <text class="sg-label" text-anchor="middle" x="200" y="310">Education</text>
+            <polygon class="sg-hex-t1" points="320,230 380,265 380,335 320,370 260,335 260,265"/>
+            <text class="sg-label" text-anchor="middle" x="320" y="293">Critical</text>
+            <text class="sg-label" text-anchor="middle" x="320" y="310">Infrastructure</text>
+            <polygon class="sg-hex-t1" points="440,230 500,265 500,335 440,370 380,335 380,265"/>
+            <text class="sg-label" text-anchor="middle" x="440" y="305">Industrial</text>
+            <polygon class="sg-hex-t2" points="560,230 620,265 620,335 560,370 500,335 500,265"/>
+            <text class="sg-label" text-anchor="middle" x="560" y="293">Self Storage</text>
+            <text class="sg-label" text-anchor="middle" x="560" y="310">and Logistics</text>
+
+            <!-- Row 4 (4: T3, T2, T2, T3) -->
+            <polygon class="sg-hex-t2" points="140,335 200,370 200,440 140,475 80,440 80,370"/>
+            <text class="sg-label" text-anchor="middle" x="140" y="398">Sports</text>
+            <text class="sg-label" text-anchor="middle" x="140" y="415">&amp; Venues</text>
+            <polygon class="sg-hex-t1" points="260,335 320,370 320,440 260,475 200,440 200,370"/>
+            <text class="sg-label" text-anchor="middle" x="260" y="398">Data</text>
+            <text class="sg-label" text-anchor="middle" x="260" y="415">Centers</text>
+            <polygon class="sg-hex-t1" points="380,335 440,370 440,440 380,475 320,440 320,370"/>
+            <text class="sg-label" text-anchor="middle" x="380" y="398">Advanced</text>
+            <text class="sg-label" text-anchor="middle" x="380" y="415">Manufacturing</text>
+            <polygon class="sg-hex-t2" points="500,335 560,370 560,440 500,475 440,440 440,370"/>
+            <text class="sg-label" text-anchor="middle" x="500" y="410">Office</text>
+
+            <!-- Row 5 (bottom, 3 — all T3 outer) -->
+            <polygon class="sg-hex-t2" points="200,440 260,475 260,545 200,580 140,545 140,475"/>
+            <text class="sg-label" text-anchor="middle" x="200" y="515">Senior Living</text>
+            <polygon class="sg-hex-t2" points="320,440 380,475 380,545 320,580 260,545 260,475"/>
+            <text class="sg-label" text-anchor="middle" x="320" y="515">Retail</text>
+            <polygon class="sg-hex-t2" points="440,440 500,475 500,545 440,580 380,545 380,475"/>
+            <text class="sg-label" text-anchor="middle" x="440" y="515">Multifamily</text>
+          </svg>
+        </div>
+
+        <h3>Hex pattern — subtle band background</h3>
+        <p class="text-muted text-small" style="margin-bottom:var(--space-4)">A faint, repeating hex pattern that can dress up tinted bands without competing with content. Implemented as a CSS background.</p>
+        <div class="sg-tile" style="
+          background-color: var(--color-bg-section);
+          background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 96'><polygon points='28,4 52,18 52,46 28,60 4,46 4,18' fill='none' stroke='%2300558C' stroke-width='1' opacity='0.10'/><polygon points='0,52 24,66 24,94 0,108 -24,94 -24,66' fill='none' stroke='%2300558C' stroke-width='1' opacity='0.10'/><polygon points='56,52 80,66 80,94 56,108 32,94 32,66' fill='none' stroke='%2300558C' stroke-width='1' opacity='0.10'/></svg>&quot;);
+          background-size: 56px 96px;
+          padding: var(--space-8);
+          text-align: center;
+        ">
+          <span class="eyebrow">A FirstCall Company</span>
+          <h3 style="margin-top:0; margin-bottom:var(--space-3)">Backed by a national platform.</h3>
+          <p class="lead" style="margin-inline:auto">Hex pattern adds subtle brand texture to tinted bands without overpowering the content.</p>
+        </div>
+      </section>
+
+      <!-- TYPOGRAPHY -->
+      <section class="sg-section" id="type">
+        <h2>Typography</h2>
+        <p class="sg-section-intro">
+          <strong>Manrope</strong> for display / headings — geometric, premium, professional.
+          <strong>IBM Plex Sans</strong> for body — humanist, slightly technical, highly readable.
+          Both loaded from Google Fonts.
+        </p>
+
+        <div class="sg-tile">
+          <div class="sg-type-row"><span class="sg-type-label">h1</span><h1 style="margin:0">Durable Partnerships.</h1></div>
+          <div class="sg-type-row"><span class="sg-type-label">h2</span><h2 style="margin:0">Built for commercial mechanical.</h2></div>
+          <div class="sg-type-row"><span class="sg-type-label">h3</span><h3 style="margin:0">Our capabilities</h3></div>
+          <div class="sg-type-row"><span class="sg-type-label">h4</span><h4 style="margin:0">HVAC Services</h4></div>
+          <div class="sg-type-row"><span class="sg-type-label">h5</span><h5 style="margin:0">Planned maintenance contracts</h5></div>
+          <div class="sg-type-row"><span class="sg-type-label">h6</span><h6 style="margin:0">Section eyebrow</h6></div>
+          <div class="sg-type-row"><span class="sg-type-label">lead</span><p class="lead" style="margin:0">FirstCall is a network of commercial mechanical service companies, partnering with property owners and facility managers across the country.</p></div>
+          <div class="sg-type-row"><span class="sg-type-label">body</span><p style="margin:0">Our team of expert technicians keeps your buildings running. From routine planned maintenance to emergency service, we deliver responsive, accountable, and skilled work — every time.</p></div>
+          <div class="sg-type-row"><span class="sg-type-label">small</span><p style="margin:0" class="text-small text-muted">Licensed and insured in all states of operation. TACLA147472E.</p></div>
+          <div class="sg-type-row"><span class="sg-type-label">eyebrow</span><span class="eyebrow">A FirstCall Company</span></div>
+        </div>
+      </section>
+
+      <!-- SPACING -->
+      <section class="sg-section" id="spacing">
+        <h2>Spacing &amp; layout</h2>
+        <p class="sg-section-intro">4px base. Stick to the scale for predictable rhythm across sites.</p>
+
+        <div class="sg-tile">
+          <div class="sg-spacings">
+            <div class="sg-spacing"><div class="sg-spacing__bar" style="height:4px;width:4px"></div><span class="sg-spacing__label">1 / 4px</span></div>
+            <div class="sg-spacing"><div class="sg-spacing__bar" style="height:8px;width:8px"></div><span class="sg-spacing__label">2 / 8px</span></div>
+            <div class="sg-spacing"><div class="sg-spacing__bar" style="height:12px;width:12px"></div><span class="sg-spacing__label">3 / 12px</span></div>
+            <div class="sg-spacing"><div class="sg-spacing__bar" style="height:16px;width:16px"></div><span class="sg-spacing__label">4 / 16px</span></div>
+            <div class="sg-spacing"><div class="sg-spacing__bar" style="height:24px;width:24px"></div><span class="sg-spacing__label">5 / 24px</span></div>
+            <div class="sg-spacing"><div class="sg-spacing__bar" style="height:32px;width:32px"></div><span class="sg-spacing__label">6 / 32px</span></div>
+            <div class="sg-spacing"><div class="sg-spacing__bar" style="height:48px;width:48px"></div><span class="sg-spacing__label">7 / 48px</span></div>
+            <div class="sg-spacing"><div class="sg-spacing__bar" style="height:64px;width:64px"></div><span class="sg-spacing__label">8 / 64px</span></div>
+            <div class="sg-spacing"><div class="sg-spacing__bar" style="height:96px;width:96px"></div><span class="sg-spacing__label">9 / 96px</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RADII -->
+      <section class="sg-section" id="radii">
+        <h2>Radii</h2>
+        <div class="sg-tile">
+          <div class="sg-radius-grid">
+            <div class="sg-radius" style="border-radius:var(--radius-sm)">sm 4</div>
+            <div class="sg-radius" style="border-radius:var(--radius-md)">md 8</div>
+            <div class="sg-radius" style="border-radius:var(--radius-lg)">lg 12</div>
+            <div class="sg-radius" style="border-radius:var(--radius-xl)">xl 16</div>
+            <div class="sg-radius" style="border-radius:var(--radius-2xl)">2xl 24</div>
+            <div class="sg-radius" style="border-radius:var(--radius-pill)">pill</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHADOWS -->
+      <section class="sg-section" id="shadows">
+        <h2>Shadows</h2>
+        <div class="sg-tile" style="background:var(--color-bg-soft); padding:var(--space-7)">
+          <div class="sg-shadow-grid">
+            <div class="sg-shadow" style="box-shadow:var(--shadow-xs)">xs</div>
+            <div class="sg-shadow" style="box-shadow:var(--shadow-sm)">sm</div>
+            <div class="sg-shadow" style="box-shadow:var(--shadow-md)">md</div>
+            <div class="sg-shadow" style="box-shadow:var(--shadow-lg)">lg</div>
+            <div class="sg-shadow" style="box-shadow:var(--shadow-xl)">xl</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BUTTONS -->
+      <section class="sg-section" id="buttons">
+        <h2>Buttons</h2>
+        <p class="sg-section-intro">Primary = accent orange. Secondary = brand green. Outline / ghost for tertiary actions. <code>--on-dark</code> variants for use over dark sections.</p>
+
+        <h3>Light surface</h3>
+        <div class="sg-tile">
+          <div class="sg-row">
+            <button class="btn btn--primary">Get a Quote</button>
+            <button class="btn btn--secondary">Contact Us</button>
+            <button class="btn btn--outline">Learn More</button>
+            <button class="btn btn--ghost">Cancel</button>
+          </div>
+          <div class="sg-row" style="margin-top:var(--space-5)">
+            <button class="btn btn--primary btn--sm">Small primary</button>
+            <button class="btn btn--primary">Default primary</button>
+            <button class="btn btn--primary btn--lg">Large primary</button>
+          </div>
+        </div>
+
+        <h3>Dark surface</h3>
+        <div class="sg-tile sg-dark-preview">
+          <div class="sg-row">
+            <button class="btn btn--on-dark">Visit Site</button>
+            <button class="btn btn--outline-on-dark">Learn More</button>
+            <button class="btn btn--primary">Get a Quote</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- LINKS -->
+      <section class="sg-section" id="links">
+        <h2>Links</h2>
+        <div class="sg-tile">
+          <p style="margin-bottom:var(--space-4)">A normal <a href="#">inline link</a> sits in the brand green family and goes deeper on hover.</p>
+          <div class="sg-row" style="gap:var(--space-6)">
+            <a href="#" class="link-arrow">Explore locations</a>
+            <a href="#" class="link-arrow">View capabilities</a>
+            <a href="#" class="link-arrow">Acquisitions program</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- BADGES -->
+      <section class="sg-section" id="badges">
+        <h2>Badges</h2>
+        <div class="sg-tile">
+          <div class="sg-row">
+            <span class="badge">Default</span>
+            <span class="badge badge--primary">Primary</span>
+            <span class="badge badge--accent">24 / 7</span>
+            <span class="badge badge--outline">Outline</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARDS -->
+      <section class="sg-section" id="cards">
+        <h2>Cards</h2>
+        <p class="sg-section-intro">Surfaces for grouping content — services, features, branch summaries.</p>
+
+        <div class="grid grid-3" style="margin-bottom:var(--space-5)">
+          <div class="card">
+            <h4 class="card__title">Plain card</h4>
+            <p class="card__body">A surface with a 1px border and 12px radius. Use for static groupings of content where hover isn't meaningful.</p>
+          </div>
+          <div class="card card--hover">
+            <h4 class="card__title">Hover card</h4>
+            <p class="card__body">Lifts on hover. Use when the whole card is clickable, like a branch overview or service link.</p>
+          </div>
+          <div class="card card--feature">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+            </span>
+            <h4 class="card__title">Feature card</h4>
+            <p class="card__body">Icon + title + body, used in feature grids and capability rows.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CAPABILITIES -->
+      <section class="sg-section" id="capabilities">
+        <h2>Capabilities grid</h2>
+        <p class="sg-section-intro">The repeating service-pillar grid used on the parent homepage and on every branch site. 3-column desktop → 2-column tablet → 1-column mobile.</p>
+
+        <div class="capabilities">
+          <article class="capability">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
+            </span>
+            <h4 class="capability__title">HVAC Services</h4>
+            <p class="capability__body">Comprehensive heating, ventilation, and air conditioning service for commercial and industrial facilities.</p>
+          </article>
+          <article class="capability">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </span>
+            <h4 class="capability__title">Building Controls</h4>
+            <p class="capability__body">Design, installation, and integration of building automation and controls systems that reduce operating costs.</p>
+          </article>
+          <article class="capability">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4-3 8-7 8-12a8 8 0 1 0-16 0c0 5 4 9 8 12z"/><circle cx="12" cy="10" r="3"/></svg>
+            </span>
+            <h4 class="capability__title">Plumbing Services</h4>
+            <p class="capability__body">Full-service commercial plumbing — install, repair, and maintenance — backed by licensed and certified tradespeople.</p>
+          </article>
+          <article class="capability">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v6h-6"/></svg>
+            </span>
+            <h4 class="capability__title">Planned Maintenance</h4>
+            <p class="capability__body">Programmatic service plans with predictable scheduling, transparent reporting, and asset-level tracking.</p>
+          </article>
+          <article class="capability">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/></svg>
+            </span>
+            <h4 class="capability__title">Emergency Services</h4>
+            <p class="capability__body">24 / 7 emergency response across our service territory — staffed dispatch and an on-call technician roster, always.</p>
+          </article>
+          <article class="capability">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            </span>
+            <h4 class="capability__title">Project Support</h4>
+            <p class="capability__body">Design-build, retrofit, and equipment-upgrade projects delivered by tradespeople who know the install — and the service after.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- BRANCH CARDS -->
+      <section class="sg-section" id="branch-cards">
+        <h2>Branch quick-cards</h2>
+        <p class="sg-section-intro">Used on the parent homepage below the hero — direct entry into each branch.</p>
+
+        <div class="grid grid-3">
+          <a class="branch-card" href="#">
+            <span class="branch-card__location">Columbus, OH</span>
+            <span class="branch-card__name">FirstCall Columbus</span>
+            <span class="branch-card__phone"><a href="tel:6142539001">(614) 253-9001</a></span>
+            <span class="link-arrow">Visit site</span>
+          </a>
+          <a class="branch-card" href="#">
+            <span class="branch-card__location">Dallas Fort-Worth, TX</span>
+            <span class="branch-card__name">FirstCall DFW</span>
+            <span class="branch-card__phone"><a href="tel:4696690978">(469) 669-0978</a></span>
+            <span class="link-arrow">Visit site</span>
+          </a>
+          <a class="branch-card" href="#">
+            <span class="branch-card__location">Central Texas</span>
+            <span class="branch-card__name">FirstCall Central Texas</span>
+            <span class="branch-card__phone"><a href="tel:5125550000">(512) 555-0000</a></span>
+            <span class="link-arrow">Visit site</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- FORMS -->
+      <section class="sg-section" id="forms">
+        <h2>Forms</h2>
+        <p class="sg-section-intro">The structural pattern used for branch service-request forms and the parent contact form.</p>
+
+        <div class="sg-tile" style="max-width:560px">
+          <div class="form-field">
+            <label class="form-label" for="sg-name">Full name <span class="required">*</span></label>
+            <input class="form-input" id="sg-name" type="text" placeholder="Jane Smith" />
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="sg-email">Work email <span class="required">*</span></label>
+            <input class="form-input" id="sg-email" type="email" placeholder="jane@company.com" />
+            <span class="form-help">We'll only use this to follow up on your request.</span>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="sg-service">Service needed</label>
+            <select class="form-select" id="sg-service">
+              <option>HVAC service</option>
+              <option>Planned maintenance</option>
+              <option>Emergency response</option>
+              <option>Project / retrofit</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="sg-msg">Tell us about your facility</label>
+            <textarea class="form-textarea" id="sg-msg" placeholder="Building type, square footage, current equipment..."></textarea>
+          </div>
+          <div class="form-field">
+            <label class="form-checkbox">
+              <input type="checkbox" />
+              <span>I'd like FirstCall to follow up by phone.</span>
+            </label>
+          </div>
+          <button class="btn btn--primary btn--full">Request a Quote</button>
+        </div>
+
+        <h3 style="margin-top:var(--space-8)">Error state</h3>
+        <div class="sg-tile" style="max-width:560px">
+          <div class="form-field">
+            <label class="form-label" for="sg-err">Work email <span class="required">*</span></label>
+            <input class="form-input form-input--error" id="sg-err" type="email" value="not-a-valid-email" />
+            <span class="form-error">Please enter a valid email address.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- HEADER -->
+      <section class="sg-section" id="header">
+        <h2>Header / nav</h2>
+        <p class="sg-section-intro">Sticky on scroll. Hamburger collapses below 1024px. Active page is marked with <code>aria-current="page"</code>.</p>
+
+        <div style="border:1px solid var(--color-border); border-radius:var(--radius-lg); overflow:hidden; background:var(--color-bg-soft); padding-bottom:var(--space-7)">
+          <header class="site-header" style="position:relative">
+            <div class="site-header__inner">
+              <a class="site-header__logo" href="#" aria-label="FirstCall — home">
+                <img src="img/logos/firstcall-group-color.svg" alt="FirstCall" height="40" style="height:40px; width:auto;" />
+              </a>
+              <nav class="site-nav" aria-label="Primary">
+                <a class="site-nav__link" href="#" aria-current="page">Locations</a>
+                <a class="site-nav__link" href="#">Acquisitions</a>
+                <a class="site-nav__link" href="#">Careers</a>
+                <a class="site-nav__link" href="#">Contact</a>
+              </nav>
+              <div class="site-header__cta">
+                <a class="btn btn--primary btn--sm" href="#">Get a Quote</a>
+                <button class="menu-toggle" aria-label="Menu"><span class="menu-toggle__bars"></span></button>
+              </div>
+            </div>
+          </header>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <section class="sg-section" id="footer">
+        <h2>Footer</h2>
+        <p class="sg-section-intro">Dark forest-green band, accent-light highlights, organized by purpose. Identical structure across parent and branches; content differs per <code>config.json</code>.</p>
+
+        <div style="border-radius:var(--radius-lg); overflow:hidden">
+          <footer class="site-footer">
+            <div class="container">
+              <div class="site-footer__grid">
+                <div class="site-footer__brand">
+                  <img src="img/logos/firstcall-group-white.svg" alt="FirstCall" style="height:44px; width:auto; margin-bottom:var(--space-3);" />
+                  <p>Commercial mechanical service, building controls, plumbing, and electrical — delivered by branch teams across the country, supported by a national platform.</p>
+                </div>
+                <div>
+                  <div class="site-footer__heading">Company</div>
+                  <ul class="site-footer__list">
+                    <li><a href="#">Locations</a></li>
+                    <li><a href="#">Acquisitions</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="site-footer__heading">Services</div>
+                  <ul class="site-footer__list">
+                    <li><a href="#">HVAC</a></li>
+                    <li><a href="#">Building Controls</a></li>
+                    <li><a href="#">Plumbing</a></li>
+                    <li><a href="#">Emergency</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="site-footer__heading">Connect</div>
+                  <ul class="site-footer__list">
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                    <li><a href="#">Press</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="site-footer__bottom">
+                <span>&copy; 2026 FirstCall Mechanical. All rights reserved.</span>
+                <span><a href="#">Privacy</a> &middot; <a href="#">Terms</a></span>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <!-- CALLOUTS -->
+      <section class="sg-section" id="callouts">
+        <h2>Callouts &amp; sections</h2>
+        <p class="sg-section-intro">Tinted bands, dark bands, and the "A FirstCall Company" pattern.</p>
+
+        <div class="callout" style="margin-bottom:var(--space-5)">
+          <strong>Heads-up:</strong> all forms ship with placeholder <code>action</code> attributes. Wire to Formspree or HubSpot during launch (documented in README).
+        </div>
+
+        <div class="section section--tinted" style="border-radius:var(--radius-lg); margin-bottom:var(--space-5)">
+          <div class="container text-center">
+            <span class="eyebrow">A FirstCall Company</span>
+            <h3 style="max-width:30ch; margin-inline:auto; margin-bottom:var(--space-4)">Backed by a national platform.</h3>
+            <p class="lead" style="margin-inline:auto">Every FirstCall branch keeps the local team, leadership, and identity that earned its reputation — and gains the depth of a national service organization behind it.</p>
+            <a href="#" class="link-arrow" style="margin-top:var(--space-5); display:inline-flex">Learn about FirstCall</a>
+          </div>
+        </div>
+
+        <div class="section section--primary" style="border-radius:var(--radius-lg)">
+          <div class="container text-center">
+            <span class="eyebrow">Acquisitions program</span>
+            <h3 style="max-width:24ch; margin-inline:auto; margin-bottom:var(--space-4)">Considering selling your mechanical business?</h3>
+            <p class="lead" style="margin-inline:auto; color:rgba(255,255,255,0.85)">We partner with owners who built strong, durable businesses — and we structure deals that keep what works.</p>
+            <div style="margin-top:var(--space-6); display:flex; gap:var(--space-3); justify-content:center; flex-wrap:wrap">
+              <a href="#" class="btn btn--primary">Start a Conversation</a>
+              <a href="#" class="btn btn--outline-on-dark">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer style="padding:var(--space-7) 0; color:var(--color-text-light); font-size:var(--text-sm); text-align:center">
+        FirstCall design system &middot; Milestone 1 &middot; <code>shared/styleguide.html</code>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

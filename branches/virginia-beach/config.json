@@ -1,0 +1,85 @@
+{
+  "slug": "virginia-beach",
+  "name": "STR Mechanical — Virginia Beach",
+  "shortName": "Virginia Beach",
+  "tagline": "Success Through Reputation",
+  "heroHeading": "Success Through Reputation. Built for Virginia Beach.",
+  "heroParagraph": "Our Hampton Roads team keeps the region's commercial buildings running — HVAC, building controls, planned maintenance, and emergency service, backed by a national platform.",
+  "phone": "(757) 548-5889",
+  "phoneE164": "+17575485889",
+  "email": "info@strmechanical.com",
+  "address": {
+    "street": "825 Green Briar Circle, Suite A",
+    "city": "Chesapeake",
+    "state": "VA",
+    "zip": "23320"
+  },
+  "addressTodo": "Office is physically in Chesapeake (Hampton Roads metro). Adam refers to it as the 'Virginia Beach' office colloquially — confirm preferred public-facing city name.",
+  "mapCoords": { "lat": 36.7682, "lng": -76.2875 },
+  "mapCoordsTodo": "Approximated from build-directory.js (Chesapeake centroid). Refine to street-level if available.",
+  "canonicalUrl": "https://strmechanical.com/virginia-beach",
+  "parentLink": "https://firstcallmechanical.com",
+  "isExternalDomain": true,
+  "heroPhoto": "shared/img/photos/str/virginia-beach.jpg",
+  "heroPhotoTodo": "556 KB JPG — already reasonable; consider converting to WebP for an extra ~30% size win. Ken Burns animation drives the cinematic feel in lieu of a video.",
+  "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
+  "industriesLead": "We serve the buildings that keep Hampton Roads and the Tidewater region running — across healthcare, industrial, education, hospitality, and beyond.",
+  "photoStrip": [
+    "reference/Photos/STR/NC Lift - For-WEB-1129.jpeg",
+    "reference/Photos/STR/dji_fly_20240522_103548_192_1716388560374_photo_optimized.jpg",
+    "reference/Photos/STR/IMG_8065.jpg",
+    "reference/Photos/STR/strraleigh5.jpeg"
+  ],
+  "photoStripTodo": "Re-host + confirm VA-specific shots",
+  "services": [
+    {
+      "key": "hvac",
+      "title": "HVAC Services",
+      "body": "Comprehensive heating, ventilation, and air conditioning service for commercial and industrial facilities."
+    },
+    {
+      "key": "controls",
+      "title": "Building Controls",
+      "body": "Design, installation, and integration of building automation systems that reduce operating costs."
+    },
+    {
+      "key": "planned",
+      "title": "Planned Maintenance",
+      "body": "Programmatic service plans with predictable scheduling and asset-level tracking."
+    },
+    {
+      "key": "emergency",
+      "title": "Emergency Services",
+      "body": "24 / 7 emergency response — staffed dispatch and an on-call technician roster, always available."
+    },
+    {
+      "key": "projects",
+      "title": "Project Support",
+      "body": "Design-build, retrofit, and equipment-upgrade projects delivered by tradespeople who know the install — and the service after."
+    }
+  ],
+  "servicesReviewTodo": "Service bodies seeded from Columbus copy. Revisit for STR-specific tone.",
+  "technicalExperience": [
+    "Air Handlers (AHUs)",
+    "Boilers — Hot Water & Steam",
+    "Booster Pumps",
+    "Chillers — Air-Cooled",
+    "Chillers — Water-Cooled",
+    "Cooling Towers",
+    "DOAS Units",
+    "Exhaust Fans",
+    "Fan Coil Units",
+    "Heat Pumps",
+    "Humidification Systems",
+    "Make-Up Air Units",
+    "Pumps & Pump Stations",
+    "Rooftop Units (RTUs)",
+    "Split Systems",
+    "Steam Traps",
+    "VAV / VFD Systems",
+    "VRF / VRV Systems",
+    "Water-Source Heat Pumps"
+  ],
+  "stateLicenses": [],
+  "stateLicensesTodo": "Confirm whether VA requires license disclosure (likely yes — VA has trade licensing)"
+}

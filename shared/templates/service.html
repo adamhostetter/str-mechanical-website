@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  STR Service Page Template
+  ============================================================
+
+  Used to hydrate each per-service page under services/<slug>.html
+  from services/<slug>/config.json. Mirrors the FirstCall Columbus
+  service-page pattern: page-hero, feature-grid, info-grid (why),
+  cta-band.
+
+  Handlebars subset (same as branch.html):
+    {{field}}, {{#each list}}...{{/each}}, {{#if cond}}...{{/if}}
+
+  Build directives (see scripts/build-branches.js for handlers):
+    INLINE_CSS         tokens + base + components + service
+    INLINE_LOGO_WHITE  shared/img/logos/str-hero.svg
+    INLINE_BRANCH_JS   shared/js/site.js
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}} — STR Mechanical</title>
+  <meta name="description" content="{{metaDescription}}" />
+  <link rel="canonical" href="{{canonicalUrl}}" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{title}} — STR Mechanical" />
+  <meta property="og:description" content="{{metaDescription}}" />
+  <meta property="og:url" content="{{canonicalUrl}}" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* {{INLINE_CSS}} */
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="/" aria-label="STR Mechanical, home">
+        <!-- {{INLINE_LOGO_WHITE}} — STR Mechanical hero mark -->
+      </a>
+
+      <nav class="site-nav" data-site-nav aria-label="Primary">
+        <div class="site-nav__dropdown-wrap" data-dropdown>
+          <button type="button" class="site-nav__link site-nav__dropdown-toggle"
+                  aria-haspopup="true" aria-expanded="false" data-dropdown-toggle>
+            Services
+            <svg class="site-nav__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="site-nav__dropdown" data-dropdown-menu>
+            <a class="site-nav__dropdown-link" href="/services/hvac.html">HVAC Services</a>
+            <a class="site-nav__dropdown-link" href="/services/building-controls.html">Building Controls</a>
+            <a class="site-nav__dropdown-link" href="/services/planned-maintenance.html">Planned Maintenance</a>
+            <a class="site-nav__dropdown-link" href="/services/emergency.html">Emergency Services</a>
+            <a class="site-nav__dropdown-link" href="/services/project-support.html">Project Support</a>
+          </div>
+        </div>
+
+        <div class="site-nav__dropdown-wrap" data-dropdown>
+          <button type="button" class="site-nav__link site-nav__dropdown-toggle"
+                  aria-haspopup="true" aria-expanded="false" data-dropdown-toggle>
+            STR Locations
+            <svg class="site-nav__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="site-nav__dropdown" data-dropdown-menu>
+            <a class="site-nav__dropdown-link" href="/">Charlotte</a>
+            <a class="site-nav__dropdown-link" href="/raleigh-durham.html">Raleigh-Durham</a>
+            <a class="site-nav__dropdown-link" href="/virginia-beach.html">Virginia Beach</a>
+            <a class="site-nav__dropdown-link" href="/greenville.html">Greenville</a>
+          </div>
+        </div>
+
+        <a class="site-nav__link" href="https://firstcallmechanical.com/locations.html" target="_blank" rel="noopener">FirstCall Locations</a>
+        <a class="site-nav__link" href="{{careersUrl}}" target="_blank" rel="noopener">Careers</a>
+        <a class="site-nav__link" href="/#contact">Contact</a>
+      </nav>
+
+      <div class="site-header__cta">
+        <a class="btn btn--primary btn--sm hide-mobile" href="/#contact">Request Service</a>
+        <button class="menu-toggle" data-menu-toggle aria-label="Open menu" aria-expanded="false">
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. PAGE HERO -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner">
+          <span class="page-hero__eyebrow">Service</span>
+          <h1 class="page-hero__title">{{title}}</h1>
+          <p class="page-hero__lede">{{lede}}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. WHAT'S INCLUDED — feature grid -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">{{featuresEyebrow}}</span>
+          <h2>{{featuresHeading}}</h2>
+          <p class="lead">{{featuresLead}}</p>
+        </div>
+        <div class="feature-grid">
+          {{#each features}}
+          <article class="feature">
+            <span class="feature__icon" aria-hidden="true">{{icon}}</span>
+            <h3>{{title}}</h3>
+            <p>{{body}}</p>
+          </article>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. WHY IT MATTERS — two-column info block -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="info-grid">
+          <div>
+            <span class="eyebrow">{{whyEyebrow}}</span>
+            <h2>{{whyHeading}}</h2>
+            {{#each whyParagraphs}}
+            <p>{{this}}</p>
+            {{/each}}
+          </div>
+          <div>
+            <ul>
+              {{#each whyBullets}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. CTA BAND with location picker -->
+    <section class="cta-band">
+      <div class="container cta-band__inner">
+        <span class="eyebrow" style="color: var(--color-accent-light)">{{ctaEyebrow}}</span>
+        <h2>{{ctaHeading}}</h2>
+        <p>{{ctaParagraph}}</p>
+        <div class="cta-band__row">
+          <a class="btn btn--primary btn--lg" href="/#contact">Request a Proposal</a>
+          <a class="btn btn--lg" href="{{careersUrl}}" target="_blank" rel="noopener" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.4)">Join the Team</a>
+        </div>
+
+        <p style="margin-top: var(--space-7); color: rgba(255,255,255,.7); font-size: var(--text-sm); text-transform: uppercase; letter-spacing: var(--tracking-caps);">Or contact a specific office</p>
+        <div class="location-picker">
+          <a class="location-picker__item" href="/">
+            <span class="location-picker__city">Charlotte</span>
+            <span class="location-picker__phone">(704) 536-5335</span>
+          </a>
+          <a class="location-picker__item" href="/raleigh-durham.html">
+            <span class="location-picker__city">Raleigh-Durham</span>
+            <span class="location-picker__phone">(111) 111-1111</span>
+          </a>
+          <a class="location-picker__item" href="/virginia-beach.html">
+            <span class="location-picker__city">Virginia Beach</span>
+            <span class="location-picker__phone">(757) 548-5889</span>
+          </a>
+          <a class="location-picker__item" href="/greenville.html">
+            <span class="location-picker__city">Greenville</span>
+            <span class="location-picker__phone">(864) 225-1245</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <!-- {{INLINE_LOGO_WHITE}} — STR Mechanical hero mark -->
+          <p>STR Mechanical — commercial HVAC, building controls, planned maintenance, emergency response, and project work across NC, VA, and SC.</p>
+        </div>
+        <div>
+          <div class="site-footer__heading">Services</div>
+          <ul class="site-footer__list">
+            <li><a href="/services/hvac.html">HVAC Services</a></li>
+            <li><a href="/services/building-controls.html">Building Controls</a></li>
+            <li><a href="/services/planned-maintenance.html">Planned Maintenance</a></li>
+            <li><a href="/services/emergency.html">Emergency Services</a></li>
+            <li><a href="/services/project-support.html">Project Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="site-footer__heading">Locations</div>
+          <ul class="site-footer__list">
+            <li><a href="/">Charlotte</a></li>
+            <li><a href="/raleigh-durham.html">Raleigh-Durham</a></li>
+            <li><a href="/virginia-beach.html">Virginia Beach</a></li>
+            <li><a href="/greenville.html">Greenville</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="site-footer__heading">Connect</div>
+          <ul class="site-footer__list">
+            <li><a href="https://www.linkedin.com/company/firstcall-mechanical/" rel="noopener">LinkedIn</a></li>
+            <li><a href="{{careersUrl}}" target="_blank" rel="noopener">Careers</a></li>
+            <li><a href="/#contact">Contact</a></li>
+            <li><a href="https://firstcallmechanical.com" target="_blank" rel="noopener">FirstCall Mechanical</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; {{copyrightYear}} STR Mechanical. All rights reserved.</span>
+        <span><a href="#">Privacy</a> &middot; <a href="#">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* {{INLINE_BRANCH_JS}} — mobile-nav toggle, header scroll, dropdowns */
+  </script>
+</body>
+</html>

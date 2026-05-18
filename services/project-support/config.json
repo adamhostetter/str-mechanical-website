@@ -1,0 +1,64 @@
+{
+  "slug": "project-support",
+  "title": "Project Support",
+  "lede": "Design-build, retrofit, and equipment-upgrade projects delivered by tradespeople who know the install — and the service that comes after. From a single rooftop unit replacement to a campus-wide chiller plant.",
+  "metaDescription": "Mechanical project work from STR Mechanical — design-build, retrofit, equipment upgrades across NC, VA, and SC.",
+  "canonicalUrl": "https://strmechanical.com/services/project-support",
+  "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
+
+  "featuresEyebrow": "What we deliver",
+  "featuresHeading": "Projects, sized to your scope.",
+  "featuresLead": "We don't chase mega-projects we can't staff or one-day jobs that lose money. Our sweet spot is the work that's too complex for a handyman and too operational for a generalist GC.",
+
+  "features": [
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M3 9h18M9 21V9\"/></svg>",
+      "title": "Rooftop unit change-outs",
+      "body": "Crane day to commissioning — including curb adaptation, refrigerant piping, electrical, controls integration, and start-up. We coordinate the crane, the roof inspector, and the AHJ."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 3\"/></svg>",
+      "title": "Chiller plant retrofits",
+      "body": "End-of-life chiller replacement, capacity upgrades, condenser water system redesigns, VFD additions, primary-secondary conversions."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22V12\"/><polyline points=\"5 9 12 2 19 9\"/><path d=\"M5 9v11h14V9\"/></svg>",
+      "title": "Boiler & hot water upgrades",
+      "body": "Atmospheric-to-condensing conversions, boiler plant redundancy upgrades, low-NOx swaps for permit compliance."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6\"/></svg>",
+      "title": "Controls upgrades",
+      "body": "Pneumatic-to-DDC conversions, Niagara migrations, head-end replacements — coordinated with the mechanical work so the system actually runs when we're done."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12c0-4 4-7 9-7s9 3 9 7-4 7-9 7c-2 0-4-.5-5.5-1.5L3 19l1.5-3.5C3.5 14.5 3 13.3 3 12z\"/></svg>",
+      "title": "Tenant fit-outs",
+      "body": "HVAC, controls, plumbing for tenant build-outs — sized to your space plan, sequenced around your construction schedule, commissioned to your standards."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 3v18h18\"/><path d=\"M7 14l4-4 4 4 5-5\"/></svg>",
+      "title": "Energy retrofits",
+      "body": "ESCO-eligible upgrades — variable speed drives, economizer additions, heat recovery, controls optimization. Measurement & verification built in."
+    }
+  ],
+
+  "whyEyebrow": "Why STR for projects",
+  "whyHeading": "The crew that designs it, installs it, and keeps it running.",
+  "whyParagraphs": [
+    "Most mechanical projects suffer the same handoff problem: design firm hands drawings to install crew, install crew hands a system to a service company, service company spends two years untangling assumptions nobody documented. We close that loop.",
+    "Our design-assist team sits with our install foremen and our service techs. The job that hits the field has been pressure-tested by the people who'll service it. The system you operate matches the drawings — because we made both."
+  ],
+  "whyBullets": [
+    "Design-build and design-assist delivery",
+    "Single point of accountability — design through warranty",
+    "Coordinated with our own service team — no handoff gap",
+    "Manufacturer relationships expedite long-lead equipment",
+    "Permits, inspections, and AHJ coordination handled",
+    "M&V baked in — you can prove the savings"
+  ],
+
+  "ctaEyebrow": "Have a project in mind?",
+  "ctaHeading": "Let's scope it together.",
+  "ctaParagraph": "Send us your scope (or just the symptoms — \"the chiller is at end-of-life and we're not sure what to do next\" is a great starting point). We'll walk the site, develop options, and come back with a proposal."
+}

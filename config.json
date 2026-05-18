@@ -1,0 +1,85 @@
+{
+  "slug": "charlotte",
+  "name": "STR Mechanical — Charlotte",
+  "shortName": "Charlotte",
+  "tagline": "Success Through Reputation",
+  "heroHeading": "Success Through Reputation. Built for Charlotte.",
+  "heroParagraph": "Our Charlotte team keeps the Carolinas' commercial buildings running — HVAC, building controls, planned maintenance, and emergency service, backed by a national platform.",
+  "phone": "(704) 536-5335",
+  "phoneE164": "+17045365335",
+  "email": "info@strmechanical.com",
+  "address": {
+    "street": "11704 Reames Road",
+    "city": "Charlotte",
+    "state": "NC",
+    "zip": "28269"
+  },
+  "mapCoords": { "lat": 35.3470, "lng": -80.8460 },
+  "mapCoordsTodo": "Approximated from build-directory.js (Charlotte HQ centroid). Refine to the actual street-level coords if available.",
+  "canonicalUrl": "https://strmechanical.com",
+  "parentLink": "https://firstcallmechanical.com",
+  "isExternalDomain": true,
+  "heroVideo": "shared/img/videos/charlotte-raw_flyover.mp4",
+  "heroVideoTodo": "18 MB raw flyover — compress to ~3-5 MB before launch (target 720p, H.264, ~2 Mbps)",
+  "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
+  "industriesLead": "We serve the buildings that keep the Carolinas and Mid-Atlantic running — across healthcare, industrial, education, hospitality, and beyond.",
+  "photoStrip": [
+    "reference/Photos/STR/NC Lift - For-WEB-1129.jpeg",
+    "reference/Photos/STR/dji_fly_20240522_103548_192_1716388560374_photo_optimized.jpg",
+    "reference/Photos/STR/strraleigh5.jpeg",
+    "reference/Photos/STR/IMG_8065.jpg"
+  ],
+  "photoStripTodo": "Re-host: move chosen photos to shared/img/photos/str/, optimize, and confirm caption-worthy shots that show STR's actual work",
+  "services": [
+    {
+      "key": "hvac",
+      "title": "HVAC Services",
+      "body": "Comprehensive heating, ventilation, and air conditioning service for commercial and industrial facilities."
+    },
+    {
+      "key": "controls",
+      "title": "Building Controls",
+      "body": "Design, installation, and integration of building automation systems that reduce operating costs."
+    },
+    {
+      "key": "planned",
+      "title": "Planned Maintenance",
+      "body": "Programmatic service plans with predictable scheduling and asset-level tracking."
+    },
+    {
+      "key": "emergency",
+      "title": "Emergency Services",
+      "body": "24 / 7 emergency response — staffed dispatch and an on-call technician roster, always available."
+    },
+    {
+      "key": "projects",
+      "title": "Project Support",
+      "body": "Design-build, retrofit, and equipment-upgrade projects delivered by tradespeople who know the install — and the service after."
+    }
+  ],
+  "servicesReviewTodo": "Service bodies seeded from Columbus's Columbus copy. Revisit for STR-specific tone, capability differences (e.g., whether STR offers plumbing), and Carolinas market language.",
+  "technicalExperience": [
+    "Air Handlers (AHUs)",
+    "Boilers — Hot Water & Steam",
+    "Booster Pumps",
+    "Chillers — Air-Cooled",
+    "Chillers — Water-Cooled",
+    "Cooling Towers",
+    "DOAS Units",
+    "Exhaust Fans",
+    "Fan Coil Units",
+    "Heat Pumps",
+    "Humidification Systems",
+    "Make-Up Air Units",
+    "Pumps & Pump Stations",
+    "Rooftop Units (RTUs)",
+    "Split Systems",
+    "Steam Traps",
+    "VAV / VFD Systems",
+    "VRF / VRV Systems",
+    "Water-Source Heat Pumps"
+  ],
+  "technicalExperienceTodo": "Equipment list copied from Columbus. Confirm STR's actual capability mix — add/remove items that differ.",
+  "stateLicenses": [],
+  "stateLicensesTodo": "Confirm whether STR's operating states (NC, VA, SC) require license disclosure"
+}

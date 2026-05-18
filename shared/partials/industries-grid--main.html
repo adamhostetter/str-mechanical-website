@@ -1,0 +1,105 @@
+<!--
+  Industries We Serve — single canonical 19-hex bullseye.
+  Concentric tiers: T1 (darkest, center) ⟶ T2 (mid ring) ⟶ T3 (lightest, outer).
+  Used on the parent landing AND every branch page.
+
+  Layout: 5 rows of 3/4/5/4/3 (classic hex flower).
+  CANONICAL SOURCE. Do not edit pages directly — edit this file
+  and run: node scripts/sync-industries.js
+-->
+<svg class="industries-honeycomb" viewBox="0 0 640 600" role="img" aria-label="Industries we serve">
+  <!-- Row 1 (top, 3 hexes — all T3 outer) -->
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="200,20 260,55 260,125 200,160 140,125 140,55"/>
+    <text class="hex-label" text-anchor="middle" x="200" y="83">Government</text>
+    <text class="hex-label" text-anchor="middle" x="200" y="100">&amp; Federal</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="320,20 380,55 380,125 320,160 260,125 260,55"/>
+    <text class="hex-label" text-anchor="middle" x="320" y="83">Commercial</text>
+    <text class="hex-label" text-anchor="middle" x="320" y="100">Office Space</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="440,20 500,55 500,125 440,160 380,125 380,55"/>
+    <text class="hex-label" text-anchor="middle" x="440" y="95">K&ndash;12 Education</text>
+  </g>
+
+  <!-- Row 2 (4 hexes — T3 outer / T2 ring / T2 ring / T3 outer) -->
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="140,125 200,160 200,230 140,265 80,230 80,160"/>
+    <text class="hex-label" text-anchor="middle" x="140" y="200">Public Sector</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-1" points="260,125 320,160 320,230 260,265 200,230 200,160"/>
+    <text class="hex-label" text-anchor="middle" x="260" y="200">Healthcare</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-1" points="380,125 440,160 440,230 380,265 320,230 320,160"/>
+    <text class="hex-label" text-anchor="middle" x="380" y="188">Life Sciences</text>
+    <text class="hex-label" text-anchor="middle" x="380" y="205">&amp; Pharma</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="500,125 560,160 560,230 500,265 440,230 440,160"/>
+    <text class="hex-label" text-anchor="middle" x="500" y="200">Hospitality</text>
+  </g>
+
+  <!-- Row 3 (widest, 5 hexes — T3 / T2 / T1 (center) / T2 / T3) -->
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="80,230 140,265 140,335 80,370 20,335 20,265"/>
+    <text class="hex-label" text-anchor="middle" x="80" y="305">Automotive</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-1" points="200,230 260,265 260,335 200,370 140,335 140,265"/>
+    <text class="hex-label" text-anchor="middle" x="200" y="293">Higher</text>
+    <text class="hex-label" text-anchor="middle" x="200" y="310">Education</text>
+  </g>
+  <g class="industry-hex industry-hex--center">
+    <polygon class="hex hex--tier-1" points="320,230 380,265 380,335 320,370 260,335 260,265"/>
+    <text class="hex-label" text-anchor="middle" x="320" y="293">Critical</text>
+    <text class="hex-label" text-anchor="middle" x="320" y="310">Infrastructure</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-1" points="440,230 500,265 500,335 440,370 380,335 380,265"/>
+    <text class="hex-label" text-anchor="middle" x="440" y="305">Industrial</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="560,230 620,265 620,335 560,370 500,335 500,265"/>
+    <text class="hex-label" text-anchor="middle" x="560" y="293">Self Storage</text>
+    <text class="hex-label" text-anchor="middle" x="560" y="310">and Logistics</text>
+  </g>
+
+  <!-- Row 4 (4 hexes — T3 outer / T2 ring / T2 ring / T3 outer) -->
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="140,335 200,370 200,440 140,475 80,440 80,370"/>
+    <text class="hex-label" text-anchor="middle" x="140" y="398">Sports</text>
+    <text class="hex-label" text-anchor="middle" x="140" y="415">&amp; Venues</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-1" points="260,335 320,370 320,440 260,475 200,440 200,370"/>
+    <text class="hex-label" text-anchor="middle" x="260" y="398">Data</text>
+    <text class="hex-label" text-anchor="middle" x="260" y="415">Centers</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-1" points="380,335 440,370 440,440 380,475 320,440 320,370"/>
+    <text class="hex-label" text-anchor="middle" x="380" y="398">Advanced</text>
+    <text class="hex-label" text-anchor="middle" x="380" y="415">Manufacturing</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="500,335 560,370 560,440 500,475 440,440 440,370"/>
+    <text class="hex-label" text-anchor="middle" x="500" y="410">Office</text>
+  </g>
+
+  <!-- Row 5 (bottom, 3 hexes — all T3 outer) -->
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="200,440 260,475 260,545 200,580 140,545 140,475"/>
+    <text class="hex-label" text-anchor="middle" x="200" y="515">Senior Living</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="320,440 380,475 380,545 320,580 260,545 260,475"/>
+    <text class="hex-label" text-anchor="middle" x="320" y="515">Retail</text>
+  </g>
+  <g class="industry-hex">
+    <polygon class="hex hex--tier-2" points="440,440 500,475 500,545 440,580 380,545 380,475"/>
+    <text class="hex-label" text-anchor="middle" x="440" y="515">Multifamily</text>
+  </g>
+</svg>

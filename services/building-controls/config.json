@@ -1,0 +1,63 @@
+{
+  "slug": "building-controls",
+  "title": "Building Controls",
+  "lede": "Design, installation, and integration of building automation systems — from a single rooftop unit's BACnet feed up to a campus-wide controls overhaul. Open protocols, no proprietary lock-in.",
+  "metaDescription": "Building automation and controls service from STR Mechanical — BACnet, LonWorks, Tridium, JCI, Siemens, Honeywell across NC, VA, and SC.",
+  "canonicalUrl": "https://strmechanical.com/services/building-controls",
+  "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
+
+  "featuresEyebrow": "Capabilities",
+  "featuresHeading": "Controls work that pays for itself.",
+  "featuresLead": "A well-tuned controls system cuts energy spend 10-20% on day one. We design, install, and tune systems that keep delivering — not ones that drift back to defaults six months later.",
+
+  "features": [
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\"/><path d=\"M9 9h6v6H9z\"/></svg>",
+      "title": "BAS design & installation",
+      "body": "New construction and retrofit — sequence of operations, panel layout, point lists, field wiring, head-end programming, and commissioning."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6\"/></svg>",
+      "title": "Multi-vendor integration",
+      "body": "Tridium Niagara, JCI Metasys, Siemens Desigo, Honeywell, Distech, Automated Logic — we speak every dialect, no vendor lock-in."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"22 12 18 12 15 21 9 3 6 12 2 12\"/></svg>",
+      "title": "Open protocols",
+      "body": "BACnet IP/MSTP, Modbus TCP/RTU, LonWorks, MQTT — interoperable systems you can extend or replace without ripping it all out."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 3v18h18\"/><path d=\"M7 14l4-4 4 4 5-5\"/></svg>",
+      "title": "Energy & analytics",
+      "body": "Trend reviews, fault detection diagnostics, energy benchmarking — find the buildings that are bleeding spend and fix them first."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2L3 7v6c0 5 4 9 9 11 5-2 9-6 9-11V7z\"/></svg>",
+      "title": "Cybersecurity hardening",
+      "body": "Network segmentation, role-based access, password rotation, firmware patching — controls systems that won't end up on a CISA advisory."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12c0-4 4-7 9-7s9 3 9 7-4 7-9 7c-2 0-4-.5-5.5-1.5L3 19l1.5-3.5C3.5 14.5 3 13.3 3 12z\"/></svg>",
+      "title": "Recommissioning",
+      "body": "Existing systems audited, sequences re-tuned, drifted setpoints corrected — recover the savings the original design promised."
+    }
+  ],
+
+  "whyEyebrow": "Why STR",
+  "whyHeading": "Controls techs who think like engineers.",
+  "whyParagraphs": [
+    "Most building controls contractors are great at pulling wire and great at programming, but rarely both — and almost never great at explaining what they did to your team.",
+    "Our controls group spans installation, integration, and analytics. We hand off systems your in-house facilities team can actually operate and maintain — with documentation that matches what's in the panel."
+  ],
+  "whyBullets": [
+    "Factory-trained on Tridium, JCI, Siemens, Honeywell, Distech, Automated Logic",
+    "Niagara N4 AX-to-N4 migrations done painlessly",
+    "Graphics + sequence documentation delivered with every project",
+    "Hands-on training for your facility team",
+    "Remote support — we can dial into your system before sending a truck"
+  ],
+
+  "ctaEyebrow": "Got an idea? A problem?",
+  "ctaHeading": "Let's talk about your controls.",
+  "ctaParagraph": "Whether it's a single-building retrofit or a campus rollout, we can scope, design, install, and program — and stay around to keep it tuned."
+}

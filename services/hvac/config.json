@@ -1,0 +1,63 @@
+{
+  "slug": "hvac",
+  "title": "HVAC Services",
+  "lede": "Comprehensive heating, ventilation, and air conditioning service for commercial and industrial facilities — from emergency repair on a rooftop unit at 2 a.m. to a full chiller plant overhaul.",
+  "metaDescription": "Commercial HVAC service from STR Mechanical — rooftop units, chillers, boilers, VRF, and air handlers across NC, VA, and SC.",
+  "canonicalUrl": "https://strmechanical.com/services/hvac",
+  "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
+
+  "featuresEyebrow": "What we service",
+  "featuresHeading": "Every system in the mechanical room.",
+  "featuresLead": "Our techs work on the full breadth of commercial HVAC equipment — packaged units, split systems, central plants, and the controls that tie them together.",
+
+  "features": [
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M3 9h18M9 21V9\"/></svg>",
+      "title": "Rooftop units",
+      "body": "Service, repair, and replacement for packaged RTUs — gas-electric, heat pump, and dedicated outside air units."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 3\"/></svg>",
+      "title": "Chillers & cooling towers",
+      "body": "Air-cooled, water-cooled, and absorption chillers — start-up, teardown, eddy-current tube testing, refrigerant management."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4\"/><circle cx=\"12\" cy=\"12\" r=\"4\"/></svg>",
+      "title": "Boilers & hot water",
+      "body": "Hot water and steam boilers, condensate systems, combustion analysis and tuning, and code-required annual inspections."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 12h20M12 2v20\"/><rect x=\"6\" y=\"6\" width=\"12\" height=\"12\" rx=\"1\"/></svg>",
+      "title": "Air handlers & DOAS",
+      "body": "AHUs, fan coils, VAV boxes, and dedicated outside air units — coil cleaning, motor and bearing replacement, balance, controls integration."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"22 12 18 12 15 21 9 3 6 12 2 12\"/></svg>",
+      "title": "VRF / VRV systems",
+      "body": "Multi-zone variable refrigerant systems — leak detection, EEPROM diagnostics, indoor-unit replacement, condenser service."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 12c0-4 4-7 9-7s9 3 9 7-4 7-9 7c-2 0-4-.5-5.5-1.5L3 19l1.5-3.5C3.5 14.5 3 13.3 3 12z\"/></svg>",
+      "title": "Indoor air quality",
+      "body": "Filtration upgrades, UV-C, bipolar ionization, humidity control, ventilation surveys, and ASHRAE 62.1 compliance audits."
+    }
+  ],
+
+  "whyEyebrow": "Why STR",
+  "whyHeading": "We service what we install — and we install what we service.",
+  "whyParagraphs": [
+    "Most HVAC firms split into install crews and service crews that don't talk. Ours don't. The tech who shows up to fix your rooftop unit at 2 a.m. has probably worked on the install crew that put it there.",
+    "That means faster diagnosis, cleaner repairs, and a service record that actually reflects what's in your building."
+  ],
+  "whyBullets": [
+    "Factory-trained on Trane, Carrier, Daikin, JCI, Lennox, Mitsubishi, and LG",
+    "EPA-certified universal techs on every truck",
+    "Manufacturer warranty handling — we file the paperwork, you don't",
+    "Aligned with your in-house facilities team, not in competition with them",
+    "Same crew for service and projects — no handoff friction"
+  ],
+
+  "ctaEyebrow": "Ready to talk?",
+  "ctaHeading": "Let's keep your buildings running.",
+  "ctaParagraph": "Tell us about your facility — current equipment, pain points, expansion plans — and we'll come back with a proposal within a week."
+}

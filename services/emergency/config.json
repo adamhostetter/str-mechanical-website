@@ -1,0 +1,64 @@
+{
+  "slug": "emergency",
+  "title": "Emergency Services",
+  "lede": "24 / 7 emergency response for commercial HVAC and building controls — staffed dispatch and an on-call technician roster, always available. When something fails at 2 a.m., you get a human and a truck, not a voicemail.",
+  "metaDescription": "24/7 emergency HVAC and controls response from STR Mechanical — staffed dispatch across NC, VA, and SC.",
+  "canonicalUrl": "https://strmechanical.com/services/emergency",
+  "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
+
+  "featuresEyebrow": "How we respond",
+  "featuresHeading": "Staffed dispatch. Real techs. Fast trucks.",
+  "featuresLead": "Emergency response is a system, not a phone number. Ours is built on staffed dispatch, on-call rotations across all four offices, and trucks already stocked for the most common failures.",
+
+  "features": [
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 6v6l4 2\"/></svg>",
+      "title": "Guaranteed response window",
+      "body": "PM customers get a contracted response time — typically 2-4 hours during business hours, 4-8 hours overnight. No PM contract? We still come, just behind the contract holders."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 17l6-6 4 4 8-8\"/><polyline points=\"14 7 21 7 21 14\"/></svg>",
+      "title": "Live dispatch, not voicemail",
+      "body": "Calls route to a person — even at 3 a.m. on a holiday. Dispatch triages, pages the on-call tech, and stays on the line until a truck is rolling."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"7\" width=\"15\" height=\"10\" rx=\"1\"/><circle cx=\"7\" cy=\"19\" r=\"2\"/><circle cx=\"17\" cy=\"19\" r=\"2\"/><path d=\"M18 9h3l2 4v3h-5\"/></svg>",
+      "title": "Stocked trucks",
+      "body": "Common-failure parts onboard — contactors, capacitors, motors, belts, common refrigerants, control boards. Fewer second trips for the same call."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/></svg>",
+      "title": "Mission-critical experience",
+      "body": "Data centers, hospitals, life sciences — facilities that can't go down. We understand the protocols, the change-control, and the documentation."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"22 12 18 12 15 21 9 3 6 12 2 12\"/></svg>",
+      "title": "Temporary cooling/heating",
+      "body": "Equipment rentals when repair time exceeds your tolerance — chillers, AHUs, spot coolers, glycol systems, electric boilers delivered and set."
+    },
+    {
+      "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><polyline points=\"14 2 14 8 20 8\"/><line x1=\"9\" y1=\"15\" x2=\"15\" y2=\"15\"/></svg>",
+      "title": "Post-event reporting",
+      "body": "Within 24 hours of any emergency call: root cause, parts replaced, labor hours, recommended follow-up. You get the paper trail your insurer and ownership need."
+    }
+  ],
+
+  "whyEyebrow": "Why STR for emergencies",
+  "whyHeading": "The cavalry, not a callback.",
+  "whyParagraphs": [
+    "Anyone can advertise \"24/7 service.\" Few actually staff it. Even fewer have the parts on the truck, the institutional knowledge of your building, and the relationships to expedite a part from a manufacturer at 11 p.m. on a Friday.",
+    "Four offices across NC, VA, and SC means there's almost always a truck within an hour. PM customers get priority — the contract is the queue."
+  ],
+  "whyBullets": [
+    "Live dispatch, never an answering service",
+    "On-call rotation across all 4 STR offices for regional coverage",
+    "Common-failure parts on every truck",
+    "Mission-critical experience: data centers, hospitals, life sciences",
+    "Temporary equipment rentals when repair time exceeds tolerance",
+    "Post-event reporting within 24 hours"
+  ],
+
+  "ctaEyebrow": "Something's down right now?",
+  "ctaHeading": "Call the closest STR office.",
+  "ctaParagraph": "If something's failing in your facility right now, scroll down and call the office nearest you. If you want to set up a PM contract that puts you in the priority queue, request a proposal."
+}

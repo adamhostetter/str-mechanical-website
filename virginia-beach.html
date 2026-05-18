@@ -1,0 +1,2775 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  FirstCall Branch Template
+  ============================================================
+
+  Canonical source for every branch site (FirstCall Mechanical
+  subpages + standalone-domain branches). Hydrated from each
+  branch's config.json by a future scripts/build-branches.js
+  step (see Milestone 5).
+
+  Placeholders use  syntax for simple field
+  substitution and  for repeats.
+
+  For the live, fully-rendered example, see
+  branches/columbus/index.html. That file is the manually-built
+  reference instance — when build-branches.js is wired up, it
+  should produce a byte-identical output for the Columbus
+  config.json.
+
+  All CSS / JS / logo SVGs are inlined per branch so each page
+  renders standalone (no sibling-file dependencies). This is
+  intentional — branch sites may live at different domains
+  (strmechanical.com, c2h.com) and shouldn't share runtime
+  assets cross-origin.
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STR Mechanical — Virginia Beach</title>
+  <meta name="description" content="STR Mechanical — Virginia Beach — commercial HVAC, building controls, plumbing, planned maintenance, and emergency service. Chesapeake, VA." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="STR Mechanical — Virginia Beach" />
+  <meta property="og:description" content="Commercial mechanical service for Chesapeake, VA." />
+  <meta property="og:url" content="https://strmechanical.com/virginia-beach" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- LocalBusiness JSON-LD for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "STR Mechanical — Virginia Beach",
+    "image": "shared/img/photos/str/virginia-beach.jpg",
+    "telephone": "+17575485889",
+    "email": "info@strmechanical.com",
+    "url": "https://strmechanical.com/virginia-beach",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "825 Green Briar Circle, Suite A",
+      "addressLocality": "Chesapeake",
+      "addressRegion": "VA",
+      "postalCode": "23320",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 36.7682,
+      "longitude": -76.2875
+    },
+    "openingHours": "Mo-Fr 07:00-17:00",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "FirstCall Mechanical",
+      "url": "https://firstcallmechanical.com"
+    }
+  }
+  </script>
+
+  <style>
+    /* ============================================================
+       TOKENS, BASE, BUTTONS, HEADER, FOOTER, PAGE: BRANCH
+
+       Build step should inline the contents of
+       shared/css/tokens.css + base.css + components.css here,
+       plus the branch-specific page styles. For the reference
+       implementation, see branches/columbus/index.html.
+       ============================================================ */
+
+    /* ===== tokens.css ===== */
+/* ============================================================
+   STR Design Tokens — mirrors the Columbus, OH reference palette
+   (Website Redesign/columbus.html inline TOKENS block).
+
+   Cream/light theme with dark-green header + footer brackets and
+   a deep-blue accent. Dark-text-on-cream content surface.
+   ============================================================ */
+
+:root {
+  /* --------------------------------------------------------
+     COLOR — Brand greens (FirstCall family)
+     -------------------------------------------------------- */
+  --color-primary:        #1A4120;
+  --color-primary-dark:   #0F2814;
+  --color-primary-mid:    #2D5F36;
+  --color-primary-soft:   #4A7D52;
+
+  /* Accent — deep brand blue */
+  --color-accent:         #00558C;
+  --color-accent-dark:    #003D66;
+  --color-accent-light:   #5BA3D6;
+
+  /* --------------------------------------------------------
+     COLOR — Surfaces (cream-led, dark-bracket)
+     -------------------------------------------------------- */
+  --color-bg:             #FCFBF7;  /* page background — warm cream */
+  --color-bg-soft:        #F4F2EA;  /* alt section bands */
+  --color-bg-section:     #EDE9DC;  /* tinted bands */
+  --color-bg-dark:        #0F2814;  /* deepest — footer, deep CTAs */
+  --color-bg-card:        #FFFFFF;  /* lifted cards on cream */
+
+  --color-text:           #1A2331;  /* near-black primary text */
+  --color-text-muted:     #5A6371;  /* secondary copy */
+  --color-text-light:     #8A93A1;  /* tertiary, meta */
+  --color-text-on-dark:   #F2EFE3;  /* warm cream on dark surfaces */
+  --color-text-on-primary:#FFFFFF;
+
+  --color-border:         #E5E1D2;
+  --color-border-strong:  #C9C7B7;
+  --color-border-dark:    #0F2814;
+
+  /* --------------------------------------------------------
+     INDUSTRIES-GRID TIER TOKENS
+     Used by the "Industries We Serve" hex grid + legend.
+     -------------------------------------------------------- */
+  --fc-tier-1:        #0B2E4F;   /* Specialty Focus — darkest navy */
+  --fc-tier-2:        #1E5A8A;   /* Deep Expertise — mid navy */
+  --fc-tier-3:        #A8C5DC;   /* Trusted Partner — light blue */
+  --fc-text-light:    #FFFFFF;
+  --fc-text-dark:     #0B2E4F;
+
+  /* --------------------------------------------------------
+     COLOR — Semantic
+     -------------------------------------------------------- */
+  --color-success:        #5BA3D6;
+  --color-warning:        #B8861A;
+  --color-danger:         #C0392B;
+  --color-info:           #5BA3D6;
+
+  /* --------------------------------------------------------
+     TYPOGRAPHY
+     Manrope (display/headings) + IBM Plex Sans (body)
+     -------------------------------------------------------- */
+  --font-display: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-xs:    0.75rem;
+  --text-sm:    0.875rem;
+  --text-base:  1rem;
+  --text-lg:    1.125rem;
+  --text-xl:    1.25rem;
+  --text-2xl:   1.5rem;
+  --text-3xl:   1.875rem;
+  --text-4xl:   2.25rem;
+  --text-5xl:   3rem;
+  --text-6xl:   3.75rem;
+  --text-7xl:   4.5rem;
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-extrabold:800;
+
+  --leading-tight:   1.15;
+  --leading-snug:    1.3;
+  --leading-normal:  1.55;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.02em;
+  --tracking-caps:   0.08em;
+
+  /* --------------------------------------------------------
+     SPACING — 4px base
+     -------------------------------------------------------- */
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.5rem;
+  --space-6:   2rem;
+  --space-7:   3rem;
+  --space-8:   4rem;
+  --space-9:   6rem;
+  --space-10:  8rem;
+  --space-11: 10rem;
+
+  /* --------------------------------------------------------
+     LAYOUT
+     -------------------------------------------------------- */
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1600px;
+  --container-content: 1440px;
+
+  --header-height: 80px;
+  --header-height-mobile: 64px;
+  --pad-x: clamp(1.25rem, 4vw, 3rem);
+
+  /* --------------------------------------------------------
+     RADII
+     -------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-pill: 999px;
+
+  /* --------------------------------------------------------
+     SHADOWS
+     -------------------------------------------------------- */
+  --shadow-xs: 0 1px 2px rgba(15, 42, 31, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 42, 31, 0.06), 0 1px 2px rgba(15, 42, 31, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 42, 31, 0.08), 0 2px 4px rgba(15, 42, 31, 0.04);
+  --shadow-lg: 0 12px 32px rgba(15, 42, 31, 0.10), 0 4px 8px rgba(15, 42, 31, 0.04);
+  --shadow-xl: 0 24px 48px rgba(15, 42, 31, 0.14), 0 8px 16px rgba(15, 42, 31, 0.06);
+
+  /* --------------------------------------------------------
+     MOTION
+     -------------------------------------------------------- */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:   150ms;
+  --duration-base:   200ms;
+  --duration-slow:   320ms;
+
+  /* --------------------------------------------------------
+     Z-INDEX
+     -------------------------------------------------------- */
+  --z-base:     1;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-header:   300;
+  --z-overlay:  400;
+  --z-modal:    500;
+  --z-toast:    600;
+}
+
+/* Focus ring — applied via :focus-visible across the system. */
+:root {
+  --focus-ring: 0 0 0 3px rgba(0, 85, 140, 0.35);
+}
+
+
+/* ===== base.css ===== */
+/* ============================================================
+   FirstCall Base — resets, typography defaults, utilities
+   Depends on tokens.css being loaded first.
+   ============================================================ */
+
+/* ---------- Modern reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg, video, canvas, picture {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: var(--color-primary-mid);
+  text-decoration: none;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+
+ul, ol { padding-left: 1.25em; }
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+
+/* ---------- Typography ---------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+}
+
+h1, .h1 {
+  font-size: clamp(2.25rem, 4.5vw, var(--text-6xl));
+  font-weight: var(--weight-bold);
+}
+
+h2, .h2 {
+  font-size: clamp(1.875rem, 3.5vw, var(--text-5xl));
+}
+
+h3, .h3 {
+  font-size: clamp(1.5rem, 2.5vw, var(--text-4xl));
+}
+
+h4, .h4 {
+  font-size: var(--text-2xl);
+  letter-spacing: var(--tracking-normal);
+}
+
+h5, .h5 {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-normal);
+}
+
+h6, .h6 {
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-text-muted);
+}
+
+p {
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+}
+
+.lead {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  max-width: 60ch;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+small, .text-small { font-size: var(--text-sm); }
+.text-xs { font-size: var(--text-xs); }
+.text-muted { color: var(--color-text-muted); }
+.text-light { color: var(--color-text-light); }
+
+/* ---------- Layout utilities ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.container-narrow {
+  max-width: 800px;
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: var(--container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .container, .container-narrow, .container-wide {
+    padding-inline: var(--space-6);
+  }
+}
+
+/* Section spacing */
+.section {
+  padding-block: var(--space-9);
+}
+
+.section-tight {
+  padding-block: var(--space-7);
+}
+
+.section-loose {
+  padding-block: var(--space-10);
+}
+
+@media (max-width: 767px) {
+  .section { padding-block: var(--space-7); }
+  .section-loose { padding-block: var(--space-8); }
+}
+
+.section--soft { background: var(--color-bg-soft); }
+.section--tinted { background: var(--color-bg-section); }
+.section--primary { background: var(--color-primary); color: var(--color-text-on-primary); }
+.section--dark { background: var(--color-bg-dark); color: var(--color-text-on-dark); }
+
+.section--primary h1, .section--primary h2, .section--primary h3,
+.section--primary h4, .section--primary h5, .section--primary h6,
+.section--dark h1, .section--dark h2, .section--dark h3,
+.section--dark h4, .section--dark h5, .section--dark h6 {
+  color: inherit;
+}
+
+.section--primary .eyebrow,
+.section--dark .eyebrow {
+  color: var(--color-accent-light);
+}
+
+/* Flex / grid helpers */
+.stack > * + * { margin-top: var(--space-4); }
+.stack-sm > * + * { margin-top: var(--space-2); }
+.stack-lg > * + * { margin-top: var(--space-6); }
+.stack-xl > * + * { margin-top: var(--space-7); }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.row--between { justify-content: space-between; }
+.row--center  { align-items: center; }
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-6 { grid-template-columns: repeat(6, 1fr); }
+
+@media (max-width: 1023px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-6 { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 639px) {
+  .grid-2, .grid-3, .grid-4, .grid-6 { grid-template-columns: 1fr; }
+}
+
+/* Text alignment */
+.text-center { text-align: center; }
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+
+/* Display */
+.hidden { display: none !important; }
+
+@media (max-width: 767px) {
+  .hide-mobile { display: none !important; }
+}
+@media (min-width: 768px) {
+  .show-mobile { display: none !important; }
+}
+
+/* Skip-to-content for accessibility */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+  border-radius: var(--radius-md);
+  font-weight: var(--weight-semibold);
+  z-index: var(--z-toast);
+  transition: top var(--duration-base) var(--ease-out);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ===== components.css ===== */
+/* ============================================================
+   FirstCall Components — buttons, cards, forms, nav, footer,
+   badges, callouts, photo strip, capabilities grid.
+   Depends on tokens.css and base.css.
+   ============================================================ */
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-normal);
+  line-height: 1;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+  white-space: nowrap;
+}
+
+.btn:active { transform: translateY(1px); }
+
+.btn--primary {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-sm);
+}
+.btn--primary:hover {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+.btn--secondary {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+.btn--secondary:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: #fff;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn--outline:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: transparent;
+}
+.btn--ghost:hover {
+  background: var(--color-bg-section);
+  color: var(--color-primary-dark);
+}
+
+.btn--on-dark {
+  background: #fff;
+  color: var(--color-primary);
+  border-color: #fff;
+}
+.btn--on-dark:hover {
+  background: var(--color-bg-section);
+  color: var(--color-primary-dark);
+}
+
+.btn--outline-on-dark {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255,255,255,0.4);
+}
+.btn--outline-on-dark:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Size variants */
+.btn--sm { padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
+.btn--lg { padding: var(--space-4) var(--space-7); font-size: var(--text-lg); }
+.btn--full { width: 100%; }
+
+/* Inline-link arrow button (used a lot on ServiceLogic-style sites) */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: gap var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+}
+
+.link-arrow::after {
+  content: "→";
+  transition: transform var(--duration-base) var(--ease-out);
+  font-weight: var(--weight-regular);
+}
+
+.link-arrow:hover {
+  color: var(--color-accent);
+  gap: var(--space-3);
+}
+
+.link-arrow:hover::after { transform: translateX(2px); }
+
+.link-arrow--on-dark { color: var(--color-accent-light); }
+.link-arrow--on-dark:hover { color: #fff; }
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.card--hover:hover {
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.card--feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.card--feature .card__icon {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-section);
+  color: var(--color-primary);
+  border-radius: var(--radius-md);
+}
+
+.card--feature .card__icon svg { width: 28px; height: 28px; }
+
+.card__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+}
+
+.card__body {
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+/* Branch quick-card (used on parent homepage) */
+.branch-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.branch-card:hover {
+  border-color: var(--color-primary-mid);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.branch-card__location {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-accent);
+}
+
+.branch-card__name {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.branch-card__phone {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+}
+
+.branch-card__phone a { color: inherit; }
+.branch-card__phone a:hover { color: var(--color-primary); }
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.form-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+
+.form-label .required {
+  color: var(--color-accent);
+  margin-left: 2px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-base) var(--ease-out), background var(--duration-base) var(--ease-out);
+}
+
+.form-input:hover,
+.form-textarea:hover,
+.form-select:hover {
+  border-color: var(--color-border-strong);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-primary-mid);
+  box-shadow: 0 0 0 3px rgba(0, 85, 140, 0.15);
+}
+
+.form-textarea {
+  min-height: 140px;
+  resize: vertical;
+  line-height: var(--leading-normal);
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%231A2421'><path d='M5 8l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  background-size: 16px;
+  padding-right: var(--space-7);
+}
+
+.form-help {
+  font-size: var(--text-xs);
+  color: var(--color-text-light);
+}
+
+.form-error {
+  font-size: var(--text-xs);
+  color: var(--color-danger);
+  font-weight: var(--weight-medium);
+}
+
+.form-input--error,
+.form-textarea--error,
+.form-select--error {
+  border-color: var(--color-danger);
+}
+
+/* Checkbox / radio */
+.form-checkbox,
+.form-radio {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  cursor: pointer;
+  font-size: var(--text-sm);
+}
+
+.form-checkbox input,
+.form-radio input {
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================================
+   HEADER / NAV  (Columbus-style: dark green bar over cream page)
+   ============================================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: rgba(15, 40, 20, 0.92);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid rgba(74, 125, 82, 0.35);
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  transition: box-shadow var(--duration-base) var(--ease-out), background var(--duration-base) var(--ease-out);
+}
+
+.site-header.is-scrolled {
+  box-shadow: 0 1px 0 rgba(0,0,0,0.4), var(--shadow-sm);
+  background: rgba(15, 40, 20, 0.97);
+}
+
+.site-header__inner {
+  width: 100%;
+  max-width: var(--container-2xl);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.site-header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+}
+
+.site-header__logo svg {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.site-header__tagline {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-accent-light);
+  padding-left: var(--space-3);
+  border-left: 1px solid rgba(242, 239, 227, 0.3);
+}
+
+@media (max-width: 767px) { .site-header__tagline { display: none; } }
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.site-nav__link {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-on-dark);
+  text-decoration: none;
+  padding: var(--space-2) 0;
+  position: relative;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.site-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent-light);
+  transition: width var(--duration-base) var(--ease-out);
+}
+
+.site-nav__link:hover { color: var(--color-accent-light); }
+
+.site-nav__link:hover::after,
+.site-nav__link[aria-current="page"]::after {
+  width: 100%;
+}
+
+.site-nav__link[aria-current="page"] {
+  color: var(--color-accent-light);
+  font-weight: var(--weight-semibold);
+}
+
+/* Nav dropdowns (Services + STR Locations) */
+.site-nav__dropdown-wrap { position: relative; }
+.site-nav__dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.site-nav__caret {
+  width: 12px;
+  height: 12px;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+.site-nav__dropdown-toggle[aria-expanded="true"] .site-nav__caret { transform: rotate(180deg); }
+.site-nav__dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: -8px;
+  min-width: 240px;
+  background: rgba(15, 40, 20, 0.97);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border: 1px solid rgba(74, 125, 82, 0.35);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-out);
+  z-index: 1;
+}
+.site-nav__dropdown.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.site-nav__dropdown-link {
+  display: block;
+  padding: var(--space-3) var(--space-3);
+  color: var(--color-text-on-dark);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  transition: background var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+}
+.site-nav__dropdown-link:hover,
+.site-nav__dropdown-link:focus-visible {
+  background: rgba(91, 163, 214, 0.15);
+  color: var(--color-accent-light);
+}
+.site-nav__dropdown-link[aria-current="page"] {
+  color: var(--color-accent-light);
+  background: rgba(91, 163, 214, 0.1);
+}
+
+.site-header__cta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+}
+
+.menu-toggle:hover { background: rgba(242, 239, 227, 0.1); }
+
+.menu-toggle__bars,
+.menu-toggle__bars::before,
+.menu-toggle__bars::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text-on-dark);
+  position: relative;
+  transition: transform var(--duration-base) var(--ease-out), top var(--duration-base) var(--ease-out);
+}
+
+.menu-toggle__bars::before,
+.menu-toggle__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.menu-toggle__bars::before { top: -7px; }
+.menu-toggle__bars::after  { top: 7px; }
+
+@media (max-width: 1023px) {
+  .menu-toggle { display: inline-flex; }
+  .site-nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: var(--color-primary-dark);
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-120%);
+    transition: transform var(--duration-slow) var(--ease-out);
+    gap: 0;
+  }
+  .site-nav.is-open { transform: translateY(0); }
+  .site-nav__link {
+    padding-block: var(--space-4);
+    border-bottom: 1px solid rgba(74, 125, 82, 0.4);
+    font-size: var(--text-lg);
+  }
+  .site-nav__link:last-child { border-bottom: none; }
+  .site-nav__link::after { display: none; }
+  .site-header__cta .btn { display: none; }
+  .hide-mobile { display: none !important; }
+
+  /* Mobile dropdowns: full-width toggle + collapsible inline menu */
+  .site-nav__dropdown-wrap { width: 100%; }
+  .site-nav__dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding-block: var(--space-4);
+    border-bottom: 1px solid rgba(74, 125, 82, 0.4);
+    font-size: var(--text-lg);
+    color: var(--color-text-on-dark);
+  }
+  .site-nav__dropdown {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    min-width: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--duration-slow) var(--ease-out);
+  }
+  .site-nav__dropdown.is-open { max-height: 400px; }
+  .site-nav__dropdown-link {
+    padding-block: var(--space-3);
+    padding-left: var(--space-5);
+    border-bottom: 1px solid rgba(74, 125, 82, 0.25);
+    font-size: var(--text-base);
+  }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.site-footer {
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+  padding-block: var(--space-9) var(--space-6);
+}
+
+.site-footer a { color: var(--color-text-on-dark); text-decoration: none; }
+.site-footer a:hover { color: var(--color-accent-light); }
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-7);
+  margin-bottom: var(--space-8);
+}
+
+@media (max-width: 1023px) {
+  .site-footer__grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 639px) {
+  .site-footer__grid { grid-template-columns: 1fr; }
+}
+
+.site-footer__heading {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-accent-light);
+  margin-bottom: var(--space-4);
+}
+
+.site-footer__list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.site-footer__list a { font-size: var(--text-base); }
+
+.site-footer__brand p {
+  color: rgba(242, 239, 227, 0.7);
+  max-width: 36ch;
+  margin-top: var(--space-3);
+  line-height: var(--leading-relaxed);
+}
+
+.site-footer__bottom {
+  padding-top: var(--space-5);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: var(--text-sm);
+  color: rgba(242, 239, 227, 0.6);
+}
+
+/* ============================================================
+   BADGES / TAGS / CALLOUTS
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-section);
+  color: var(--color-primary);
+}
+
+.badge--accent { background: var(--color-accent); color: #fff; }
+.badge--primary { background: var(--color-primary); color: #fff; }
+.badge--outline { background: transparent; border: 1.5px solid var(--color-border-strong); color: var(--color-text-muted); }
+
+.callout {
+  background: var(--color-bg-section);
+  border-left: 4px solid var(--color-accent);
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-md);
+}
+
+/* ============================================================
+   PHOTO STRIP (horizontal scrolling row used on branch sites)
+   ============================================================ */
+
+.photo-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 1fr);
+  gap: var(--space-4);
+  overflow-x: auto;
+  padding-bottom: var(--space-3);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.photo-strip__item {
+  scroll-snap-align: start;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-section);
+}
+
+.photo-strip__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+  .photo-strip {
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4, 1fr);
+    overflow: visible;
+  }
+}
+
+/* ============================================================
+   CAPABILITIES GRID (homepage + branch)
+   ============================================================ */
+
+.capabilities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+@media (max-width: 1023px) { .capabilities { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 639px)  { .capabilities { grid-template-columns: 1fr; } }
+
+.capability {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+}
+
+.capability:hover {
+  border-color: var(--color-primary-mid);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.capability__icon {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+}
+
+.capability__icon svg { width: 28px; height: 28px; }
+
+.capability__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.capability__body {
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+  font-size: var(--text-base);
+}
+
+/* ============================================================
+   HERO (parent + branch share this structural pattern)
+   ============================================================ */
+
+.hero {
+  position: relative;
+  padding-block: var(--space-10) var(--space-9);
+  overflow: hidden;
+}
+
+.hero--with-photo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (max-width: 1023px) {
+  .hero--with-photo { grid-template-columns: 1fr; gap: var(--space-6); }
+}
+
+.hero__eyebrow {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, var(--text-7xl));
+  font-weight: var(--weight-extrabold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-5);
+  max-width: 16ch;
+}
+
+.hero__lede {
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  max-width: 50ch;
+  margin-bottom: var(--space-6);
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.hero__photo {
+  aspect-ratio: 5 / 4;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-bg-section);
+  box-shadow: var(--shadow-xl);
+}
+
+.hero__photo img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+/* ============================================================
+   COLOR SWATCHES (used in styleguide only, but kept here so
+   the swatch component is documented within the system)
+   ============================================================ */
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.swatch__chip {
+  height: 96px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.swatch__meta {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.swatch__meta strong {
+  display: block;
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+
+/* ===== branch.css ===== */
+/* ============================================================
+   shared/css/branch.css
+
+   Page-specific styles for the branch page (the template at
+   shared/templates/branch.html). Inlined by
+   scripts/build-branches.js after tokens.css, base.css, and
+   components.css.
+
+   Extracted from the manually-built reference instance
+   (Website Redesign/columbus.html, lines 500–858). Keep in sync
+   with the Website Redesign repo's equivalent.
+   ============================================================ */
+
+/* ===== PAGE: BRANCH ===== */
+
+/* Hero — full-bleed video background with overlaid text */
+.branch-hero {
+  position: relative;
+  min-height: 82vh;
+  display: flex;
+  align-items: center;
+  padding-block: var(--space-9);
+  overflow: hidden;
+  background: var(--color-primary-dark); /* fallback while video loads */
+  color: #fff;
+  isolation: isolate; /* contain stacking context */
+  /* Pull the hero up under the sticky header so the video starts at the very top */
+  margin-top: calc(var(--header-height) * -1);
+  padding-top: calc(var(--header-height) + var(--space-9));
+}
+@media (max-width: 767px) {
+  .branch-hero { min-height: 70vh; padding-block: var(--space-8); padding-top: calc(var(--header-height) + var(--space-7)); }
+}
+.branch-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Photo hero — used when a branch doesn't have a flyover video.
+   Wrapper handles JS-driven parallax translate; image handles continuous
+   Ken Burns zoom + pan. Two transforms on two elements stay composable. */
+.branch-hero__photo-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  will-change: transform;
+}
+.branch-hero__photo-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  animation: hero-ken-burns 26s ease-in-out infinite alternate;
+  transform-origin: center 40%;
+  will-change: transform;
+  /* Slight initial scale so the edges never expose the parent box mid-pan */
+  transform: scale(1.06);
+}
+@keyframes hero-ken-burns {
+  0%   { transform: scale(1.06) translate3d(0, 0, 0); }
+  100% { transform: scale(1.18) translate3d(-2.5%, 1%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .branch-hero__photo-bg {
+    animation: none;
+    transform: scale(1.06);
+  }
+}
+/* Gradient overlay — darker on the left where text sits, lighter on the right
+   so the video subject still reads through. */
+.branch-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(100deg, rgba(15, 40, 20, 0.85) 0%, rgba(15, 40, 20, 0.62) 38%, rgba(15, 40, 20, 0.30) 70%, rgba(15, 40, 20, 0.20) 100%),
+    linear-gradient(180deg, rgba(15, 40, 20, 0.35) 0%, rgba(15, 40, 20, 0.10) 30%, rgba(15, 40, 20, 0.10) 70%, rgba(15, 40, 20, 0.55) 100%);
+}
+.branch-hero__inner {
+  position: relative;
+  max-width: 680px;
+}
+.branch-hero__eyebrow {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-accent-light);
+  margin-bottom: var(--space-4);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+.branch-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-5);
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+  max-width: 18ch;
+}
+.branch-hero__lede {
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  color: rgba(255, 255, 255, 0.94);
+  max-width: 52ch;
+  margin-bottom: var(--space-6);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
+.branch-hero__cta { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+/* Override outline button so it reads on dark video */
+.branch-hero .btn--outline {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.branch-hero .btn--outline:hover {
+  background: #fff;
+  color: var(--color-primary);
+  border-color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .branch-hero__video { display: none; }
+}
+
+/* Photo strip — horizontal scroll on mobile, 3-column gallery grid on desktop. */
+.photo-strip-section { padding-block: var(--space-7); }
+.photo-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 1fr);
+  gap: var(--space-4);
+  overflow-x: auto;
+  padding-bottom: var(--space-3);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+.photo-strip__item {
+  scroll-snap-align: start;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-section);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+}
+.photo-strip__item:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.photo-strip__item img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+.photo-strip__item:hover img { transform: scale(1.04); }
+@media (min-width: 768px) {
+  .photo-strip {
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: visible;
+    gap: var(--space-5);
+  }
+}
+
+/* Section head */
+.section-head {
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: var(--space-7);
+}
+.section-head .lead { margin-inline: auto; }
+
+/* Capabilities */
+.capabilities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+@media (max-width: 1023px) { .capabilities { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 639px)  { .capabilities { grid-template-columns: 1fr; } }
+.capability {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color var(--duration-base) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out),
+              transform var(--duration-base) var(--ease-out);
+}
+.capability:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+.capability__icon {
+  width: 56px; height: 56px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+}
+.capability__icon svg { width: 28px; height: 28px; }
+.capability__title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+}
+.capability__body {
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+/* Technical Experience */
+.tech-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3) var(--space-6);
+  max-width: 1000px;
+  margin-inline: auto;
+}
+@media (max-width: 1023px) { .tech-list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 639px)  { .tech-list { grid-template-columns: 1fr; } }
+.tech-list li {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-base);
+  color: var(--color-text);
+}
+.tech-list li::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* ===== INDUSTRIES HONEYCOMB ===== */
+.industries-honeycomb { max-width: 760px; margin-inline: auto; display: block; }
+.hex--tier-1 { fill: var(--fc-tier-1); }
+.hex--tier-2 { fill: var(--fc-tier-2); stroke: var(--fc-tier-1); stroke-width: 1.5; }
+.hex-label   { fill: var(--fc-text-light); font-family: "Manrope", sans-serif; font-weight: 700; font-size: 13px; pointer-events: none; }
+
+/* Scroll-in + hover animation for each industry hex */
+.industry-hex {
+  opacity: 0;
+  transform: translateY(12px) scale(0.94);
+  transform-origin: center;
+  transform-box: fill-box;
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+  cursor: default;
+}
+.industry-hex.is-visible { opacity: 1; transform: translateY(0) scale(1); }
+.industry-hex polygon {
+  transition: filter 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.industry-hex:hover polygon {
+  transform: scale(1.05);
+  filter: drop-shadow(0 6px 14px rgba(11, 46, 79, 0.32));
+}
+@media (prefers-reduced-motion: reduce) {
+  .industry-hex { opacity: 1; transform: none; transition: none; }
+  .industry-hex:hover polygon { transform: none; }
+}
+
+/* "A FirstCall Company" band */
+.firstcall-block {
+  background: var(--color-bg-section);
+  position: relative;
+  overflow: hidden;
+}
+.firstcall-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 96'><polygon points='28,4 52,18 52,46 28,60 4,46 4,18' fill='none' stroke='%2300558C' stroke-width='1' opacity='0.10'/><polygon points='0,52 24,66 24,94 0,108 -24,94 -24,66' fill='none' stroke='%2300558C' stroke-width='1' opacity='0.10'/><polygon points='56,52 80,66 80,94 56,108 32,94 32,66' fill='none' stroke='%2300558C' stroke-width='1' opacity='0.10'/></svg>");
+  background-size: 56px 96px;
+  pointer-events: none;
+}
+.firstcall-block__inner {
+  position: relative;
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* Service form */
+.service-form {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-7);
+  box-shadow: var(--shadow-md);
+  max-width: 760px;
+  margin-inline: auto;
+}
+@media (max-width: 767px) { .service-form { padding: var(--space-5); } }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4) var(--space-5);
+}
+@media (max-width: 639px) { .form-grid { grid-template-columns: 1fr; } }
+.form-field { display: flex; flex-direction: column; gap: var(--space-2); }
+.form-field--full { grid-column: 1 / -1; }
+.form-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+.form-label .required { color: var(--color-accent); margin-left: 2px; }
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  transition: border-color var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
+}
+.form-input:hover, .form-textarea:hover, .form-select:hover { border-color: var(--color-text-muted); }
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(0, 85, 140, 0.15);
+}
+.form-textarea { min-height: 140px; resize: vertical; line-height: var(--leading-normal); }
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%231A2331'><path d='M5 8l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  background-size: 16px;
+  padding-right: var(--space-7);
+}
+.form-help { font-size: var(--text-xs); color: var(--color-text-light); }
+.form-actions { margin-top: var(--space-5); display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+
+/* STR Locations grid (4-up of office cards) */
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+}
+@media (max-width: 1023px) { .locations-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 639px)  { .locations-grid { grid-template-columns: 1fr; } }
+
+.location-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: border-color var(--duration-base) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out),
+              transform var(--duration-base) var(--ease-out);
+}
+.location-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.location-card__city {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.location-card__badge {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  background: var(--color-primary);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+.location-card__addr {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+.location-card__contact {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text);
+}
+.location-card__contact a {
+  color: var(--color-text);
+  font-weight: var(--weight-medium);
+}
+.location-card__contact a:hover { color: var(--color-accent); }
+.location-card .link-arrow { margin-top: auto; padding-top: var(--space-3); }
+
+/* Careers section CTA row */
+.careers-cta {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* Contact card next to form */
+.contact-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-7);
+  align-items: start;
+}
+@media (max-width: 1023px) { .contact-row { grid-template-columns: 1fr; } }
+.contact-card {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+}
+.contact-card h3 {
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-4);
+}
+.contact-card__row {
+  display: flex; gap: var(--space-3); align-items: flex-start;
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--text-sm);
+}
+.contact-card__row:first-of-type { border-top: none; padding-top: 0; }
+.contact-card__label {
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-size: var(--text-xs);
+  min-width: 70px;
+  flex: 0 0 auto;
+  padding-top: 2px;
+}
+.contact-card__value { color: var(--color-text); line-height: var(--leading-relaxed); }
+.contact-card__value a { color: var(--color-text); font-weight: var(--weight-medium); }
+.contact-card__value a:hover { color: var(--color-accent); }
+
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="/" aria-label="STR Mechanical — Virginia Beach, home">
+        <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1774.69 265.77">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path class="cls-1" d="M287.85,104.05c-3.91-2.26-8.55-4.31-14.07-4.31-21.66,0-57.15,33.24-115.09,107.77-25.43,31.06-46.07,47.02-62.08,55.5h131.18l75.93-131.51-15.85-27.46h-.02Z"/>
+      <path class="cls-1" d="M143.16,195.12c43.25-55.65,73.03-87.43,96.5-102.98,12.39-8.21,23.52-12.2,34.06-12.2h.23l-9.54-16.52-.13-.08c-4.22-2.61-9.39-5.28-15.69-5.28-21.66,0-57.15,33.24-115.09,107.77-34.7,42.39-60.5,56.66-77.77,62.18l13.94,24.15c14.15-3.32,37.88-13.57,73.49-57.06v.02Z"/>
+      <path class="cls-1" d="M109.57,123.87c-34.88,42.61-60.76,56.8-78.03,62.26l13.94,24.15c14.26-3.57,37.71-14.34,72.49-56.82,43.25-55.65,73.03-87.43,96.5-102.98,12.38-8.21,23.52-12.2,34.06-12.2.46,0,.93.04,1.39.05l-9.91-17.17c-4.16-2.54-9.21-5.06-15.34-5.06-21.66,0-57.15,33.24-115.09,107.77h-.01Z"/>
+      <path class="cls-1" d="M94.05,111.49C137.3,55.84,167.08,24.06,190.54,8.51c5.58-3.7,10.91-6.5,16.04-8.51H75.93L0,131.51l21.29,36.87c14.23-3.5,37.76-14.14,72.76-56.89Z"/>
+    </g>
+    <g>
+      <path class="cls-1" d="M353.45,182.76c-6.67-2.84-12.01-7.04-16-12.61s-6.1-12.27-6.32-20.11h29.86c.44,4.43,1.91,7.81,4.43,10.14,2.51,2.33,5.8,3.49,9.84,3.49s7.44-.99,9.85-2.98c2.4-1.99,3.61-4.74,3.61-8.27,0-2.95-.96-5.4-2.87-7.33-1.92-1.93-4.27-3.52-7.06-4.77s-6.76-2.67-11.9-4.26c-7.44-2.39-13.51-4.77-18.21-7.16-4.7-2.39-8.75-5.91-12.14-10.57s-5.09-10.74-5.09-18.24c0-11.13,3.88-19.86,11.65-26.16,7.77-6.31,17.89-9.46,30.35-9.46s22.91,3.15,30.68,9.46c7.76,6.31,11.92,15.08,12.47,26.33h-30.36c-.22-3.86-1.59-6.9-4.1-9.12-2.52-2.22-5.74-3.32-9.68-3.32-3.39,0-6.13.94-8.2,2.81-2.08,1.88-3.12,4.58-3.12,8.1,0,3.86,1.75,6.88,5.25,9.03,3.5,2.16,8.97,4.49,16.41,6.99,7.44,2.62,13.48,5.11,18.13,7.5s8.67,5.85,12.06,10.4c3.39,4.55,5.09,10.4,5.09,17.56s-1.67,13.01-5,18.58c-3.34,5.57-8.18,10-14.52,13.29-6.35,3.3-13.84,4.94-22.48,4.94s-15.97-1.42-22.64-4.26h.01Z"/>
+      <path class="cls-1" d="M519.17,66.18v23.35h-30.52v96.3h-28.06v-96.3h-30.52v-23.35h89.1Z"/>
+      <path class="cls-1" d="M593,185.83l-23.96-45.17h-6.73v45.17h-28.06v-119.65h47.09c9.08,0,16.82,1.65,23.22,4.94,6.4,3.3,11.18,7.81,14.36,13.55,3.17,5.74,4.76,12.13,4.76,19.18,0,7.95-2.16,15.06-6.48,21.31s-10.69,10.68-19.12,13.29l26.58,47.38h-31.67,0ZM562.32,120.04h17.39c5.14,0,9-1.3,11.57-3.92,2.57-2.61,3.86-6.31,3.86-11.08s-1.29-8.12-3.86-10.74c-2.57-2.61-6.43-3.92-11.57-3.92h-17.39s0,29.66,0,29.66Z"/>
+      <path class="cls-1" d="M808.44,66.18v119.65h-28.06v-71.76l-25.76,71.76h-22.64l-25.92-71.93v71.93h-28.06v-119.65h33.14l32.32,82.84,32-82.84s32.98,0,32.98,0Z"/>
+      <path class="cls-1" d="M857.66,89.53v24.2h37.57v22.5h-37.57v26.25h42.5v23.35h-70.55v-119.65h70.55v23.35h-42.5Z"/>
+      <path class="cls-1" d="M921.98,94.22c4.92-9.26,11.79-16.47,20.59-21.65,8.8-5.17,18.79-7.76,29.94-7.76,13.67,0,25.38,3.75,35.11,11.25,9.73,7.5,16.24,17.73,19.53,30.68h-30.85c-2.3-5-5.55-8.8-9.76-11.42-4.21-2.61-9-3.92-14.36-3.92-8.64,0-15.64,3.13-21,9.37-5.36,6.25-8.04,14.6-8.04,25.06s2.68,18.81,8.04,25.05c5.36,6.25,12.36,9.37,21,9.37,5.36,0,10.15-1.3,14.36-3.92,4.21-2.61,7.47-6.42,9.76-11.42h30.85c-3.28,12.95-9.79,23.15-19.53,30.59-9.74,7.44-21.44,11.16-35.11,11.16-11.16,0-21.14-2.58-29.94-7.75-8.81-5.17-15.67-12.36-20.59-21.56-4.92-9.2-7.38-19.71-7.38-31.53s2.46-22.36,7.38-31.62v.02Z"/>
+      <path class="cls-1" d="M1145.13,66.18v119.65h-28.06v-49.26h-43.65v49.26h-28.06v-119.65h28.06v46.87h43.65v-46.87s28.06,0,28.06,0Z"/>
+      <path class="cls-1" d="M1237.99,164.7h-42.99l-6.89,21.13h-29.37l41.68-119.65h32.49l41.68,119.65h-29.7l-6.89-21.13h-.01ZM1230.78,142.2l-14.28-43.8-14.11,43.8h28.39Z"/>
+      <path class="cls-1" d="M1391.25,185.83h-28.06l-46.93-73.8v73.8h-28.06v-119.65h28.06l46.93,74.14v-74.14h28.06v119.65h0Z"/>
+      <path class="cls-1" d="M1440.63,66.18v119.65h-28.06v-119.65h28.06Z"/>
+      <path class="cls-1" d="M1464.59,94.22c4.92-9.26,11.79-16.47,20.59-21.65,8.8-5.17,18.79-7.76,29.94-7.76,13.67,0,25.38,3.75,35.11,11.25s16.24,17.73,19.53,30.68h-30.85c-2.3-5-5.55-8.8-9.76-11.42-4.21-2.61-9-3.92-14.36-3.92-8.64,0-15.64,3.13-21,9.37-5.36,6.25-8.04,14.6-8.04,25.06s2.68,18.81,8.04,25.05c5.36,6.25,12.36,9.37,21,9.37,5.36,0,10.15-1.3,14.36-3.92,4.21-2.61,7.47-6.42,9.76-11.42h30.85c-3.28,12.95-9.79,23.15-19.53,30.59-9.74,7.44-21.44,11.16-35.11,11.16-11.16,0-21.14-2.58-29.94-7.75-8.81-5.17-15.67-12.36-20.59-21.56-4.92-9.2-7.38-19.71-7.38-31.53s2.46-22.36,7.38-31.62v.02Z"/>
+      <path class="cls-1" d="M1659.68,164.7h-42.99l-6.89,21.13h-29.37l41.68-119.65h32.49l41.68,119.65h-29.7l-6.89-21.13h-.01ZM1652.46,142.2l-14.28-43.8-14.11,43.8h28.39Z"/>
+      <path class="cls-1" d="M1737.94,163.33h36.75v22.5h-64.81v-119.65h28.06v97.15Z"/>
+    </g>
+    <g>
+      <path class="cls-1" d="M398.44,224.75v10.22h22.77v11.68h-22.77v17.59h-15.18v-51.16h39.7v11.68h-24.52Z"/>
+      <path class="cls-1" d="M426.43,264.54v-38.59h11.45v38.59h-11.45Z"/>
+      <path class="cls-1" d="M462.39,254.08h-6.06v10.4h-11.45v-38.59h18c10.35,0,16.3,4.95,16.3,13.71,0,5.73-2.31,9.91-6.5,12.28l7.82,12.61h-12.99l-5.12-10.4h0ZM462.89,245.27c3.41,0,5.39-1.87,5.39-5.34s-1.98-5.23-5.39-5.23h-6.55v10.57h6.55Z"/>
+      <path class="cls-1" d="M515.29,230.57l-4.24,8.81c-3.96-2.26-9.58-4.29-12.83-4.29-1.93,0-3.19.66-3.19,2.09,0,5.67,20.15,2.31,20.15,16.24,0,8.2-7.27,12.11-15.91,12.11-6.55,0-13.71-2.31-18.55-6.11l4.29-8.7c3.96,3.36,10.4,5.89,14.37,5.89,2.42,0,3.96-.83,3.96-2.59,0-5.84-20.15-2.15-20.15-15.74,0-7.43,6.33-12.17,15.97-12.17,5.89,0,11.95,1.76,16.13,4.46h0Z"/>
+      <path class="cls-1" d="M539.39,235.54v29.45h-11.51v-29.45h-11.18v-9.14h33.91v9.14h-11.23.01Z"/>
+      <path class="cls-1" d="M603.39,222.38l-8.8,10.41c-3.23-4.1-7.99-6.82-12.24-6.82-6.96,0-12.24,5.64-12.24,13.19s5.28,13.27,12.24,13.27c3.96,0,8.72-2.35,12.24-5.94l8.8,9.38c-5.57,6.01-14,9.9-21.77,9.9-15.61,0-27.12-11.29-27.12-26.46s11.73-26.02,27.63-26.02c7.77,0,16.05,3.52,21.26,9.09h0Z"/>
+      <path class="cls-1" d="M616.17,258.67l-2.31,6.17h-11.78l16.46-38.59h11.78l15.91,38.59h-12.22l-2.26-6.17h-15.58ZM624.09,237.7l-4.73,12.61h9.36l-4.62-12.61h-.01Z"/>
+      <path class="cls-1" d="M676.21,254.86v9.58h-27.64v-38.59h11.45v29.01h16.19Z"/>
+      <path class="cls-1" d="M706.69,254.91v9.58h-27.64v-38.59h11.45v29.01h16.19Z"/>
+      <path class="cls-1" d="M359.76,254.23h-19.09l-3.52,10.11h-6.03l15.82-45.2h6.59l15.76,45.2h-6.03l-3.52-10.11h.02ZM358.13,249.41l-7.91-22.96-7.91,22.96h15.82Z"/>
+      <g>
+        <path class="cls-1" d="M715.52,229.88c1.92-3.54,4.55-6.32,7.88-8.32s7.02-3,11.08-3c4.77,0,8.94,1.2,12.5,3.59s6.15,5.78,7.79,10.18h-6.84c-1.21-2.74-2.96-4.85-5.24-6.33-2.28-1.48-5.01-2.22-8.19-2.22s-5.8.74-8.23,2.22-4.33,3.58-5.71,6.29c-1.38,2.72-2.07,5.9-2.07,9.56s.69,6.77,2.07,9.49,3.29,4.82,5.71,6.29c2.43,1.48,5.17,2.22,8.23,2.22s5.91-.73,8.19-2.19,4.03-3.56,5.24-6.29h6.84c-1.63,4.35-4.23,7.71-7.79,10.08s-7.72,3.56-12.5,3.56c-4.06,0-7.76-.99-11.08-2.97-3.33-1.98-5.96-4.73-7.88-8.25-1.93-3.52-2.89-7.5-2.89-11.94s.96-8.43,2.89-11.97h0Z"/>
+        <path class="cls-1" d="M771.97,262.1c-3.35-1.98-6-4.74-7.94-8.28-1.95-3.54-2.92-7.53-2.92-11.97s.97-8.43,2.92-11.97c1.95-3.54,4.59-6.3,7.94-8.28s7.05-2.97,11.12-2.97,7.83.99,11.18,2.97,5.99,4.73,7.91,8.25,2.89,7.52,2.89,12-.96,8.48-2.89,12c-1.93,3.52-4.56,6.27-7.91,8.25s-7.08,2.97-11.18,2.97-7.77-.99-11.12-2.97ZM791.34,257.7c2.45-1.48,4.37-3.59,5.78-6.33s2.1-5.91,2.1-9.52-.7-6.84-2.1-9.56c-1.4-2.72-3.32-4.82-5.75-6.29-2.43-1.48-5.19-2.22-8.29-2.22s-5.86.74-8.29,2.22-4.34,3.58-5.75,6.29c-1.4,2.72-2.1,5.9-2.1,9.56s.7,6.78,2.1,9.52c1.4,2.74,3.33,4.85,5.78,6.33s5.2,2.22,8.26,2.22,5.81-.74,8.26-2.22h0Z"/>
+        <path class="cls-1" d="M857,219.47v45.14h-5.71v-33.66l-14.44,33.66h-4.02l-14.51-33.72v33.72h-5.71v-45.14h6.15l16.08,37.31,16.07-37.31h6.09Z"/>
+        <path class="cls-1" d="M892.19,241.88c-2.49,2.5-6.29,3.75-11.4,3.75h-8.41v18.98h-5.71v-45.47h14.13c4.94,0,8.7,1.24,11.27,3.72s3.86,5.68,3.86,9.59-1.25,6.93-3.74,9.43ZM887.83,238.59c1.51-1.44,2.26-3.48,2.26-6.13,0-5.61-3.1-8.41-9.29-8.41h-8.41v16.7h8.41c3.18,0,5.53-.72,7.03-2.15h0Z"/>
+        <path class="cls-1" d="M928.9,254.5h-19.09l-3.52,10.11h-6.03l15.82-45.2h6.59l15.76,45.2h-6.03l-3.52-10.11h.02ZM927.26,249.68l-7.91-22.96-7.91,22.96h15.82,0Z"/>
+        <path class="cls-1" d="M979.76,264.61h-5.71l-22.98-36.2v36.2h-5.71v-45.53h5.71l22.98,36.14v-36.14h5.71v45.53Z"/>
+        <path class="cls-1" d="M1020.14,219.15l-14.25,28.31v17.16h-5.71v-17.16l-14.32-28.31h6.34l10.8,23.03,10.8-23.03h6.34Z"/>
+      </g>
+    </g>
+  </g>
+</svg>
+        <span class="site-header__tagline">Virginia Beach, VA</span>
+      </a>
+
+      <nav class="site-nav" data-site-nav aria-label="Primary">
+        <div class="site-nav__dropdown-wrap" data-dropdown>
+          <button type="button" class="site-nav__link site-nav__dropdown-toggle"
+                  aria-haspopup="true" aria-expanded="false" data-dropdown-toggle>
+            Services
+            <svg class="site-nav__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="site-nav__dropdown" data-dropdown-menu>
+            <a class="site-nav__dropdown-link" href="/services/hvac.html">HVAC Services</a>
+            <a class="site-nav__dropdown-link" href="/services/building-controls.html">Building Controls</a>
+            <a class="site-nav__dropdown-link" href="/services/planned-maintenance.html">Planned Maintenance</a>
+            <a class="site-nav__dropdown-link" href="/services/emergency.html">Emergency Services</a>
+            <a class="site-nav__dropdown-link" href="/services/project-support.html">Project Support</a>
+          </div>
+        </div>
+
+        <div class="site-nav__dropdown-wrap" data-dropdown>
+          <button type="button" class="site-nav__link site-nav__dropdown-toggle"
+                  aria-haspopup="true" aria-expanded="false" data-dropdown-toggle>
+            STR Locations
+            <svg class="site-nav__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="site-nav__dropdown" data-dropdown-menu>
+            <a class="site-nav__dropdown-link" href="/">Charlotte</a>
+            <a class="site-nav__dropdown-link" href="raleigh-durham.html">Raleigh-Durham</a>
+            <a class="site-nav__dropdown-link" href="virginia-beach.html">Virginia Beach</a>
+            <a class="site-nav__dropdown-link" href="greenville.html">Greenville</a>
+          </div>
+        </div>
+
+        <a class="site-nav__link" href="https://firstcallmechanical.com/locations.html" target="_blank" rel="noopener">FirstCall Locations</a>
+        <a class="site-nav__link" href="https://firstcallmechanical.com/mechanical/careers" target="_blank" rel="noopener">Careers</a>
+        <a class="site-nav__link" href="#contact">Contact</a>
+      </nav>
+
+      <div class="site-header__cta">
+        <a class="btn btn--primary btn--sm hide-mobile" href="tel:+17575485889">Call (757) 548-5889</a>
+        <button class="menu-toggle" data-menu-toggle aria-label="Open menu" aria-expanded="false">
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. HERO — full-bleed video background with overlaid text (Columbus pattern) -->
+    <section class="branch-hero">
+      
+
+      
+      <div class="branch-hero__photo-wrap" data-hero-parallax>
+        <img class="branch-hero__photo-bg" src="shared/img/photos/str/virginia-beach.jpg" alt="" aria-hidden="true" loading="eager" fetchpriority="high" />
+      </div>
+      
+
+      <div class="container">
+        <div class="branch-hero__inner">
+          <span class="branch-hero__eyebrow">STR Mechanical · Virginia Beach, VA</span>
+          <h1 class="branch-hero__title">Success Through Reputation. Built for Virginia Beach.</h1>
+          <p class="branch-hero__lede">Our Hampton Roads team keeps the region's commercial buildings running — HVAC, building controls, planned maintenance, and emergency service, backed by a national platform.</p>
+          <div class="branch-hero__cta">
+            <a class="btn btn--primary btn--lg" href="tel:+17575485889">Call (757) 548-5889</a>
+            <a class="btn btn--outline btn--lg" href="#contact">Request Service</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PHOTO STRIP -->
+    <section class="photo-strip-section">
+      <div class="container">
+        <div class="photo-strip">
+          
+          <div class="photo-strip__item"><img src="reference/Photos/STR/NC Lift - For-WEB-1129.jpeg" alt="Virginia Beach branch photo" loading="lazy" /></div>
+          
+          <div class="photo-strip__item"><img src="reference/Photos/STR/dji_fly_20240522_103548_192_1716388560374_photo_optimized.jpg" alt="Virginia Beach branch photo" loading="lazy" /></div>
+          
+          <div class="photo-strip__item"><img src="reference/Photos/STR/IMG_8065.jpg" alt="Virginia Beach branch photo" loading="lazy" /></div>
+          
+          <div class="photo-strip__item"><img src="reference/Photos/STR/strraleigh5.jpeg" alt="Virginia Beach branch photo" loading="lazy" /></div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. OUR CAPABILITIES -->
+    <section class="section" id="services" aria-labelledby="caps-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Our Capabilities</span>
+          <h2 id="caps-heading">Comprehensive mechanical service for Virginia Beach.</h2>
+          <p class="lead">From chillers and rooftop units to building controls and emergency response — our Virginia Beach team delivers the full stack.</p>
+        </div>
+
+        <div class="capabilities">
+          
+          <article class="capability" id="service-hvac">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
+            </span>
+            <h4 class="capability__title">HVAC Services</h4>
+            <p class="capability__body">Comprehensive heating, ventilation, and air conditioning service for commercial and industrial facilities.</p>
+          </article>
+          
+          <article class="capability" id="service-controls">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </span>
+            <h4 class="capability__title">Building Controls</h4>
+            <p class="capability__body">Design, installation, and integration of building automation systems that reduce operating costs.</p>
+          </article>
+          
+          <article class="capability" id="service-planned">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v6h-6"/></svg>
+            </span>
+            <h4 class="capability__title">Planned Maintenance</h4>
+            <p class="capability__body">Programmatic service plans with predictable scheduling and asset-level tracking.</p>
+          </article>
+          
+          <article class="capability" id="service-emergency">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10"/></svg>
+            </span>
+            <h4 class="capability__title">Emergency Services</h4>
+            <p class="capability__body">24 / 7 emergency response — staffed dispatch and an on-call technician roster, always available.</p>
+          </article>
+          
+          <article class="capability" id="service-projects">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            </span>
+            <h4 class="capability__title">Project Support</h4>
+            <p class="capability__body">Design-build, retrofit, and equipment-upgrade projects delivered by tradespeople who know the install — and the service after.</p>
+          </article>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TECHNICAL EXPERIENCE -->
+    <section class="section section--soft" aria-labelledby="tech-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Technical Experience</span>
+          <h2 id="tech-heading">Equipment we service every day.</h2>
+          <p class="lead">A representative list of the systems and equipment our Virginia Beach team works with.</p>
+        </div>
+
+        <ul class="tech-list">
+          
+          <li>Air Handlers (AHUs)</li>
+          
+          <li>Boilers — Hot Water & Steam</li>
+          
+          <li>Booster Pumps</li>
+          
+          <li>Chillers — Air-Cooled</li>
+          
+          <li>Chillers — Water-Cooled</li>
+          
+          <li>Cooling Towers</li>
+          
+          <li>DOAS Units</li>
+          
+          <li>Exhaust Fans</li>
+          
+          <li>Fan Coil Units</li>
+          
+          <li>Heat Pumps</li>
+          
+          <li>Humidification Systems</li>
+          
+          <li>Make-Up Air Units</li>
+          
+          <li>Pumps & Pump Stations</li>
+          
+          <li>Rooftop Units (RTUs)</li>
+          
+          <li>Split Systems</li>
+          
+          <li>Steam Traps</li>
+          
+          <li>VAV / VFD Systems</li>
+          
+          <li>VRF / VRV Systems</li>
+          
+          <li>Water-Source Heat Pumps</li>
+          
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. INDUSTRIES WE SERVE -->
+    <section class="section" aria-labelledby="markets-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Industries We Serve</span>
+          <h2 id="markets-heading">Built for the buildings that matter.</h2>
+          <p class="lead">We serve the buildings that keep Hampton Roads and the Tidewater region running — across healthcare, industrial, education, hospitality, and beyond.</p>
+        </div>
+
+        <!--
+          Tier-coded honeycomb. Canonical source: shared/partials/industries-grid--.html
+          Build pipeline: after handlebar substitution, run `node scripts/sync-industries.js`
+          to populate the marker block below from the partial.
+        -->
+        <!-- industries-grid:start variant=main -->
+        <svg class="industries-honeycomb" viewBox="0 0 640 600" role="img" aria-label="Industries we serve">
+          <!-- Row 1 (top, 3 hexes — all T3 outer) -->
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="200,20 260,55 260,125 200,160 140,125 140,55"/>
+            <text class="hex-label" text-anchor="middle" x="200" y="83">Government</text>
+            <text class="hex-label" text-anchor="middle" x="200" y="100">&amp; Federal</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="320,20 380,55 380,125 320,160 260,125 260,55"/>
+            <text class="hex-label" text-anchor="middle" x="320" y="83">Commercial</text>
+            <text class="hex-label" text-anchor="middle" x="320" y="100">Office Space</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="440,20 500,55 500,125 440,160 380,125 380,55"/>
+            <text class="hex-label" text-anchor="middle" x="440" y="95">K&ndash;12 Education</text>
+          </g>
+
+          <!-- Row 2 (4 hexes — T3 outer / T2 ring / T2 ring / T3 outer) -->
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="140,125 200,160 200,230 140,265 80,230 80,160"/>
+            <text class="hex-label" text-anchor="middle" x="140" y="200">Public Sector</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-1" points="260,125 320,160 320,230 260,265 200,230 200,160"/>
+            <text class="hex-label" text-anchor="middle" x="260" y="200">Healthcare</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-1" points="380,125 440,160 440,230 380,265 320,230 320,160"/>
+            <text class="hex-label" text-anchor="middle" x="380" y="188">Life Sciences</text>
+            <text class="hex-label" text-anchor="middle" x="380" y="205">&amp; Pharma</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="500,125 560,160 560,230 500,265 440,230 440,160"/>
+            <text class="hex-label" text-anchor="middle" x="500" y="200">Hospitality</text>
+          </g>
+
+          <!-- Row 3 (widest, 5 hexes — T3 / T2 / T1 (center) / T2 / T3) -->
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="80,230 140,265 140,335 80,370 20,335 20,265"/>
+            <text class="hex-label" text-anchor="middle" x="80" y="305">Automotive</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-1" points="200,230 260,265 260,335 200,370 140,335 140,265"/>
+            <text class="hex-label" text-anchor="middle" x="200" y="293">Higher</text>
+            <text class="hex-label" text-anchor="middle" x="200" y="310">Education</text>
+          </g>
+          <g class="industry-hex industry-hex--center">
+            <polygon class="hex hex--tier-1" points="320,230 380,265 380,335 320,370 260,335 260,265"/>
+            <text class="hex-label" text-anchor="middle" x="320" y="293">Critical</text>
+            <text class="hex-label" text-anchor="middle" x="320" y="310">Infrastructure</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-1" points="440,230 500,265 500,335 440,370 380,335 380,265"/>
+            <text class="hex-label" text-anchor="middle" x="440" y="305">Industrial</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="560,230 620,265 620,335 560,370 500,335 500,265"/>
+            <text class="hex-label" text-anchor="middle" x="560" y="293">Self Storage</text>
+            <text class="hex-label" text-anchor="middle" x="560" y="310">and Logistics</text>
+          </g>
+
+          <!-- Row 4 (4 hexes — T3 outer / T2 ring / T2 ring / T3 outer) -->
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="140,335 200,370 200,440 140,475 80,440 80,370"/>
+            <text class="hex-label" text-anchor="middle" x="140" y="398">Sports</text>
+            <text class="hex-label" text-anchor="middle" x="140" y="415">&amp; Venues</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-1" points="260,335 320,370 320,440 260,475 200,440 200,370"/>
+            <text class="hex-label" text-anchor="middle" x="260" y="398">Data</text>
+            <text class="hex-label" text-anchor="middle" x="260" y="415">Centers</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-1" points="380,335 440,370 440,440 380,475 320,440 320,370"/>
+            <text class="hex-label" text-anchor="middle" x="380" y="398">Advanced</text>
+            <text class="hex-label" text-anchor="middle" x="380" y="415">Manufacturing</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="500,335 560,370 560,440 500,475 440,440 440,370"/>
+            <text class="hex-label" text-anchor="middle" x="500" y="410">Office</text>
+          </g>
+
+          <!-- Row 5 (bottom, 3 hexes — all T3 outer) -->
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="200,440 260,475 260,545 200,580 140,545 140,475"/>
+            <text class="hex-label" text-anchor="middle" x="200" y="515">Senior Living</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="320,440 380,475 380,545 320,580 260,545 260,475"/>
+            <text class="hex-label" text-anchor="middle" x="320" y="515">Retail</text>
+          </g>
+          <g class="industry-hex">
+            <polygon class="hex hex--tier-2" points="440,440 500,475 500,545 440,580 380,545 380,475"/>
+            <text class="hex-label" text-anchor="middle" x="440" y="515">Multifamily</text>
+          </g>
+        </svg>
+        <!-- industries-grid:end -->
+
+      </div>
+    </section>
+
+    <!-- 6. STR LOCATIONS -->
+    <section class="section section--soft" id="locations" aria-labelledby="locations-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Our Locations</span>
+          <h2 id="locations-heading">Four offices. One team.</h2>
+          <p class="lead">STR Mechanical serves the Carolinas, Hampton Roads, and the Upstate from four regional offices — local crews, shared platform.</p>
+        </div>
+
+        <div class="locations-grid">
+          <article class="location-card">
+            <div class="location-card__city">Charlotte <span class="location-card__badge">HQ</span></div>
+            <p class="location-card__addr">11704 Reames Road<br>Charlotte, NC 28269</p>
+            <p class="location-card__contact">
+              <a href="tel:+17045365335">(704) 536-5335</a><br>
+              <a href="mailto:info@strmechanical.com">info@strmechanical.com</a>
+            </p>
+            <a href="/" class="link-arrow">View Charlotte</a>
+          </article>
+
+          <article class="location-card">
+            <div class="location-card__city">Raleigh-Durham</div>
+            <p class="location-card__addr">551 C Pylon Drive, Suite C<br>Raleigh, NC 27606</p>
+            <p class="location-card__contact">
+              <a href="tel:+11111111111">(111) 111-1111</a><br>
+              <a href="mailto:info@strmechanical.com">info@strmechanical.com</a>
+            </p>
+            <a href="raleigh-durham.html" class="link-arrow">View Raleigh-Durham</a>
+          </article>
+
+          <article class="location-card">
+            <div class="location-card__city">Virginia Beach</div>
+            <p class="location-card__addr">825 Green Briar Circle, Suite A<br>Chesapeake, VA 23320</p>
+            <p class="location-card__contact">
+              <a href="tel:+17575485889">(757) 548-5889</a><br>
+              <a href="mailto:info@strmechanical.com">info@strmechanical.com</a>
+            </p>
+            <a href="virginia-beach.html" class="link-arrow">View Virginia Beach</a>
+          </article>
+
+          <article class="location-card">
+            <div class="location-card__city">Greenville</div>
+            <p class="location-card__addr">550 Blackbottom Road<br>Liberty, SC 29657</p>
+            <p class="location-card__contact">
+              <a href="tel:+18642251245">(864) 225-1245</a><br>
+              <a href="mailto:scadmin@strmechanical.com">scadmin@strmechanical.com</a>
+            </p>
+            <a href="greenville.html" class="link-arrow">View Greenville</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. A FIRSTCALL COMPANY -->
+    <section class="section firstcall-block" aria-labelledby="firstcall-heading">
+      <div class="container firstcall-block__inner">
+        <span class="eyebrow">A FirstCall Company</span>
+        <h2 id="firstcall-heading">Local team. National platform.</h2>
+        <p class="lead">
+          STR Mechanical — Virginia Beach is part of FirstCall Mechanical — a network of leading regional
+          commercial service companies. We bring the depth of a national platform
+          while keeping the local leadership, identity, and reputation that's built
+          this branch's business. Local stays local. The national platform
+          multiplies what we can do.
+        </p>
+        <a href="https://firstcallmechanical.com" class="link-arrow" style="margin-top:var(--space-5); display:inline-flex">Learn about FirstCall Mechanical</a>
+      </div>
+    </section>
+
+    <!-- 8. CAREERS -->
+    <section class="section section--soft" id="careers" aria-labelledby="careers-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Careers</span>
+          <h2 id="careers-heading">Join the STR team.</h2>
+          <p class="lead">We're hiring across all four locations — service technicians, controls specialists, project leads. If you want to do real work for real customers, we want to talk.</p>
+        </div>
+        <div class="careers-cta">
+          <a class="btn btn--primary btn--lg" href="https://firstcallmechanical.com/mechanical/careers" target="_blank" rel="noopener">View Open Positions</a>
+          <a class="btn btn--outline btn--lg" href="#contact">Ask a Recruiter</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. SERVICE FORM -->
+    <section class="section section--tinted" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">How Can We Help?</span>
+          <h2 id="contact-heading">At STR Mechanical — Virginia Beach, we're dedicated to helping.</h2>
+          <p class="lead">Tell us about your facility and we'll get back to you within one business day. For emergencies, call us — we're on call around the clock.</p>
+        </div>
+
+        <div class="contact-row">
+          <form class="service-form" action="#" method="post" novalidate>
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label" for="f-name">Full name <span class="required">*</span></label>
+                <input class="form-input" id="f-name" name="name" type="text" required autocomplete="name" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="f-company">Company / Organization</label>
+                <input class="form-input" id="f-company" name="company" type="text" autocomplete="organization" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="f-email">Work email <span class="required">*</span></label>
+                <input class="form-input" id="f-email" name="email" type="email" required autocomplete="email" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="f-phone">Phone</label>
+                <input class="form-input" id="f-phone" name="phone" type="tel" autocomplete="tel" />
+              </div>
+              <div class="form-field form-field--full">
+                <label class="form-label" for="f-addr">Service address</label>
+                <input class="form-input" id="f-addr" name="address" type="text" placeholder="Building name, street, city" autocomplete="street-address" />
+              </div>
+              <div class="form-field form-field--full">
+                <label class="form-label" for="f-service">Service needed</label>
+                <select class="form-select" id="f-service" name="service">
+                  <option value="hvac">HVAC service</option>
+                  <option value="controls">Building controls</option>
+                  <option value="planned">Planned maintenance</option>
+                  <option value="emergency">Emergency response</option>
+                  <option value="project">Project / retrofit / upgrade</option>
+                  <option value="other">Something else</option>
+                </select>
+              </div>
+              <div class="form-field form-field--full">
+                <label class="form-label" for="f-msg">Tell us about your facility</label>
+                <textarea class="form-textarea" id="f-msg" name="message" placeholder="Building type, square footage, current equipment, the issue you're seeing..."></textarea>
+                <span class="form-help">Including equipment model numbers (if you have them) helps us send the right tech.</span>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary btn--lg">Request Service</button>
+              <span class="form-help">Or call <a href="tel:+17575485889" style="font-weight: 600">(757) 548-5889</a> for immediate dispatch.</span>
+            </div>
+          </form>
+
+          <aside class="contact-card" aria-label="Branch contact information">
+            <h3>STR Mechanical — Virginia Beach</h3>
+            <div class="contact-card__row">
+              <div class="contact-card__label">Address</div>
+              <div class="contact-card__value">
+                825 Green Briar Circle, Suite A<br>
+                Chesapeake, VA 23320
+              </div>
+            </div>
+            <div class="contact-card__row">
+              <div class="contact-card__label">Phone</div>
+              <div class="contact-card__value"><a href="tel:+17575485889">(757) 548-5889</a></div>
+            </div>
+            <div class="contact-card__row">
+              <div class="contact-card__label">Email</div>
+              <div class="contact-card__value"><a href="mailto:info@strmechanical.com">info@strmechanical.com</a></div>
+            </div>
+            <div class="contact-card__row">
+              <div class="contact-card__label">Hours</div>
+              <div class="contact-card__value">
+                Mon–Fri 7:00 a.m. – 5:00 p.m.<br>
+                <strong style="color: var(--color-accent);">24 / 7 emergency response</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1774.69 265.77">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path class="cls-1" d="M287.85,104.05c-3.91-2.26-8.55-4.31-14.07-4.31-21.66,0-57.15,33.24-115.09,107.77-25.43,31.06-46.07,47.02-62.08,55.5h131.18l75.93-131.51-15.85-27.46h-.02Z"/>
+      <path class="cls-1" d="M143.16,195.12c43.25-55.65,73.03-87.43,96.5-102.98,12.39-8.21,23.52-12.2,34.06-12.2h.23l-9.54-16.52-.13-.08c-4.22-2.61-9.39-5.28-15.69-5.28-21.66,0-57.15,33.24-115.09,107.77-34.7,42.39-60.5,56.66-77.77,62.18l13.94,24.15c14.15-3.32,37.88-13.57,73.49-57.06v.02Z"/>
+      <path class="cls-1" d="M109.57,123.87c-34.88,42.61-60.76,56.8-78.03,62.26l13.94,24.15c14.26-3.57,37.71-14.34,72.49-56.82,43.25-55.65,73.03-87.43,96.5-102.98,12.38-8.21,23.52-12.2,34.06-12.2.46,0,.93.04,1.39.05l-9.91-17.17c-4.16-2.54-9.21-5.06-15.34-5.06-21.66,0-57.15,33.24-115.09,107.77h-.01Z"/>
+      <path class="cls-1" d="M94.05,111.49C137.3,55.84,167.08,24.06,190.54,8.51c5.58-3.7,10.91-6.5,16.04-8.51H75.93L0,131.51l21.29,36.87c14.23-3.5,37.76-14.14,72.76-56.89Z"/>
+    </g>
+    <g>
+      <path class="cls-1" d="M353.45,182.76c-6.67-2.84-12.01-7.04-16-12.61s-6.1-12.27-6.32-20.11h29.86c.44,4.43,1.91,7.81,4.43,10.14,2.51,2.33,5.8,3.49,9.84,3.49s7.44-.99,9.85-2.98c2.4-1.99,3.61-4.74,3.61-8.27,0-2.95-.96-5.4-2.87-7.33-1.92-1.93-4.27-3.52-7.06-4.77s-6.76-2.67-11.9-4.26c-7.44-2.39-13.51-4.77-18.21-7.16-4.7-2.39-8.75-5.91-12.14-10.57s-5.09-10.74-5.09-18.24c0-11.13,3.88-19.86,11.65-26.16,7.77-6.31,17.89-9.46,30.35-9.46s22.91,3.15,30.68,9.46c7.76,6.31,11.92,15.08,12.47,26.33h-30.36c-.22-3.86-1.59-6.9-4.1-9.12-2.52-2.22-5.74-3.32-9.68-3.32-3.39,0-6.13.94-8.2,2.81-2.08,1.88-3.12,4.58-3.12,8.1,0,3.86,1.75,6.88,5.25,9.03,3.5,2.16,8.97,4.49,16.41,6.99,7.44,2.62,13.48,5.11,18.13,7.5s8.67,5.85,12.06,10.4c3.39,4.55,5.09,10.4,5.09,17.56s-1.67,13.01-5,18.58c-3.34,5.57-8.18,10-14.52,13.29-6.35,3.3-13.84,4.94-22.48,4.94s-15.97-1.42-22.64-4.26h.01Z"/>
+      <path class="cls-1" d="M519.17,66.18v23.35h-30.52v96.3h-28.06v-96.3h-30.52v-23.35h89.1Z"/>
+      <path class="cls-1" d="M593,185.83l-23.96-45.17h-6.73v45.17h-28.06v-119.65h47.09c9.08,0,16.82,1.65,23.22,4.94,6.4,3.3,11.18,7.81,14.36,13.55,3.17,5.74,4.76,12.13,4.76,19.18,0,7.95-2.16,15.06-6.48,21.31s-10.69,10.68-19.12,13.29l26.58,47.38h-31.67,0ZM562.32,120.04h17.39c5.14,0,9-1.3,11.57-3.92,2.57-2.61,3.86-6.31,3.86-11.08s-1.29-8.12-3.86-10.74c-2.57-2.61-6.43-3.92-11.57-3.92h-17.39s0,29.66,0,29.66Z"/>
+      <path class="cls-1" d="M808.44,66.18v119.65h-28.06v-71.76l-25.76,71.76h-22.64l-25.92-71.93v71.93h-28.06v-119.65h33.14l32.32,82.84,32-82.84s32.98,0,32.98,0Z"/>
+      <path class="cls-1" d="M857.66,89.53v24.2h37.57v22.5h-37.57v26.25h42.5v23.35h-70.55v-119.65h70.55v23.35h-42.5Z"/>
+      <path class="cls-1" d="M921.98,94.22c4.92-9.26,11.79-16.47,20.59-21.65,8.8-5.17,18.79-7.76,29.94-7.76,13.67,0,25.38,3.75,35.11,11.25,9.73,7.5,16.24,17.73,19.53,30.68h-30.85c-2.3-5-5.55-8.8-9.76-11.42-4.21-2.61-9-3.92-14.36-3.92-8.64,0-15.64,3.13-21,9.37-5.36,6.25-8.04,14.6-8.04,25.06s2.68,18.81,8.04,25.05c5.36,6.25,12.36,9.37,21,9.37,5.36,0,10.15-1.3,14.36-3.92,4.21-2.61,7.47-6.42,9.76-11.42h30.85c-3.28,12.95-9.79,23.15-19.53,30.59-9.74,7.44-21.44,11.16-35.11,11.16-11.16,0-21.14-2.58-29.94-7.75-8.81-5.17-15.67-12.36-20.59-21.56-4.92-9.2-7.38-19.71-7.38-31.53s2.46-22.36,7.38-31.62v.02Z"/>
+      <path class="cls-1" d="M1145.13,66.18v119.65h-28.06v-49.26h-43.65v49.26h-28.06v-119.65h28.06v46.87h43.65v-46.87s28.06,0,28.06,0Z"/>
+      <path class="cls-1" d="M1237.99,164.7h-42.99l-6.89,21.13h-29.37l41.68-119.65h32.49l41.68,119.65h-29.7l-6.89-21.13h-.01ZM1230.78,142.2l-14.28-43.8-14.11,43.8h28.39Z"/>
+      <path class="cls-1" d="M1391.25,185.83h-28.06l-46.93-73.8v73.8h-28.06v-119.65h28.06l46.93,74.14v-74.14h28.06v119.65h0Z"/>
+      <path class="cls-1" d="M1440.63,66.18v119.65h-28.06v-119.65h28.06Z"/>
+      <path class="cls-1" d="M1464.59,94.22c4.92-9.26,11.79-16.47,20.59-21.65,8.8-5.17,18.79-7.76,29.94-7.76,13.67,0,25.38,3.75,35.11,11.25s16.24,17.73,19.53,30.68h-30.85c-2.3-5-5.55-8.8-9.76-11.42-4.21-2.61-9-3.92-14.36-3.92-8.64,0-15.64,3.13-21,9.37-5.36,6.25-8.04,14.6-8.04,25.06s2.68,18.81,8.04,25.05c5.36,6.25,12.36,9.37,21,9.37,5.36,0,10.15-1.3,14.36-3.92,4.21-2.61,7.47-6.42,9.76-11.42h30.85c-3.28,12.95-9.79,23.15-19.53,30.59-9.74,7.44-21.44,11.16-35.11,11.16-11.16,0-21.14-2.58-29.94-7.75-8.81-5.17-15.67-12.36-20.59-21.56-4.92-9.2-7.38-19.71-7.38-31.53s2.46-22.36,7.38-31.62v.02Z"/>
+      <path class="cls-1" d="M1659.68,164.7h-42.99l-6.89,21.13h-29.37l41.68-119.65h32.49l41.68,119.65h-29.7l-6.89-21.13h-.01ZM1652.46,142.2l-14.28-43.8-14.11,43.8h28.39Z"/>
+      <path class="cls-1" d="M1737.94,163.33h36.75v22.5h-64.81v-119.65h28.06v97.15Z"/>
+    </g>
+    <g>
+      <path class="cls-1" d="M398.44,224.75v10.22h22.77v11.68h-22.77v17.59h-15.18v-51.16h39.7v11.68h-24.52Z"/>
+      <path class="cls-1" d="M426.43,264.54v-38.59h11.45v38.59h-11.45Z"/>
+      <path class="cls-1" d="M462.39,254.08h-6.06v10.4h-11.45v-38.59h18c10.35,0,16.3,4.95,16.3,13.71,0,5.73-2.31,9.91-6.5,12.28l7.82,12.61h-12.99l-5.12-10.4h0ZM462.89,245.27c3.41,0,5.39-1.87,5.39-5.34s-1.98-5.23-5.39-5.23h-6.55v10.57h6.55Z"/>
+      <path class="cls-1" d="M515.29,230.57l-4.24,8.81c-3.96-2.26-9.58-4.29-12.83-4.29-1.93,0-3.19.66-3.19,2.09,0,5.67,20.15,2.31,20.15,16.24,0,8.2-7.27,12.11-15.91,12.11-6.55,0-13.71-2.31-18.55-6.11l4.29-8.7c3.96,3.36,10.4,5.89,14.37,5.89,2.42,0,3.96-.83,3.96-2.59,0-5.84-20.15-2.15-20.15-15.74,0-7.43,6.33-12.17,15.97-12.17,5.89,0,11.95,1.76,16.13,4.46h0Z"/>
+      <path class="cls-1" d="M539.39,235.54v29.45h-11.51v-29.45h-11.18v-9.14h33.91v9.14h-11.23.01Z"/>
+      <path class="cls-1" d="M603.39,222.38l-8.8,10.41c-3.23-4.1-7.99-6.82-12.24-6.82-6.96,0-12.24,5.64-12.24,13.19s5.28,13.27,12.24,13.27c3.96,0,8.72-2.35,12.24-5.94l8.8,9.38c-5.57,6.01-14,9.9-21.77,9.9-15.61,0-27.12-11.29-27.12-26.46s11.73-26.02,27.63-26.02c7.77,0,16.05,3.52,21.26,9.09h0Z"/>
+      <path class="cls-1" d="M616.17,258.67l-2.31,6.17h-11.78l16.46-38.59h11.78l15.91,38.59h-12.22l-2.26-6.17h-15.58ZM624.09,237.7l-4.73,12.61h9.36l-4.62-12.61h-.01Z"/>
+      <path class="cls-1" d="M676.21,254.86v9.58h-27.64v-38.59h11.45v29.01h16.19Z"/>
+      <path class="cls-1" d="M706.69,254.91v9.58h-27.64v-38.59h11.45v29.01h16.19Z"/>
+      <path class="cls-1" d="M359.76,254.23h-19.09l-3.52,10.11h-6.03l15.82-45.2h6.59l15.76,45.2h-6.03l-3.52-10.11h.02ZM358.13,249.41l-7.91-22.96-7.91,22.96h15.82Z"/>
+      <g>
+        <path class="cls-1" d="M715.52,229.88c1.92-3.54,4.55-6.32,7.88-8.32s7.02-3,11.08-3c4.77,0,8.94,1.2,12.5,3.59s6.15,5.78,7.79,10.18h-6.84c-1.21-2.74-2.96-4.85-5.24-6.33-2.28-1.48-5.01-2.22-8.19-2.22s-5.8.74-8.23,2.22-4.33,3.58-5.71,6.29c-1.38,2.72-2.07,5.9-2.07,9.56s.69,6.77,2.07,9.49,3.29,4.82,5.71,6.29c2.43,1.48,5.17,2.22,8.23,2.22s5.91-.73,8.19-2.19,4.03-3.56,5.24-6.29h6.84c-1.63,4.35-4.23,7.71-7.79,10.08s-7.72,3.56-12.5,3.56c-4.06,0-7.76-.99-11.08-2.97-3.33-1.98-5.96-4.73-7.88-8.25-1.93-3.52-2.89-7.5-2.89-11.94s.96-8.43,2.89-11.97h0Z"/>
+        <path class="cls-1" d="M771.97,262.1c-3.35-1.98-6-4.74-7.94-8.28-1.95-3.54-2.92-7.53-2.92-11.97s.97-8.43,2.92-11.97c1.95-3.54,4.59-6.3,7.94-8.28s7.05-2.97,11.12-2.97,7.83.99,11.18,2.97,5.99,4.73,7.91,8.25,2.89,7.52,2.89,12-.96,8.48-2.89,12c-1.93,3.52-4.56,6.27-7.91,8.25s-7.08,2.97-11.18,2.97-7.77-.99-11.12-2.97ZM791.34,257.7c2.45-1.48,4.37-3.59,5.78-6.33s2.1-5.91,2.1-9.52-.7-6.84-2.1-9.56c-1.4-2.72-3.32-4.82-5.75-6.29-2.43-1.48-5.19-2.22-8.29-2.22s-5.86.74-8.29,2.22-4.34,3.58-5.75,6.29c-1.4,2.72-2.1,5.9-2.1,9.56s.7,6.78,2.1,9.52c1.4,2.74,3.33,4.85,5.78,6.33s5.2,2.22,8.26,2.22,5.81-.74,8.26-2.22h0Z"/>
+        <path class="cls-1" d="M857,219.47v45.14h-5.71v-33.66l-14.44,33.66h-4.02l-14.51-33.72v33.72h-5.71v-45.14h6.15l16.08,37.31,16.07-37.31h6.09Z"/>
+        <path class="cls-1" d="M892.19,241.88c-2.49,2.5-6.29,3.75-11.4,3.75h-8.41v18.98h-5.71v-45.47h14.13c4.94,0,8.7,1.24,11.27,3.72s3.86,5.68,3.86,9.59-1.25,6.93-3.74,9.43ZM887.83,238.59c1.51-1.44,2.26-3.48,2.26-6.13,0-5.61-3.1-8.41-9.29-8.41h-8.41v16.7h8.41c3.18,0,5.53-.72,7.03-2.15h0Z"/>
+        <path class="cls-1" d="M928.9,254.5h-19.09l-3.52,10.11h-6.03l15.82-45.2h6.59l15.76,45.2h-6.03l-3.52-10.11h.02ZM927.26,249.68l-7.91-22.96-7.91,22.96h15.82,0Z"/>
+        <path class="cls-1" d="M979.76,264.61h-5.71l-22.98-36.2v36.2h-5.71v-45.53h5.71l22.98,36.14v-36.14h5.71v45.53Z"/>
+        <path class="cls-1" d="M1020.14,219.15l-14.25,28.31v17.16h-5.71v-17.16l-14.32-28.31h6.34l10.8,23.03,10.8-23.03h6.34Z"/>
+      </g>
+    </g>
+  </g>
+</svg>
+          <p>STR Mechanical — Virginia Beach — commercial HVAC, building controls, plumbing, and project work, backed by a national platform.</p>
+        </div>
+        <div>
+          <div class="site-footer__heading">Virginia Beach</div>
+          <ul class="site-footer__list">
+            <li><span>825 Green Briar Circle, Suite A</span></li>
+            <li><span>Chesapeake, VA 23320</span></li>
+            <li><a href="tel:+17575485889">(757) 548-5889</a></li>
+            <li><a href="mailto:info@strmechanical.com">info@strmechanical.com</a></li>
+          </ul>
+          
+        </div>
+        <div>
+          <div class="site-footer__heading">Connect</div>
+          <ul class="site-footer__list">
+            <li><a href="https://www.linkedin.com/company/firstcall-mechanical/" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://firstcallmechanical.com/mechanical/careers" target="_blank" rel="noopener">Careers</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="site-footer__heading">FirstCall Network</div>
+          <ul class="site-footer__list">
+            <li><a href="https://firstcallmechanical.com">FirstCall Mechanical</a></li>
+            <li><a href="https://firstcallmechanical.com/locations.html">All Locations</a></li>
+            <li><a href="https://firstcallmechanical.com/acquisitions.html">Acquisitions</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; 2026 STR Mechanical — Virginia Beach. All rights reserved.</span>
+        <span><a href="https://firstcallmechanical.com">FirstCall Mechanical</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ============================================================
+   FirstCall site.js — shared interactions for every page.
+   No framework, no dependencies. Defensive about missing nodes
+   so individual pages can opt in by adding the markup.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  /* ---------- Mobile nav toggle ---------- */
+  function initMobileNav() {
+    var toggle = document.querySelector("[data-menu-toggle]");
+    var nav = document.querySelector("[data-site-nav]");
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.style.overflow = open ? "hidden" : "";
+    });
+
+    // Close the menu when a nav link is followed.
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      });
+    });
+
+    // Close on Escape.
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("is-open")) {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+        toggle.focus();
+      }
+    });
+  }
+
+  /* ---------- Header shadow on scroll ---------- */
+  function initHeaderScroll() {
+    var header = document.querySelector(".site-header");
+    if (!header) return;
+    var ticking = false;
+
+    function update() {
+      if (window.scrollY > 8) {
+        header.classList.add("is-scrolled");
+      } else {
+        header.classList.remove("is-scrolled");
+      }
+      ticking = false;
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    update();
+  }
+
+  /* ---------- Map preview pin popovers ---------- */
+  function initMapPins() {
+    var pins = document.querySelectorAll("[data-map-pin]");
+    if (!pins.length) return;
+
+    pins.forEach(function (pin) {
+      pin.addEventListener("mouseenter", function () { pin.classList.add("is-active"); });
+      pin.addEventListener("mouseleave", function () { pin.classList.remove("is-active"); });
+      pin.addEventListener("focus",      function () { pin.classList.add("is-active"); });
+      pin.addEventListener("blur",       function () { pin.classList.remove("is-active"); });
+    });
+  }
+
+  /* ---------- Nav dropdowns (Services + STR Locations) ---------- */
+  function initNavDropdown() {
+    var dropdowns = document.querySelectorAll("[data-dropdown]");
+    if (!dropdowns.length) return;
+
+    function closeAll() {
+      dropdowns.forEach(function (wrap) {
+        var menu = wrap.querySelector("[data-dropdown-menu]");
+        var toggle = wrap.querySelector("[data-dropdown-toggle]");
+        if (menu) menu.classList.remove("is-open");
+        if (toggle) toggle.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    dropdowns.forEach(function (wrap) {
+      var toggle = wrap.querySelector("[data-dropdown-toggle]");
+      var menu = wrap.querySelector("[data-dropdown-menu]");
+      if (!toggle || !menu) return;
+      toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var wasOpen = menu.classList.contains("is-open");
+        closeAll();
+        if (!wasOpen) {
+          menu.classList.add("is-open");
+          toggle.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    document.addEventListener("click", function (e) {
+      var inside = false;
+      dropdowns.forEach(function (w) { if (w.contains(e.target)) inside = true; });
+      if (!inside) closeAll();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeAll();
+    });
+  }
+
+  /* ---------- Industries honeycomb scroll-in ----------
+     Hexes start with opacity:0 (set in branch.css). Reveal them in
+     staggered sequence when the SVG enters the viewport. Observe the
+     parent <svg>, not the inner <g> nodes — WebKit mobile does not
+     fire IntersectionObserver reliably for SVG <g> children. */
+  function initIndustries() {
+    var svg = document.querySelector(".industries-honeycomb");
+    if (!svg) return;
+    var hexes = svg.querySelectorAll(".industry-hex");
+    if (!hexes.length) return;
+
+    function reveal() {
+      hexes.forEach(function (h, idx) {
+        setTimeout(function () { h.classList.add("is-visible"); }, idx * 70);
+      });
+    }
+
+    var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced || !("IntersectionObserver" in window)) {
+      hexes.forEach(function (h) { h.classList.add("is-visible"); });
+      return;
+    }
+
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        reveal();
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+    obs.observe(svg);
+  }
+
+  /* ---------- Hero video (slow playback + loop at midpoint) ----------
+     The Charlotte flyover pans one direction then returns; cut the
+     loop at the midpoint so only the forward pan plays, then seamlessly
+     restart. Slow playback rate for cinematic feel. */
+  function initHeroVideo() {
+    var v = document.querySelector("[data-hero-video]");
+    if (!v) return;
+    v.playbackRate = 0.7;
+
+    var loopAt = null;
+    v.addEventListener("loadedmetadata", function () {
+      if (isFinite(v.duration) && v.duration > 0) {
+        loopAt = v.duration / 2;
+      }
+    });
+    v.addEventListener("timeupdate", function () {
+      if (loopAt && v.currentTime >= loopAt) {
+        v.currentTime = 0;
+      }
+    });
+
+    // Browsers may block autoplay until user interaction — retry on first interaction.
+    function kick() {
+      v.play().catch(function () {});
+      window.removeEventListener("scroll", kick);
+      window.removeEventListener("touchstart", kick);
+      window.removeEventListener("click", kick);
+    }
+    v.play().catch(function () {
+      window.addEventListener("scroll", kick, { passive: true, once: true });
+      window.addEventListener("touchstart", kick, { passive: true, once: true });
+      window.addEventListener("click", kick, { once: true });
+    });
+  }
+
+  /* ---------- Hero photo parallax (for image-based heroes) ----------
+     Translates the .branch-hero__photo-wrap upward as the user scrolls
+     past the hero. Combined with the Ken Burns CSS animation on the
+     inner <img>, this gives a cinematic, scroll-driven motion for
+     branches that don't have a flyover video. Disabled on
+     prefers-reduced-motion. */
+  function initHeroParallax() {
+    var wrap = document.querySelector("[data-hero-parallax]");
+    if (!wrap) return;
+
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var hero = wrap.closest(".branch-hero") || wrap.parentElement;
+    if (!hero) return;
+
+    var ticking = false;
+    function update() {
+      var rect = hero.getBoundingClientRect();
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        var offset = -rect.top * 0.35;
+        wrap.style.transform = "translate3d(0, " + offset.toFixed(2) + "px, 0)";
+      }
+      ticking = false;
+    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }, { passive: true });
+    update();
+  }
+
+  /* ---------- Boot ---------- */
+  function boot() {
+    initMobileNav();
+    initHeaderScroll();
+    initMapPins();
+    initNavDropdown();
+    initIndustries();
+    initHeroVideo();
+    initHeroParallax();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
+
+  </script>
+</body>
+</html>
