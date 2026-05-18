@@ -24,12 +24,12 @@
   "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
   "industriesLead": "We serve the buildings that keep the Carolinas and Mid-Atlantic running — across healthcare, industrial, education, hospitality, and beyond.",
   "photoStrip": [
-    "reference/Photos/STR/NC Lift - For-WEB-1129.jpeg",
-    "reference/Photos/STR/dji_fly_20240522_103548_192_1716388560374_photo_optimized.jpg",
-    "reference/Photos/STR/strraleigh5.jpeg",
-    "reference/Photos/STR/IMG_8065.jpg"
+    "shared/img/photos/str/nc-lift.jpg",
+    "shared/img/photos/str/drone-aerial.jpg",
+    "shared/img/photos/str/raleigh-jobsite.jpg",
+    "shared/img/photos/str/jobsite.jpg"
   ],
-  "photoStripTodo": "Re-host: move chosen photos to shared/img/photos/str/, optimize, and confirm caption-worthy shots that show STR's actual work",
+  "photoStripTodo": "drone-aerial.jpg (2.6 MB) + jobsite.jpg (2.5 MB) should be compressed to ~400-600 KB before launch",
   "services": [
     {
       "key": "hvac",

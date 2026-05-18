@@ -25,12 +25,12 @@
   "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
   "industriesLead": "We serve the buildings that keep Hampton Roads and the Tidewater region running — across healthcare, industrial, education, hospitality, and beyond.",
   "photoStrip": [
-    "reference/Photos/STR/NC Lift - For-WEB-1129.jpeg",
-    "reference/Photos/STR/dji_fly_20240522_103548_192_1716388560374_photo_optimized.jpg",
-    "reference/Photos/STR/IMG_8065.jpg",
-    "reference/Photos/STR/strraleigh5.jpeg"
+    "shared/img/photos/str/nc-lift.jpg",
+    "shared/img/photos/str/drone-aerial.jpg",
+    "shared/img/photos/str/jobsite.jpg",
+    "shared/img/photos/str/raleigh-jobsite.jpg"
   ],
-  "photoStripTodo": "Re-host + confirm VA-specific shots",
+  "photoStripTodo": "Source VA/Hampton Roads-specific shots; compress drone-aerial + jobsite to ~500 KB before launch",
   "services": [
     {
       "key": "hvac",
