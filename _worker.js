@@ -45,6 +45,7 @@ export default {
 // One row per form. Each value is the recipient list for that form.
 // Adding a new branch: add a row here AND set <input name="_form" value="..."> in the page.
 const FORM_ROUTING = {
+  "str-landing-contact":        ["Service@strmechanical.com", "Adam.Hostetter@firstcallgroup.com"],
   "str-charlotte-contact":      ["Service@strmechanical.com", "Adam.Hostetter@firstcallgroup.com"],
   "str-raleigh-durham-contact": ["Service@strmechanical.com", "Adam.Hostetter@firstcallgroup.com"],
   "str-virginia-beach-contact": ["Service@strmechanical.com", "Adam.Hostetter@firstcallgroup.com"],
@@ -52,6 +53,7 @@ const FORM_ROUTING = {
 };
 
 const FORM_LABELS = {
+  "str-landing-contact":        "STR Mechanical contact form (landing)",
   "str-charlotte-contact":      "STR Mechanical — Charlotte contact form",
   "str-raleigh-durham-contact": "STR Mechanical — Raleigh-Durham contact form",
   "str-virginia-beach-contact": "STR Mechanical — Virginia Beach contact form",

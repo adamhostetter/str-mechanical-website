@@ -1,40 +1,36 @@
 {
-  "slug": "virginia-beach",
-  "name": "STR Mechanical — Virginia Beach",
-  "shortName": "Virginia Beach",
+  "slug": "charlotte",
+  "name": "STR Mechanical — Charlotte",
+  "shortName": "Charlotte",
   "isBranch": true,
   "tagline": "Success Through Reputation",
-  "heroHeading": "Success Through Reputation. Built for Virginia Beach.",
-  "heroParagraph": "Our Hampton Roads team keeps the region's commercial buildings running — HVAC, building controls, planned maintenance, and emergency service, backed by a national platform.",
-  "phone": "(757) 548-5889",
-  "phoneE164": "+17575485889",
+  "heroHeading": "Success Through Reputation. Built for Charlotte.",
+  "heroParagraph": "Our Charlotte team keeps the Carolinas' commercial buildings running — HVAC, building controls, planned maintenance, and emergency service, backed by a national platform.",
+  "phone": "(704) 536-5335",
+  "phoneE164": "+17045365335",
   "email": "Service@strmechanical.com",
   "address": {
-    "street": "825 Green Briar Circle, Suite A",
-    "city": "Chesapeake",
-    "state": "VA",
-    "zip": "23320"
+    "street": "11704 Reames Road",
+    "city": "Charlotte",
+    "state": "NC",
+    "zip": "28269"
   },
-  "addressTodo": "Office is physically in Chesapeake (Hampton Roads metro). Adam refers to it as the 'Virginia Beach' office colloquially — confirm preferred public-facing city name.",
-  "mapCoords": {
-    "lat": 36.7682,
-    "lng": -76.2875
-  },
-  "mapCoordsTodo": "Approximated from build-directory.js (Chesapeake centroid). Refine to street-level if available.",
-  "canonicalUrl": "https://strmechanical.com/virginia-beach",
+  "mapCoords": { "lat": 35.3470, "lng": -80.8460 },
+  "mapCoordsTodo": "Approximated from build-directory.js (Charlotte HQ centroid). Refine to the actual street-level coords if available.",
+  "canonicalUrl": "https://strmechanical.com/charlotte.html",
   "parentLink": "https://firstcallmechanical.com",
   "isExternalDomain": true,
-  "heroPhoto": "shared/img/photos/str/virginia-beach.jpg",
-  "heroPhotoTodo": "556 KB JPG — already reasonable; consider converting to WebP for an extra ~30% size win. Ken Burns animation drives the cinematic feel in lieu of a video.",
+  "heroVideo": "shared/img/videos/charlotte-raw_flyover.mp4",
+  "heroVideoTodo": "18 MB raw flyover — compress to ~3-5 MB before launch (target 720p, H.264, ~2 Mbps)",
   "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
-  "industriesLead": "We serve the buildings that keep Hampton Roads and the Tidewater region running — across healthcare, industrial, education, hospitality, and beyond.",
+  "industriesLead": "We serve the buildings that keep the Carolinas and Mid-Atlantic running — across healthcare, industrial, education, hospitality, and beyond.",
   "photoStrip": [
     "shared/img/photos/str/nc-lift.jpg",
     "shared/img/photos/str/drone-aerial.jpg",
-    "shared/img/photos/str/jobsite.jpg",
-    "shared/img/photos/str/raleigh-jobsite.jpg"
+    "shared/img/photos/str/raleigh-jobsite.jpg",
+    "shared/img/photos/str/jobsite.jpg"
   ],
-  "photoStripTodo": "Source VA/Hampton Roads-specific shots; compress drone-aerial + jobsite to ~500 KB before launch",
+  "photoStripTodo": "drone-aerial.jpg (2.6 MB) + jobsite.jpg (2.5 MB) should be compressed to ~400-600 KB before launch",
   "services": [
     {
       "key": "hvac",
@@ -67,7 +63,7 @@
       "body": "Design-build, retrofit, and equipment-upgrade projects delivered by tradespeople who know the install — and the service after."
     }
   ],
-  "servicesReviewTodo": "Service bodies seeded from Columbus copy. Revisit for STR-specific tone.",
+  "servicesReviewTodo": "Service bodies seeded from Columbus's Columbus copy. Revisit for STR-specific tone, capability differences (e.g., whether STR offers plumbing), and Carolinas market language.",
   "technicalExperience": [
     "Air Handlers (AHUs)",
     "Boilers — Hot Water & Steam",
@@ -83,9 +79,9 @@
     "Ice Machines",
     "Make-Up Air Units",
     "Pumps & Pump Stations",
+    "Refrigerated Display Cases",
     "Rack Systems & Remote Condensers",
     "Reach-In Coolers & Freezers",
-    "Refrigerated Display Cases",
     "Rooftop Units (RTUs)",
     "Split Systems",
     "Steam Traps",
@@ -94,6 +90,7 @@
     "Walk-In Coolers & Freezers",
     "Water-Source Heat Pumps"
   ],
+  "technicalExperienceTodo": "Equipment list copied from Columbus. Confirm STR's actual capability mix — add/remove items that differ.",
   "stateLicenses": [],
-  "stateLicensesTodo": "Confirm whether VA requires license disclosure (likely yes — VA has trade licensing)"
+  "stateLicensesTodo": "Confirm whether STR's operating states (NC, VA, SC) require license disclosure"
 }

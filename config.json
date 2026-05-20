@@ -1,10 +1,11 @@
 {
-  "slug": "charlotte",
-  "name": "STR Mechanical — Charlotte",
-  "shortName": "Charlotte",
+  "slug": "landing",
+  "name": "STR Mechanical",
+  "shortName": "STR Mechanical",
+  "isLanding": true,
   "tagline": "Success Through Reputation",
-  "heroHeading": "Success Through Reputation. Built for Charlotte.",
-  "heroParagraph": "Our Charlotte team keeps the Carolinas' commercial buildings running — HVAC, building controls, planned maintenance, and emergency service, backed by a national platform.",
+  "heroHeading": "Success Through Reputation. Built for the Carolinas and Virginia.",
+  "heroParagraph": "STR Mechanical keeps commercial buildings running across the Carolinas, Hampton Roads, and the Upstate — HVAC, building controls, planned maintenance, and emergency service, backed by a national platform.",
   "phone": "(704) 536-5335",
   "phoneE164": "+17045365335",
   "email": "Service@strmechanical.com",
@@ -15,14 +16,14 @@
     "zip": "28269"
   },
   "mapCoords": { "lat": 35.3470, "lng": -80.8460 },
-  "mapCoordsTodo": "Approximated from build-directory.js (Charlotte HQ centroid). Refine to the actual street-level coords if available.",
+  "mapCoordsTodo": "HQ centroid (Charlotte). Landing shares HQ contact card; refine if landing gets its own map block.",
   "canonicalUrl": "https://strmechanical.com",
   "parentLink": "https://firstcallmechanical.com",
   "isExternalDomain": true,
   "heroVideo": "shared/img/videos/charlotte-raw_flyover.mp4",
   "heroVideoTodo": "18 MB raw flyover — compress to ~3-5 MB before launch (target 720p, H.264, ~2 Mbps)",
   "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
-  "industriesLead": "We serve the buildings that keep the Carolinas and Mid-Atlantic running — across healthcare, industrial, education, hospitality, and beyond.",
+  "industriesLead": "We serve the buildings that keep the Carolinas, Hampton Roads, and the Upstate running — across healthcare, industrial, education, hospitality, and beyond.",
   "photoStrip": [
     "shared/img/photos/str/nc-lift.jpg",
     "shared/img/photos/str/drone-aerial.jpg",
@@ -62,7 +63,7 @@
       "body": "Design-build, retrofit, and equipment-upgrade projects delivered by tradespeople who know the install — and the service after."
     }
   ],
-  "servicesReviewTodo": "Service bodies seeded from Columbus's Columbus copy. Revisit for STR-specific tone, capability differences (e.g., whether STR offers plumbing), and Carolinas market language.",
+  "servicesReviewTodo": "Service bodies seeded from Columbus copy. Revisit for STR-specific tone, capability differences, and Carolinas/Mid-Atlantic market language.",
   "technicalExperience": [
     "Air Handlers (AHUs)",
     "Boilers — Hot Water & Steam",
