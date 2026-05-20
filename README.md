@@ -59,6 +59,22 @@ ease of editing — inline before publishing.
       OR redesign `index.html` freehand for a custom look.
 - [ ] Wire `_worker.js` to STR's Resend / contact email.
 - [ ] Create GitHub repo and add as `origin`.
+- [ ] **Anti-spam: Cloudflare Turnstile** — mirror the Starnes implementation
+      (Starnes commit `b70d9f8`, "Add anti-spam layers to contact form:
+      Turnstile + time + origin"). Four layers in `_worker.js`, all silent-ok
+      on rejection so bots can't learn:
+      1. Origin allowlist (reject POSTs from unknown hostnames)
+      2. Honeypot (already in place)
+      3. Min-submit-time — JS writes `Date.now()` into a hidden `_ts` field;
+         worker rejects if elapsed < 3 s
+      4. Cloudflare Turnstile — verify token via
+         `challenges.cloudflare.com/turnstile/v0/siteverify`
+
+      Setup: create a Turnstile widget per the STR domain at
+      dash.cloudflare.com → Turnstile → Add widget; add `TURNSTILE_SECRET_KEY`
+      as a Pages secret (Production); copy the Starnes `_worker.js`/HTML/JS
+      patterns into this repo and swap the site key. ~15 min once the keys
+      are in hand.
 
 ## Maintenance terminology
 
