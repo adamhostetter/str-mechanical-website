@@ -1,80 +1,39 @@
 /**
- * Cloudflare Pages multi-domain router + form-submission handler.
+ * Cloudflare Pages Function — STR Mechanical (strmechanical.com)
  *
- * Routing — same Pages project serves two custom domains:
- *   firstcallgroup.com        → FCG content (repo root files)
- *   firstcallmechanical.com   → FCM content (from /mechanical/* + the
- *                                /columbus, /dfw, /central-texas branch
- *                                files at root)
+ * Handles POST /api/contact for the contact form on every STR branch page.
+ * Looks up recipients by the `_form` hidden field, runs the 5-layer
+ * anti-spam pipeline, and forwards the message via the Resend API. Any other
+ * request falls through to the static-asset handler.
  *
- * Forms — POST /api/contact accepts form submissions from any of the 9
- * forms across both sites, looks up recipients by the `_form` hidden
- * field, and forwards the message via the Resend API. Recipients live in
- * FORM_ROUTING below; the Resend API key lives in env.RESEND_API_KEY
- * (set as a Cloudflare Pages secret, NEVER in the repo).
+ * Anti-spam (five layers, cheapest first; any match → silent ok so bots
+ * can't tell the submission was rejected):
+ *   1. Origin allowlist  — reject POSTs not coming from a known STR host
+ *   2. Honeypot          — hidden _honeypot input filled = bot
+ *   3. Min-submit-time   — JS writes _ts on page load; reject if elapsed < 3s
+ *   4. Cloudflare Turnstile — siteverify the cf-turnstile-response token
+ *                            (conditional: skipped when TURNSTILE_SECRET_KEY
+ *                            is not set on the Pages project, so the worker
+ *                            keeps working before the secret is wired up)
+ *   5. Non-Latin script  — reject submissions whose user-supplied text
+ *                          contains Cyrillic/CJK/Arabic/etc. STR operates in
+ *                          the US in English + Spanish only. Latin-script
+ *                          accented characters (ñ, á, é) pass through.
+ *
+ * Secrets — set in Cloudflare Pages → Settings → Variables and Secrets:
+ *   RESEND_API_KEY         (re-use the same key as the FCG/FCM Pages project)
+ *   TURNSTILE_SECRET_KEY   (per-site widget secret from dash.cloudflare.com/turnstile;
+ *                          site key for the widget itself is 0x4AAAAAADTTEXP88lgQc1tE)
+ *                          When unset, the Turnstile layer is skipped.
  */
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // =========================================================================
-    // Form submissions — same endpoint on both hosts
-    // =========================================================================
     if (url.pathname === "/api/contact" && request.method === "POST") {
       return handleContactForm(request, env);
     }
 
-    const host = url.hostname.replace(/^www\./, "");
-    const path = url.pathname;
-
-    // =========================================================================
-    // firstcallmechanical.com
-    // =========================================================================
-    if (host === "firstcallmechanical.com") {
-      const rewrites = {
-        "/":           "/mechanical/index.html",
-        "/locations":  "/mechanical/locations.html",
-        "/careers":    "/mechanical/careers.html",
-        "/contact":    "/mechanical/contact.html",
-      };
-      const stripped = path.length > 1 && path.endsWith("/") ? path.slice(0, -1) : path;
-      const target = rewrites[stripped];
-      if (target) {
-        const rewritten = new URL(target, url.origin);
-        return env.ASSETS.fetch(new Request(rewritten, request));
-      }
-
-      if (path === "/index.html") {
-        return Response.redirect("https://firstcallmechanical.com/" + url.search, 301);
-      }
-
-      if (/^\/(team|news|acquisitions)(\/.*)?$/.test(path)) {
-        return Response.redirect(`https://firstcallgroup.com${path}${url.search}`, 301);
-      }
-
-      return env.ASSETS.fetch(request);
-    }
-
-    // =========================================================================
-    // firstcallgroup.com
-    // =========================================================================
-    if (host === "firstcallgroup.com") {
-      if (/^\/(columbus|dfw|central-texas)(\/.*)?$/.test(path)) {
-        return Response.redirect(`https://firstcallmechanical.com${path}${url.search}`, 301);
-      }
-
-      if (path === "/mechanical" || path === "/mechanical/") {
-        return Response.redirect("https://firstcallmechanical.com/" + url.search, 301);
-      }
-      if (path.startsWith("/mechanical/")) {
-        const newPath = path.substring("/mechanical".length);
-        return Response.redirect(`https://firstcallmechanical.com${newPath}${url.search}`, 301);
-      }
-
-      return env.ASSETS.fetch(request);
-    }
-
-    // Any other host (pages.dev preview, localhost, etc.) — serve as-is.
     return env.ASSETS.fetch(request);
   },
 };
@@ -84,47 +43,84 @@ export default {
 // =============================================================================
 
 // One row per form. Each value is the recipient list for that form.
-// Adding a new form: add a row here AND set <input name="_form" value="..."> in the page.
+// Adding a new branch: add a row here AND set <input name="_form" value="..."> in the page.
 const FORM_ROUTING = {
-  "fcg-contact":          ["chris@firstcallgroup.com",          "Adam.Hostetter@firstcallgroup.com"],
-  "fcg-acquisitions":     ["chris@firstcallgroup.com",          "Adam.Hostetter@firstcallgroup.com"],
-  "fcm-contact":          ["info@firstcallgroup.com",           "Adam.Hostetter@firstcallgroup.com"],
-  "fcm-columbus-service": ["serviceoh@firstcallmechanical.com", "Adam.Hostetter@firstcallgroup.com", "spriest@firstcallmechanical.com"],
-  "fcm-dfw-service":      ["dispatch@firstcallmechanical.com",  "Adam.Hostetter@firstcallgroup.com", "scott.smith@firstcallmechanical.com"],
-  "fcm-atx-service":      ["dispatch@firstcallmechanical.com",  "Adam.Hostetter@firstcallgroup.com", "scott.smith@firstcallmechanical.com"],
-  "fcm-columbus-contact": ["serviceoh@firstcallmechanical.com", "Adam.Hostetter@firstcallgroup.com", "spriest@firstcallmechanical.com"],
-  "fcm-dfw-contact":      ["dispatch@firstcallmechanical.com",  "Adam.Hostetter@firstcallgroup.com", "scott.smith@firstcallmechanical.com"],
-  "fcm-atx-contact":      ["dispatch@firstcallmechanical.com",  "Adam.Hostetter@firstcallgroup.com", "scott.smith@firstcallmechanical.com"],
+  "str-charlotte-contact":      ["Service@strmechanical.com", "Adam.Hostetter@firstcallgroup.com"],
+  "str-raleigh-durham-contact": ["Service@strmechanical.com", "Adam.Hostetter@firstcallgroup.com"],
+  "str-virginia-beach-contact": ["Service@strmechanical.com", "Adam.Hostetter@firstcallgroup.com"],
+  "str-greenville-contact":     ["scadmin@strmechanical.com", "Adam.Hostetter@firstcallgroup.com"],
 };
 
 const FORM_LABELS = {
-  "fcg-contact":          "FirstCall Group contact form",
-  "fcg-acquisitions":     "FirstCall Group acquisitions inquiry",
-  "fcm-contact":          "FirstCall Mechanical contact form",
-  "fcm-columbus-service": "Columbus service request",
-  "fcm-dfw-service":      "DFW service request",
-  "fcm-atx-service":      "Austin service request",
-  "fcm-columbus-contact": "Columbus contact form",
-  "fcm-dfw-contact":      "DFW contact form",
-  "fcm-atx-contact":      "Austin contact form",
+  "str-charlotte-contact":      "STR Mechanical — Charlotte contact form",
+  "str-raleigh-durham-contact": "STR Mechanical — Raleigh-Durham contact form",
+  "str-virginia-beach-contact": "STR Mechanical — Virginia Beach contact form",
+  "str-greenville-contact":     "STR Mechanical — Greenville contact form",
 };
 
 // The "from" address must be on a domain you've verified in Resend.
-// firstcallgroup.com should be verified (DNS records added to the Cloudflare
-// zone for firstcallgroup.com).
-const FROM_EMAIL = "FirstCall <noreply@firstcallgroup.com>";
+// firstcallgroup.com is already verified for the FCG/FCM project — reusing
+// it here keeps STR's form working without a separate verification step.
+// Switch to noreply@strmechanical.com once that domain is verified in Resend.
+const FROM_EMAIL = "STR Mechanical <noreply@firstcallgroup.com>";
+
+// Hostnames a contact-form POST is allowed to come from. Add the Pages preview
+// hostname here if you want to test forms on Cloudflare preview deploys.
+const ALLOWED_ORIGINS = new Set([
+  "https://strmechanical.com",
+  "https://www.strmechanical.com",
+  "https://str-website.pages.dev",
+]);
+
+// Minimum time (ms) between page-load timestamp (_ts) and submission.
+const MIN_SUBMIT_MS = 3000;
 
 async function handleContactForm(request, env) {
   try {
-    // Parse body — accept JSON or form-encoded.
+    // Layer 1 — Origin allowlist. Direct API hammering won't carry the right header.
+    const origin = request.headers.get("origin") || "";
+    if (!ALLOWED_ORIGINS.has(origin)) {
+      console.warn("Origin rejected:", origin);
+      return silentOk();
+    }
+
     const ct = request.headers.get("content-type") || "";
     const data = ct.includes("application/json")
       ? await request.json()
       : Object.fromEntries((await request.formData()).entries());
 
-    // Honeypot: bots fill hidden fields. Pretend success, don't email.
+    // Layer 2 — Honeypot. Hidden field; humans never see it, bots fill everything.
     if (data._honeypot) {
-      return jsonResp({ ok: true });
+      console.warn("Honeypot triggered");
+      return silentOk();
+    }
+
+    // Layer 3 — Min-submit-time. _ts is set by site.js on DOMContentLoaded.
+    const ts = parseInt(data._ts, 10);
+    if (!Number.isFinite(ts) || Date.now() - ts < MIN_SUBMIT_MS) {
+      console.warn("Time check failed: _ts=", data._ts, "elapsed=", Date.now() - ts);
+      return silentOk();
+    }
+
+    // Layer 4 — Cloudflare Turnstile (conditional). If TURNSTILE_SECRET_KEY isn't
+    // set on the Pages project yet, skip — the other 4 layers still protect the
+    // form. When the secret IS set, the token becomes required.
+    if (env.TURNSTILE_SECRET_KEY) {
+      const turnstileToken = data["cf-turnstile-response"] || "";
+      const turnstileOk = await verifyTurnstile(turnstileToken, request, env);
+      if (!turnstileOk) {
+        console.warn("Turnstile verify failed");
+        return silentOk();
+      }
+    }
+
+    // Layer 5 — Non-Latin script reject. English + Spanish only.
+    const userText = [data.name, data.company, data.address, data.message]
+      .filter(s => typeof s === "string")
+      .join(" ");
+    if (isLikelyForeignScript(userText)) {
+      console.warn("Non-Latin script rejected");
+      return silentOk();
     }
 
     const formId = String(data._form || "").trim();
@@ -168,6 +164,30 @@ async function handleContactForm(request, env) {
   }
 }
 
+async function verifyTurnstile(token, request, env) {
+  if (!token || !env.TURNSTILE_SECRET_KEY) return false;
+  const body = new URLSearchParams();
+  body.append("secret", env.TURNSTILE_SECRET_KEY);
+  body.append("response", token);
+  const ip = request.headers.get("cf-connecting-ip");
+  if (ip) body.append("remoteip", ip);
+  try {
+    const resp = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body,
+    });
+    const json = await resp.json();
+    return !!json.success;
+  } catch (e) {
+    console.error("Turnstile siteverify error:", e);
+    return false;
+  }
+}
+
+function silentOk() {
+  return jsonResp({ ok: true });
+}
+
 function jsonResp(body, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
@@ -183,7 +203,7 @@ function buildSubject(formId, data) {
 
 function renderEmailHTML(formId, data) {
   const rows = Object.entries(data)
-    .filter(([k]) => !k.startsWith("_"))
+    .filter(([k]) => !k.startsWith("_") && k !== "cf-turnstile-response")
     .map(([k, v]) => `
       <tr>
         <td style="padding:6px 16px 6px 0; vertical-align:top; color:#5a6371; font-weight:600; white-space:nowrap">${esc(prettyLabel(k))}</td>
@@ -203,7 +223,7 @@ function renderEmailText(formId, data) {
   const label = FORM_LABELS[formId] || formId;
   const lines = [`New form submission`, label, `(${formId})`, ""];
   for (const [k, v] of Object.entries(data)) {
-    if (k.startsWith("_")) continue;
+    if (k.startsWith("_") || k === "cf-turnstile-response") continue;
     lines.push(`${prettyLabel(k)}: ${v}`);
   }
   return lines.join("\n");
@@ -215,4 +235,17 @@ function prettyLabel(k) {
 
 function esc(s) {
   return String(s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+}
+
+// True if `text` contains more than a few characters from non-Latin scripts
+// commonly used by foreign-language spam (Cyrillic, Arabic, Hebrew,
+// Devanagari, Thai, CJK, Hangul). Allows Latin Extended (accents, ñ, á, é,
+// ü, etc.) so English and Spanish pass through cleanly. Threshold > 3 chars
+// to tolerate the occasional pasted symbol from a copy/paste.
+function isLikelyForeignScript(text) {
+  if (!text || typeof text !== "string") return false;
+  const nonLatin = text.match(
+    /[Ѐ-ӿԀ-ԯ֐-׿؀-ۿ܀-ݏऀ-ॿ฀-๿　-鿿가-힯]/g
+  );
+  return !!nonLatin && nonLatin.length > 3;
 }

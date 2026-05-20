@@ -64,7 +64,7 @@
       "latitude": {{mapCoords.lat}},
       "longitude": {{mapCoords.lng}}
     },
-    "openingHours": "Mo-Fr 07:00-17:00",
+    "openingHours": "Mo-Fr 07:30-16:30",
     "parentOrganization": {
       "@type": "Organization",
       "name": "FirstCall Mechanical",
@@ -363,7 +363,7 @@
             <p class="location-card__addr">11704 Reames Road<br>Charlotte, NC 28269</p>
             <p class="location-card__contact">
               <a href="tel:+17045365335">(704) 536-5335</a><br>
-              <a href="mailto:info@strmechanical.com">info@strmechanical.com</a>
+              <a href="mailto:Service@strmechanical.com">Service@strmechanical.com</a>
             </p>
             <a href="index.html" class="link-arrow">View Charlotte</a>
           </article>
@@ -373,7 +373,7 @@
             <p class="location-card__addr">551 C Pylon Drive, Suite C<br>Raleigh, NC 27606</p>
             <p class="location-card__contact">
               <a href="tel:+11111111111">(111) 111-1111</a><br>
-              <a href="mailto:info@strmechanical.com">info@strmechanical.com</a>
+              <a href="mailto:Service@strmechanical.com">Service@strmechanical.com</a>
             </p>
             <a href="raleigh-durham.html" class="link-arrow">View Raleigh-Durham</a>
           </article>
@@ -383,7 +383,7 @@
             <p class="location-card__addr">825 Green Briar Circle, Suite A<br>Chesapeake, VA 23320</p>
             <p class="location-card__contact">
               <a href="tel:+17575485889">(757) 548-5889</a><br>
-              <a href="mailto:info@strmechanical.com">info@strmechanical.com</a>
+              <a href="mailto:Service@strmechanical.com">Service@strmechanical.com</a>
             </p>
             <a href="virginia-beach.html" class="link-arrow">View Virginia Beach</a>
           </article>
@@ -442,7 +442,10 @@
         </div>
 
         <div class="contact-row">
-          <form class="service-form" action="#" method="post" novalidate>
+          <form class="service-form" action="/api/contact" method="POST" data-form-handler novalidate>
+            <input type="hidden" name="_form" value="str-{{slug}}-contact" />
+            <input type="hidden" name="_ts" value="" />
+            <input type="text" name="_honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" />
             <div class="form-grid">
               <div class="form-field">
                 <label class="form-label" for="f-name">Full name <span class="required">*</span></label>
@@ -481,6 +484,8 @@
                 <span class="form-help">Including equipment model numbers (if you have them) helps us send the right tech.</span>
               </div>
             </div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADTTEXP88lgQc1tE" data-theme="auto" style="margin-top:1rem"></div>
+            <div data-form-error role="alert" hidden style="margin-top:1rem;padding:0.75rem 1rem;background:#FEF2F2;border:1px solid #FCA5A5;color:#7F1D1D;border-radius:8px;font-size:0.875rem"></div>
             <div class="form-actions">
               <button type="submit" class="btn btn--primary btn--lg">Request Service</button>
               <span class="form-help">Or call <a href="tel:{{phoneE164}}" style="font-weight: 600">{{phone}}</a> for immediate dispatch.</span>
@@ -507,7 +512,7 @@
             <div class="contact-card__row">
               <div class="contact-card__label">Hours</div>
               <div class="contact-card__value">
-                Mon–Fri 7:00 a.m. – 5:00 p.m.<br>
+                Mon–Fri 7:30 a.m. – 4:30 p.m.<br>
                 <strong style="color: var(--color-accent);">24 / 7 emergency response</strong>
               </div>
             </div>
@@ -565,5 +570,6 @@
   <script>
     /* {{INLINE_BRANCH_JS}} — mobile-nav toggle, header scroll, form handler */
   </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 </html>

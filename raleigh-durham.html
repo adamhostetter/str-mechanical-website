@@ -49,7 +49,7 @@
     "name": "STR Mechanical — Raleigh-Durham",
     "image": "shared/img/photos/str/raleigh-durham.jpg",
     "telephone": "+11111111111",
-    "email": "info@strmechanical.com",
+    "email": "Service@strmechanical.com",
     "url": "https://strmechanical.com/raleigh-durham",
     "address": {
       "@type": "PostalAddress",
@@ -64,7 +64,7 @@
       "latitude": 35.7926,
       "longitude": -78.7036
     },
-    "openingHours": "Mo-Fr 07:00-17:00",
+    "openingHours": "Mo-Fr 07:30-16:30",
     "parentOrganization": {
       "@type": "Organization",
       "name": "FirstCall Mechanical",
@@ -2302,7 +2302,7 @@ small, .text-small { font-size: var(--text-sm); }
             <p class="location-card__addr">11704 Reames Road<br>Charlotte, NC 28269</p>
             <p class="location-card__contact">
               <a href="tel:+17045365335">(704) 536-5335</a><br>
-              <a href="mailto:info@strmechanical.com">info@strmechanical.com</a>
+              <a href="mailto:Service@strmechanical.com">Service@strmechanical.com</a>
             </p>
             <a href="index.html" class="link-arrow">View Charlotte</a>
           </article>
@@ -2312,7 +2312,7 @@ small, .text-small { font-size: var(--text-sm); }
             <p class="location-card__addr">551 C Pylon Drive, Suite C<br>Raleigh, NC 27606</p>
             <p class="location-card__contact">
               <a href="tel:+11111111111">(111) 111-1111</a><br>
-              <a href="mailto:info@strmechanical.com">info@strmechanical.com</a>
+              <a href="mailto:Service@strmechanical.com">Service@strmechanical.com</a>
             </p>
             <a href="raleigh-durham.html" class="link-arrow">View Raleigh-Durham</a>
           </article>
@@ -2322,7 +2322,7 @@ small, .text-small { font-size: var(--text-sm); }
             <p class="location-card__addr">825 Green Briar Circle, Suite A<br>Chesapeake, VA 23320</p>
             <p class="location-card__contact">
               <a href="tel:+17575485889">(757) 548-5889</a><br>
-              <a href="mailto:info@strmechanical.com">info@strmechanical.com</a>
+              <a href="mailto:Service@strmechanical.com">Service@strmechanical.com</a>
             </p>
             <a href="virginia-beach.html" class="link-arrow">View Virginia Beach</a>
           </article>
@@ -2381,7 +2381,10 @@ small, .text-small { font-size: var(--text-sm); }
         </div>
 
         <div class="contact-row">
-          <form class="service-form" action="#" method="post" novalidate>
+          <form class="service-form" action="/api/contact" method="POST" data-form-handler novalidate>
+            <input type="hidden" name="_form" value="str-raleigh-durham-contact" />
+            <input type="hidden" name="_ts" value="" />
+            <input type="text" name="_honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" />
             <div class="form-grid">
               <div class="form-field">
                 <label class="form-label" for="f-name">Full name <span class="required">*</span></label>
@@ -2420,6 +2423,8 @@ small, .text-small { font-size: var(--text-sm); }
                 <span class="form-help">Including equipment model numbers (if you have them) helps us send the right tech.</span>
               </div>
             </div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADTTEXP88lgQc1tE" data-theme="auto" style="margin-top:1rem"></div>
+            <div data-form-error role="alert" hidden style="margin-top:1rem;padding:0.75rem 1rem;background:#FEF2F2;border:1px solid #FCA5A5;color:#7F1D1D;border-radius:8px;font-size:0.875rem"></div>
             <div class="form-actions">
               <button type="submit" class="btn btn--primary btn--lg">Request Service</button>
               <span class="form-help">Or call <a href="tel:+11111111111" style="font-weight: 600">(111) 111-1111</a> for immediate dispatch.</span>
@@ -2441,12 +2446,12 @@ small, .text-small { font-size: var(--text-sm); }
             </div>
             <div class="contact-card__row">
               <div class="contact-card__label">Email</div>
-              <div class="contact-card__value"><a href="mailto:info@strmechanical.com">info@strmechanical.com</a></div>
+              <div class="contact-card__value"><a href="mailto:Service@strmechanical.com">Service@strmechanical.com</a></div>
             </div>
             <div class="contact-card__row">
               <div class="contact-card__label">Hours</div>
               <div class="contact-card__value">
-                Mon–Fri 7:00 a.m. – 5:00 p.m.<br>
+                Mon–Fri 7:30 a.m. – 4:30 p.m.<br>
                 <strong style="color: var(--color-accent);">24 / 7 emergency response</strong>
               </div>
             </div>
@@ -2523,7 +2528,7 @@ small, .text-small { font-size: var(--text-sm); }
             <li><span>551 C Pylon Drive, Suite C</span></li>
             <li><span>Raleigh, NC 27606</span></li>
             <li><a href="tel:+11111111111">(111) 111-1111</a></li>
-            <li><a href="mailto:info@strmechanical.com">info@strmechanical.com</a></li>
+            <li><a href="mailto:Service@strmechanical.com">Service@strmechanical.com</a></li>
           </ul>
           
         </div>
@@ -2771,6 +2776,89 @@ small, .text-small { font-size: var(--text-sm); }
     update();
   }
 
+  /* ---------- Contact form: time-stamp + async submit ----------
+     For any <form data-form-handler> on the page:
+       1. Stamp the page-load time into the hidden _ts field. The worker's
+          min-submit-time check rejects submissions where (now - _ts) < 3 s.
+          Bots that POST directly to /api/contact never run this, so _ts
+          stays empty and the worker silently drops them.
+       2. Intercept submit, POST FormData to /api/contact.
+       3. On success: replace the form with an inline "thanks" panel.
+       4. On error: surface the message in [data-form-error] and re-enable
+          the submit button. */
+  function initContactForm() {
+    var forms = document.querySelectorAll("form[data-form-handler]");
+    if (!forms.length) return;
+
+    forms.forEach(function (form) {
+      var tsField = form.querySelector('input[name="_ts"]');
+      if (tsField) tsField.value = String(Date.now());
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        submitContactForm(form);
+      });
+    });
+  }
+
+  function submitContactForm(form) {
+    var btn = form.querySelector('button[type="submit"], input[type="submit"]');
+    var errBox = form.querySelector("[data-form-error]");
+    var origLabel = btn ? (btn.tagName === "INPUT" ? btn.value : btn.textContent) : null;
+
+    if (errBox) { errBox.hidden = true; errBox.textContent = ""; }
+    if (btn) {
+      btn.disabled = true;
+      if (btn.tagName === "INPUT") btn.value = "Sending…";
+      else btn.textContent = "Sending…";
+    }
+
+    fetch("/api/contact", {
+      method: "POST",
+      body: new FormData(form),
+      headers: { "Accept": "application/json" },
+    })
+      .then(function (r) { return r.json().then(function (body) { return { ok: r.ok, body: body }; }); })
+      .then(function (res) {
+        if (res.ok && res.body && res.body.ok) {
+          showContactFormSuccess(form);
+        } else {
+          var msg = (res.body && res.body.error) || "Submission failed. Please try again.";
+          throw new Error(msg);
+        }
+      })
+      .catch(function (err) {
+        if (errBox) {
+          errBox.textContent = "Sorry — we couldn't send your message. " + err.message;
+          errBox.hidden = false;
+        } else {
+          alert("Sorry — we couldn't send your message. " + err.message);
+        }
+        if (btn) {
+          btn.disabled = false;
+          if (btn.tagName === "INPUT") btn.value = origLabel;
+          else btn.textContent = origLabel;
+        }
+        // Reset the Turnstile widget so the user can retry.
+        if (window.turnstile && typeof window.turnstile.reset === "function") {
+          try { window.turnstile.reset(); } catch (_) { /* widget missing or already reset */ }
+        }
+      });
+  }
+
+  function showContactFormSuccess(form) {
+    var panel = document.createElement("div");
+    panel.setAttribute("role", "status");
+    panel.setAttribute("aria-live", "polite");
+    panel.style.cssText =
+      "padding:40px 24px;background:#F4F2EA;border:1px solid #E5E1D2;border-radius:12px;text-align:center;color:#1a2331";
+    panel.innerHTML =
+      '<div style="font-family:Manrope,system-ui,sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:8px">Thanks &mdash; we&rsquo;ll be in touch.</div>' +
+      '<div style="color:#5a6371;font-size:1rem">Your message is on its way. We&rsquo;ll respond as soon as we can.</div>';
+    form.replaceWith(panel);
+    panel.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
   /* ---------- Boot ---------- */
   function boot() {
     initMobileNav();
@@ -2780,6 +2868,7 @@ small, .text-small { font-size: var(--text-sm); }
     initIndustries();
     initHeroVideo();
     initHeroParallax();
+    initContactForm();
   }
 
   if (document.readyState === "loading") {
@@ -2790,5 +2879,6 @@ small, .text-small { font-size: var(--text-sm); }
 })();
 
   </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 </html>
