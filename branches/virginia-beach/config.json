@@ -15,7 +15,10 @@
     "zip": "23320"
   },
   "addressTodo": "Office is physically in Chesapeake (Hampton Roads metro). Adam refers to it as the 'Virginia Beach' office colloquially — confirm preferred public-facing city name.",
-  "mapCoords": { "lat": 36.7682, "lng": -76.2875 },
+  "mapCoords": {
+    "lat": 36.7682,
+    "lng": -76.2875
+  },
   "mapCoordsTodo": "Approximated from build-directory.js (Chesapeake centroid). Refine to street-level if available.",
   "canonicalUrl": "https://strmechanical.com/virginia-beach",
   "parentLink": "https://firstcallmechanical.com",
@@ -41,6 +44,11 @@
       "key": "controls",
       "title": "Building Controls",
       "body": "Design, installation, and integration of building automation systems that reduce operating costs."
+    },
+    {
+      "key": "refrigeration",
+      "title": "Commercial Refrigeration",
+      "body": "Walk-in coolers and freezers, reach-ins, ice machines, refrigerated display cases — service, repair, and 24/7 emergency response."
     },
     {
       "key": "planned",
@@ -71,13 +79,18 @@
     "Fan Coil Units",
     "Heat Pumps",
     "Humidification Systems",
+    "Ice Machines",
     "Make-Up Air Units",
     "Pumps & Pump Stations",
+    "Rack Systems & Remote Condensers",
+    "Reach-In Coolers & Freezers",
+    "Refrigerated Display Cases",
     "Rooftop Units (RTUs)",
     "Split Systems",
     "Steam Traps",
     "VAV / VFD Systems",
     "VRF / VRV Systems",
+    "Walk-In Coolers & Freezers",
     "Water-Source Heat Pumps"
   ],
   "stateLicenses": [],
