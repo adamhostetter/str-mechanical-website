@@ -261,14 +261,13 @@
 .tech-list__cta .btn { display: inline-flex; align-items: center; gap: var(--space-2); }
 .tech-list__cta .btn__icon { width: 1.1em; height: 1.1em; flex: 0 0 auto; }
 
-/* Footer membership badge — only rendered on branches with `footerBadge` set
-   (currently just Virginia Beach with the CFESA logo). */
+/* Footer membership badge — sits inside the brand column, below the brand
+   paragraph and above the copyright row. Only rendered on branches with
+   `footerBadge` set (currently just Virginia Beach with the CFESA logo). */
 .site-footer__memberships {
-  margin-top: var(--space-5);
-  padding-top: var(--space-5);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: var(--space-4);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .site-footer__memberships-badge {
   max-width: 140px;

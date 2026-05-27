@@ -603,6 +603,11 @@
         <div class="site-footer__brand">
           <!-- {{INLINE_LOGO_WHITE}} — FirstCall Mechanical wordmark in white -->
           <p>{{name}} — commercial HVAC, building controls, plumbing, and project work, backed by a national platform.</p>
+          {{#if footerBadge}}
+          <div class="site-footer__memberships">
+            <img class="site-footer__memberships-badge" src="{{footerBadge.src}}" alt="{{footerBadge.alt}}" />
+          </div>
+          {{/if}}
         </div>
         <div>
           <div class="site-footer__heading">{{shortName}}</div>
@@ -637,11 +642,6 @@
         <span>&copy; {{copyrightYear}} {{name}}. All rights reserved.</span>
         <span><a href="{{parentLink}}">FirstCall Mechanical</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></span>
       </div>
-      {{#if footerBadge}}
-      <div class="site-footer__memberships">
-        <img class="site-footer__memberships-badge" src="{{footerBadge.src}}" alt="{{footerBadge.alt}}" />
-      </div>
-      {{/if}}
     </div>
   </footer>
 
