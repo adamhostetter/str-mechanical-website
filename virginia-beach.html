@@ -1705,25 +1705,21 @@ small, .text-small { font-size: var(--text-sm); }
 .tech-list__cta .btn { display: inline-flex; align-items: center; gap: var(--space-2); }
 .tech-list__cta .btn__icon { width: 1.1em; height: 1.1em; flex: 0 0 auto; }
 
-/* Footer membership badge — full-width strip between the footer grid and
-   the bottom copyright row, with a hairline border separating it from the
-   copyright. Only rendered on branches with `footerBadge` set (currently
+/* Footer membership badge — sits inside the brand column, below the brand
+   paragraph. Only rendered on branches with `footerBadge` set (currently
    just Virginia Beach with the CFESA logo). */
 .site-footer__memberships {
   margin-top: var(--space-5);
-  padding-top: var(--space-5);
-  padding-bottom: var(--space-3);
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .site-footer__memberships a { display: inline-block; }
 .site-footer__memberships-badge {
-  max-width: 160px;
+  max-width: 180px;
   width: 100%;
   height: auto;
   display: block;
-  opacity: 0.85;
+  opacity: 0.9;
   transition: opacity var(--duration-fast) var(--ease-out);
 }
 .site-footer__memberships a:hover .site-footer__memberships-badge { opacity: 1; }
@@ -2591,6 +2587,13 @@ small, .text-small { font-size: var(--text-sm); }
   </g>
 </svg>
           <p>STR Mechanical — Virginia Beach — commercial HVAC, building controls, plumbing, and project work, backed by a national platform.</p>
+          
+          <div class="site-footer__memberships">
+            <a href="https://cfesa.com/" target="_blank" rel="noopener" aria-label="CFESA — Commercial Food Equipment Service Association member">
+              <img class="site-footer__memberships-badge" src="shared/img/logos/cfesa-logo.png" alt="CFESA — Commercial Food Equipment Service Association member" />
+            </a>
+          </div>
+          
         </div>
         <div>
           <div class="site-footer__heading">Virginia Beach</div>
@@ -2619,13 +2622,6 @@ small, .text-small { font-size: var(--text-sm); }
           </ul>
         </div>
       </div>
-      
-      <div class="site-footer__memberships">
-        <a href="https://cfesa.com/" target="_blank" rel="noopener" aria-label="CFESA — Commercial Food Equipment Service Association member">
-          <img class="site-footer__memberships-badge" src="shared/img/logos/cfesa-logo.png" alt="CFESA — Commercial Food Equipment Service Association member" />
-        </a>
-      </div>
-      
       <div class="site-footer__bottom">
         <span>&copy; 2026 STR Mechanical — Virginia Beach. All rights reserved.</span>
         <span><a href="https://firstcallmechanical.com">FirstCall Mechanical</a> &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></span>
