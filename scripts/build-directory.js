@@ -57,7 +57,7 @@ const branches = [
 
   // Virginia
   { brand: "Starnes",                              city: "Lebanon",    state: "VA", addr: "4082 US Highway 19, Lebanon, VA 24266",            url: "https://starnesinc.com/",        phone: null,             lat: 36.9077, lng: -82.0793 },
-  { brand: "STR Mechanical — Chesapeake",  city: "Chesapeake", state: "VA", addr: "825 Green Briar Circle, Suite A, Chesapeake, VA 23320", url: "https://strmechanical.com/", phone: null,             lat: 36.7682, lng: -76.2875 },
+  { brand: "STR Mechanical — Chesapeake",  city: "Chesapeake", state: "VA", addr: "825 Greenbrier Circle, Suite A, Chesapeake, VA 23320", url: "https://strmechanical.com/", phone: null,             lat: 36.7682, lng: -76.2875 },
 
   // South Carolina
   { brand: "STR Mechanical — Greenville", city: "Liberty",      state: "SC", addr: "550 Blackbottom Road, Liberty, SC 29657",       url: "https://strmechanical.com/",                                phone: null,             lat: 34.7873, lng: -82.6943 },
